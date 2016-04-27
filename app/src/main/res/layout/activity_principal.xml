@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Datos Personales "
+        android:id="@+id/btDatPersPRINC"
+        android:layout_above="@+id/btMisVeh"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="126dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mis Vehículos"
+        android:id="@+id/btMisVeh"
+        android:layout_alignBaseline="@+id/btNuevoAcc"
+        android:layout_alignBottom="@+id/btNuevoAcc"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nuevo Accidente"
+        android:id="@+id/btNuevoAcc"
+        android:layout_alignBaseline="@+id/btHistAcc"
+        android:layout_alignBottom="@+id/btHistAcc"
+        android:layout_alignLeft="@+id/btMisVeh"
+        android:layout_alignStart="@+id/btMisVeh" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Historial Accidentes "
+        android:id="@+id/btHistAcc"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/btMisVeh"
+        android:layout_alignEnd="@+id/btMisVeh"
+        android:layout_marginTop="164dp" />
+</RelativeLayout>

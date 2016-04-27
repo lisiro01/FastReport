@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VECHICULO 1/2¿**"
+        android:id="@+id/textView2"
+        android:textSize="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="39dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Escanear QR"
+        android:id="@+id/btEscanQR"
+        android:layout_below="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Datos"
+        android:id="@+id/btDatos"
+        android:layout_below="@+id/btEscanQR"
+        android:layout_alignLeft="@+id/btEscanQR"
+        android:layout_alignStart="@+id/btEscanQR"
+        android:layout_alignRight="@+id/btEscanQR"
+        android:layout_alignEnd="@+id/btEscanQR"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daños"
+        android:id="@+id/btDanyos"
+        android:layout_below="@+id/btDatos"
+        android:layout_alignLeft="@+id/btDatos"
+        android:layout_alignStart="@+id/btDatos"
+        android:layout_alignRight="@+id/btDatos"
+        android:layout_alignEnd="@+id/btDatos"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Circunstancias"
+        android:id="@+id/btCirc"
+        android:layout_below="@+id/btDanyos"
+        android:layout_alignLeft="@+id/btDanyos"
+        android:layout_alignStart="@+id/btDanyos"
+        android:layout_alignRight="@+id/btDanyos"
+        android:layout_alignEnd="@+id/btDanyos"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Foto"
+        android:id="@+id/button6"
+        android:layout_below="@+id/btCirc"
+        android:layout_alignLeft="@+id/btCirc"
+        android:layout_alignStart="@+id/btCirc"
+        android:layout_alignRight="@+id/btCirc"
+        android:layout_alignEnd="@+id/btCirc"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Generar QR"
+        android:id="@+id/btGenQR"
+        android:layout_below="@+id/button6"
+        android:layout_alignLeft="@+id/button6"
+        android:layout_alignStart="@+id/button6"
+        android:layout_alignRight="@+id/button6"
+        android:layout_alignEnd="@+id/button6"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Atras"
+        android:id="@+id/button7"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="10dp" />
+</RelativeLayout>

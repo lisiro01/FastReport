@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DATOS GENERALES"
+        android:id="@+id/tvTituloDatos"
+        android:textSize="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vehículo"
+        android:id="@+id/btVehDatos"
+        android:layout_marginTop="41dp"
+        android:layout_below="@+id/tvTituloDatos"
+        android:layout_alignLeft="@+id/tvTituloDatos"
+        android:layout_alignStart="@+id/tvTituloDatos"
+        android:layout_alignRight="@+id/tvTituloDatos"
+        android:layout_alignEnd="@+id/tvTituloDatos" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Asegurado"
+        android:id="@+id/btAseg"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btVehDatos"
+        android:layout_alignLeft="@+id/btVehDatos"
+        android:layout_alignStart="@+id/btVehDatos"
+        android:layout_alignRight="@+id/btVehDatos"
+        android:layout_alignEnd="@+id/btVehDatos" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aseguradora"
+        android:id="@+id/btAseguradora"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btAseg"
+        android:layout_alignLeft="@+id/btAseg"
+        android:layout_alignStart="@+id/btAseg"
+        android:layout_alignRight="@+id/btAseg"
+        android:layout_alignEnd="@+id/btAseg" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Atras"
+        android:id="@+id/btAtDGEN"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="10dp" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:id="@+id/btGuarDGEN"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="10dp" />
+</RelativeLayout>
