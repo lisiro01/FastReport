@@ -3,40 +3,49 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Datos Personales "
         android:id="@+id/btDatPersPRINC"
-        android:layout_above="@+id/btMisVeh"
+        android:layout_below="@+id/btFastEmail"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="126dp" />
+        android:layout_marginTop="50dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Mis Vehículos"
         android:id="@+id/btMisVeh"
-        android:layout_alignBaseline="@+id/btNuevoAcc"
-        android:layout_alignBottom="@+id/btNuevoAcc"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/btDatPersPRINC"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Nuevo Accidente"
-        android:id="@+id/btNuevoAcc"
-        android:layout_alignBaseline="@+id/btHistAcc"
-        android:layout_alignBottom="@+id/btHistAcc"
-        android:layout_alignLeft="@+id/btMisVeh"
-        android:layout_alignStart="@+id/btMisVeh" />
+        android:text="Fast Email"
+        android:id="@+id/btFastEmail"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Historial Accidentes "
         android:id="@+id/btHistAcc"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/btMisVeh"
-        android:layout_alignEnd="@+id/btMisVeh"
-        android:layout_marginTop="164dp" />
+        android:layout_below="@+id/btMisVeh"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Atras"
+        android:id="@+id/btAtrasPRINC"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp" />
 </RelativeLayout>

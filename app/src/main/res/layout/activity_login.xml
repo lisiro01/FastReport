@@ -71,7 +71,7 @@
         android:layout_below="@+id/etContraseña"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
-        android:layout_alignParentStart="false" />
+        android:clickable="false" />
 
     <Button
         android:layout_width="120dp"
@@ -87,7 +87,7 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="Entrar"
-        android:id="@+id/button2"
+        android:id="@+id/btLogEntrar"
         android:layout_alignTop="@+id/btRegistrarse"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

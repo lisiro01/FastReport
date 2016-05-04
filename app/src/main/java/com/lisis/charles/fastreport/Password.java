@@ -1,11 +1,12 @@
 package com.lisis.charles.fastreport;
 
-import org.mindrot.BCrypt;
+//import org.mindrot.BCrypt;
 
-/**
- * Created by Lis on 27/4/16.
- */
 public class Password {
+
+    /*
+
+
     // Define the BCrypt workload to use when generating password hashes. 10-31 is a valid value.
         private static int workload = 12;
 
@@ -20,6 +21,8 @@ public class Password {
          *			     or when changing an account's password.
          * @return String - a string of length 60 that is the bcrypt hashed password in crypt(3) format.
          */
+
+    /*
         public static String hashPassword(String password_plaintext) {
             String salt = BCrypt.gensalt(workload);
             String hashed_password = BCrypt.hashpw(password_plaintext, salt);
@@ -35,6 +38,7 @@ public class Password {
          * @param stored_hash The account's stored password hash, retrieved from the authorization database
          * @return boolean - true if the password matches the password of the stored hash, false otherwise
          */
+    /*
         public static boolean checkPassword(String password_plaintext, String stored_hash) {
             boolean password_verified = false;
 
@@ -51,6 +55,7 @@ public class Password {
          * for the password it represents, and also generate a new hash and ensure that the new hash verifies
          * just the same.
          */
+    /*
         public static void main(String[] args) {
             String test_passwd = "abcdefghijklmnopqrstuvwxyz";
             String test_hash = "$2a$06$.rCVZVOThsIa97pEDOxvGuRRgzG64bvtJ0938xuqzv18d3ZpQhstC";
@@ -77,5 +82,5 @@ public class Password {
 
         }
 
-
+*/
 }
