@@ -1,15 +1,54 @@
 package db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.Date;
+
 /**
  * Created by Lis on 27/4/16.
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
     //Sentencia SQL para crear la tabla de Usuarios
-    String sqlCreate = "CREATE TABLE Usuarios (codigo INTEGER, nombre TEXT, )";
+    String sqlCreate;
+
+    {
+        sqlCreate = "CREATE TABLE Usuario (\n" +
+                "usuario TEXT NOT NULL UNIQUE,\n" +
+                "nombre TEXT NOT NULL,\n" +
+                "apellidos TEXT NOT NULL,\n" +
+                "password TEXT NOT NULL,\n" +
+                "telefono TEXT NOT NULL,\n" +
+                "licenciaCond TEXT NOT NULL,\n" +
+                "fechaVenc DATE NOT NULL,\n" +
+                "direccion TEXT NOT NULL,\n" +
+                "PRIMARY KEY(usuario)\n" +
+                "); " +
+                "CREATE TABLE Vehiculo (\n" +
+                "tipo TEXT,\n" +
+                "matricula TEXT NOT NULL,\n" +
+                "marca TEXT,\n" +
+                "modelo TEXT,\n" +
+                "PRIMARY KEY(matricula)\n" +
+                "); " +
+                "CREATE TABLE Aseguradora (\n" +
+                "NombreAseg TEXT NOT NULL,\n" +
+                "PRIMARY KEY(NombreAseg)\n" +
+                ");"  +
+                "CREATE TABLE Accidente" +
+                "(usuario TEXT " +
+                "matricula TEXT ,\n" +
+                "NombreAseg TEXT ,\n" +
+                "PRIMARY KEY(usuario,matricula, NombreAseg)\n" +
+                "FOREIGN KEY(usuario) REFERENCES Usuario," +
+                " FOREIGN KEY (matricula) REFERENCES Vehiculo," +
+                "FOREIGN KEY (NombreAseg)  REFERENCES Aseguradora ;";
+
+    }
+
 
     public SQLiteHelper(Context contexto, String nombre,
                         CursorFactory factory, int version) {
@@ -25,7 +64,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int versionAnterior, int versionNueva) {
-        //NOTA: Arreglar esto para mantener los datos.
+        //TODO: Arreglar esto para mantener los datos.
 
         //Se elimina la versión anterior de la tabla
         db.execSQL("DROP TABLE IF EXISTS Usuarios");
@@ -33,5 +72,23 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         //Se crea la nueva versión de la tabla
         db.execSQL(sqlCreate);
     }
+
+    public void insertarUsuario (SQLiteDatabase db, String user, String name, String lastN,
+                          String pass, String phone, String lic, Date expDate, String adress){
+
+        ContentValues reg = new ContentValues();
+        reg.put("usuario", user);
+        reg.put("nombre", name);
+        reg.put("apellidos", lastN);
+        reg.put("password", pass );
+        reg.put("telefono", phone );
+        reg.put("licenciaCond", lic);
+        reg.put("fechaVenc", expDate.toString());
+        reg.put("direccion", adress);
+
+        db.insert("Usuario",null, reg);
+
+    }
+
 
 }

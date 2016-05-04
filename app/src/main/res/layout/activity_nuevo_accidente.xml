@@ -9,15 +9,14 @@
         android:text="Fecha"
         android:id="@+id/tvFecha"
         android:layout_below="@+id/tvTitNuevoAcc"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="47dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_toLeftOf="@+id/editText"
+        android:layout_toStartOf="@+id/editText"
+        android:layout_marginBottom="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="NUEVO ACCIDENTE"
+        android:text="ACCIDENTE"
         android:id="@+id/tvTitNuevoAcc"
         android:textSize="30dp"
         android:layout_alignParentTop="true"
@@ -30,11 +29,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Hora"
         android:id="@+id/tvHora"
-        android:layout_marginTop="39dp"
         android:layout_below="@+id/tvFecha"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp" />
+        android:layout_alignLeft="@+id/tvFecha"
+        android:layout_alignStart="@+id/tvFecha"
+        android:layout_marginBottom="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,9 +40,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Localización"
         android:id="@+id/tvLocal"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/tvHora"
         android:layout_alignLeft="@+id/tvHora"
-        android:layout_alignStart="@+id/tvHora" />
+        android:layout_alignStart="@+id/tvHora"
+        android:layout_marginBottom="15dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -52,8 +51,9 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/editText"
-        android:layout_above="@+id/tvHora"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/editText2"
+        android:layout_alignLeft="@+id/tvTitNuevoAcc"
+        android:layout_alignStart="@+id/tvTitNuevoAcc" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -68,20 +68,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Descripción Accidente"
-        android:id="@+id/btDescAcc"
-        android:layout_marginTop="39dp"
-        android:layout_below="@+id/tvLocal"
-        android:layout_alignRight="@+id/tvTitNuevoAcc"
-        android:layout_alignEnd="@+id/tvTitNuevoAcc"
-        android:layout_toRightOf="@+id/tvHora"
-        android:layout_toEndOf="@+id/tvHora" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Finalizar"
-        android:id="@+id/btFinaliz"
+        android:text="Enviar"
+        android:id="@+id/btEnviar"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -93,8 +81,67 @@
         android:layout_height="wrap_content"
         android:text="Guardar"
         android:id="@+id/btGuardACC"
-        android:layout_alignTop="@+id/btFinaliz"
+        android:layout_alignTop="@+id/btEnviar"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Fotos"
+        android:id="@+id/tvFotos"
+        android:layout_below="@+id/tvLocal"
+        android:layout_alignLeft="@+id/tvHora"
+        android:layout_alignStart="@+id/tvHora"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_toStartOf="@+id/tvTitNuevoAcc"
+        android:layout_toLeftOf="@+id/tvTitNuevoAcc" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Vehiculo"
+        android:id="@+id/tvVeh"
+        android:layout_below="@+id/tvFotos"
+        android:layout_alignLeft="@+id/tvLocal"
+        android:layout_alignStart="@+id/tvLocal"
+        android:layout_marginBottom="15dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/etSelVeh"
+        android:text="Selecciona Vehiculo"
+        android:layout_alignBottom="@+id/tvVeh"
+        android:layout_toRightOf="@+id/tvFotos"
+        android:layout_toEndOf="@+id/tvFotos" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Enviar Datos a:"
+        android:id="@+id/tvEnvDat"
+        android:layout_below="@+id/tvVeh"
+        android:layout_alignLeft="@+id/tvVeh"
+        android:layout_alignStart="@+id/tvVeh"
+        android:layout_marginBottom="15dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/etEmail"
+        android:text="Introduzca email"
+        android:layout_below="@+id/tvEnvDat"
+        android:layout_alignLeft="@+id/tvEnvDat"
+        android:layout_alignStart="@+id/tvEnvDat"
+        android:layout_marginBottom="15dp" />
 
 </RelativeLayout>
