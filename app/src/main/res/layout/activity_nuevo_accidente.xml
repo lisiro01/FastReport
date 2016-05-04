@@ -8,16 +8,16 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Fecha"
         android:id="@+id/tvFecha"
-        android:layout_below="@+id/tvTitNuevoAcc"
-        android:layout_toLeftOf="@+id/editText"
-        android:layout_toStartOf="@+id/editText"
-        android:layout_marginBottom="15dp" />
+        android:layout_below="@+id/tvTitFastEmail"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ACCIDENTE"
-        android:id="@+id/tvTitNuevoAcc"
+        android:text="FAST EMAIL"
+        android:id="@+id/tvTitFastEmail"
         android:textSize="30dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -31,8 +31,7 @@
         android:id="@+id/tvHora"
         android:layout_below="@+id/tvFecha"
         android:layout_alignLeft="@+id/tvFecha"
-        android:layout_alignStart="@+id/tvFecha"
-        android:layout_marginBottom="15dp" />
+        android:layout_alignStart="@+id/tvFecha" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,27 +42,7 @@
         android:layout_below="@+id/tvHora"
         android:layout_alignLeft="@+id/tvHora"
         android:layout_alignStart="@+id/tvHora"
-        android:layout_marginBottom="15dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:layout_above="@+id/editText2"
-        android:layout_alignLeft="@+id/tvTitNuevoAcc"
-        android:layout_alignStart="@+id/tvTitNuevoAcc" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_alignBottom="@+id/tvHora"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
+        android:layout_marginTop="10dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -82,8 +61,8 @@
         android:text="Guardar"
         android:id="@+id/btGuardACC"
         android:layout_alignTop="@+id/btEnviar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
+        android:layout_alignRight="@+id/tvTitFastEmail"
+        android:layout_alignEnd="@+id/tvTitFastEmail" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -92,12 +71,9 @@
         android:text="Fotos"
         android:id="@+id/tvFotos"
         android:layout_below="@+id/tvLocal"
-        android:layout_alignLeft="@+id/tvHora"
-        android:layout_alignStart="@+id/tvHora"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="15dp"
-        android:layout_toStartOf="@+id/tvTitNuevoAcc"
-        android:layout_toLeftOf="@+id/tvTitNuevoAcc" />
+        android:layout_alignLeft="@+id/tvLocal"
+        android:layout_alignStart="@+id/tvLocal"
+        android:layout_marginTop="40dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -106,9 +82,9 @@
         android:text="Vehiculo"
         android:id="@+id/tvVeh"
         android:layout_below="@+id/tvFotos"
-        android:layout_alignLeft="@+id/tvLocal"
-        android:layout_alignStart="@+id/tvLocal"
-        android:layout_marginBottom="15dp" />
+        android:layout_alignLeft="@+id/tvFotos"
+        android:layout_alignStart="@+id/tvFotos"
+        android:layout_marginTop="15dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -117,9 +93,10 @@
         android:ems="10"
         android:id="@+id/etSelVeh"
         android:text="Selecciona Vehiculo"
-        android:layout_alignBottom="@+id/tvVeh"
-        android:layout_toRightOf="@+id/tvFotos"
-        android:layout_toEndOf="@+id/tvFotos" />
+        android:layout_below="@+id/tvFotos"
+        android:layout_alignLeft="@+id/tvTitFastEmail"
+        android:layout_alignStart="@+id/tvTitFastEmail"
+        android:layout_marginTop="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -130,7 +107,7 @@
         android:layout_below="@+id/tvVeh"
         android:layout_alignLeft="@+id/tvVeh"
         android:layout_alignStart="@+id/tvVeh"
-        android:layout_marginBottom="15dp" />
+        android:layout_marginTop="15dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -142,6 +119,35 @@
         android:layout_below="@+id/tvEnvDat"
         android:layout_alignLeft="@+id/tvEnvDat"
         android:layout_alignStart="@+id/tvEnvDat"
-        android:layout_marginBottom="15dp" />
+        android:layout_alignRight="@+id/btEnviar"
+        android:layout_alignEnd="@+id/btEnviar" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/etHora"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/tvHora" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/etFecha"
+        android:layout_above="@+id/etHora"
+        android:layout_alignLeft="@+id/etHora"
+        android:layout_alignStart="@+id/etHora" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Atras"
+        android:id="@+id/btAtrasFE"
+        android:layout_alignBottom="@+id/btGuardACC"
+        android:layout_alignLeft="@+id/etEmail"
+        android:layout_alignStart="@+id/etEmail" />
 
 </RelativeLayout>

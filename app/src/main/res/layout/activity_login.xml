@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="¿Aun no estas registrado?"
+        android:text="¿Aun no estás registrado?"
         android:id="@+id/tvAunNo"
         android:textColor="#ff2d48ff"
         android:layout_below="@+id/etContraseña"
@@ -76,20 +76,10 @@
     <Button
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="Registrarse"
-        android:id="@+id/btRegistrarse"
-        android:layout_marginTop="51dp"
-        android:layout_below="@+id/tvAunNo"
-        android:layout_toRightOf="@+id/tvUsuario"
-        android:layout_toEndOf="@+id/tvUsuario" />
-
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
         android:text="Entrar"
         android:id="@+id/button2"
-        android:layout_alignTop="@+id/btRegistrarse"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="30dp" />
+        android:layout_marginBottom="34dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/tvTituloLogin"
+        android:layout_toEndOf="@+id/tvTituloLogin" />
 </RelativeLayout>
