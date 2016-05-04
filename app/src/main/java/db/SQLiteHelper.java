@@ -32,16 +32,16 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "matricula TEXT NOT NULL,\n" +
                 "marca TEXT,\n" +
                 "modelo TEXT,\n" +
+                "NombreAseg TEXT NOT NULL,\n" +
+                "numPoliza TEXT NOT NULL,\n" +
                 "PRIMARY KEY(matricula)\n" +
                 "); " +
-                "CREATE TABLE Aseguradora (\n" +
-                "NombreAseg TEXT NOT NULL,\n" +
-                "PRIMARY KEY(NombreAseg)\n" +
-                ");"  +
                 "CREATE TABLE Accidente" +
                 "(usuario TEXT " +
                 "matricula TEXT ,\n" +
-                "NombreAseg TEXT ,\n" +
+                "fechaAcc DATE ,\n" +
+                "hora TEXT ,\n" +
+                "localizacion TEXT ,\n" +
                 "PRIMARY KEY(usuario,matricula, NombreAseg)\n" +
                 "FOREIGN KEY(usuario) REFERENCES Usuario," +
                 " FOREIGN KEY (matricula) REFERENCES Vehiculo," +
@@ -73,8 +73,24 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(sqlCreate);
     }
 
+    public void insertarVehiculo (SQLiteDatabase db, String type, String matr, String marc,
+                                  String model, String nombAseg, String numPol){
+
+        ContentValues reg = new ContentValues();
+        reg.put("tipo", type);
+        reg.put("matricula", matr);
+        reg.put("marca", marc);
+        reg.put("modelo", model );
+        reg.put("NombreAseg", nombAseg );
+        reg.put("numPoliza", numPol);
+
+        db.insert("Vehiculo",null, reg);
+
+    }
+
+
     public void insertarUsuario (SQLiteDatabase db, String user, String name, String lastN,
-                          String pass, String phone, String lic, Date expDate, String adress){
+                                 String pass, String phone, String lic, Date expDate, String adress){
 
         ContentValues reg = new ContentValues();
         reg.put("usuario", user);
@@ -87,7 +103,22 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         reg.put("direccion", adress);
 
         db.insert("Usuario",null, reg);
+    }
 
+
+
+
+    public void insertarAccidente(SQLiteDatabase db, String user, String matr, String date,
+                                  String time, String local){
+
+        ContentValues reg = new ContentValues();
+        reg.put("usuario", user);
+        reg.put("matricula", matr);
+        reg.put("fechaAcc", date);
+        reg.put("hora", time );
+        reg.put("localizacion", local );
+
+        db.insert("Accidente",null, reg);
     }
 
 
