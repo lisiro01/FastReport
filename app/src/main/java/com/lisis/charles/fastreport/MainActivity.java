@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent in = new Intent(MainActivity.this, VentanaPrincipal.class);
+                in.putExtra("username", userName.toString());
                 startActivity(in);
 
             }

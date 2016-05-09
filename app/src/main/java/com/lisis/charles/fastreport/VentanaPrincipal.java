@@ -22,6 +22,7 @@ public class VentanaPrincipal extends AppCompatActivity {
         btnHisAcc = (Button) findViewById(R.id.btHistAcc);
         btnAtras = (Button) findViewById(R.id.btAtrasPRINC);
 
+
         btnFastEm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
