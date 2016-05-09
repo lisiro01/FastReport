@@ -121,6 +121,8 @@ public class DatosPersonales extends AppCompatActivity {
         String lic = numLic.getText().toString();
         String expDate = dir.getText().toString();
 
+        admin.creaUsuario(bd, nomUser, "123");
+
         admin.actualizaDatosUsuario(bd,nomUser, name, lastN, phone, lic, expDate, adress);
     }
 

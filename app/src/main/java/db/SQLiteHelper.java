@@ -15,36 +15,32 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     String sqlCreate;
 
     {
-        sqlCreate = "CREATE TABLE Usuario (\n" +
-                "usuario TEXT NOT NULL UNIQUE,\n" +
-                "nombre TEXT ,\n" +
-                "apellidos TEXT \n" +
-                "password TEXT ,\n" +
-                "telefono TEXT ,\n" +
-                "licenciaCond TEXT ,\n" +
-                "fechaVenc DATE ,\n" +
-                "direccion TEXT ,\n" +
-                "PRIMARY KEY(usuario)\n" +
-                "); " +
-                "CREATE TABLE Vehiculo (\n" +
-                "tipo TEXT,\n" +
-                "matricula TEXT NOT NULL,\n" +
-                "marca TEXT,\n" +
-                "modelo TEXT,\n" +
-                "NombreAseg TEXT NOT NULL,\n" +
-                "numPoliza TEXT NOT NULL,\n" +
-                "PRIMARY KEY(matricula)\n" +
-                "); " +
-                "CREATE TABLE Accidente" +
-                "(usuario TEXT " +
-                "matricula TEXT ,\n" +
-                "fechaAcc DATE ,\n" +
-                "hora TEXT ,\n" +
-                "localizacion TEXT ,\n" +
-                "PRIMARY KEY(usuario,matricula, NombreAseg)\n" +
-                "FOREIGN KEY(usuario) REFERENCES Usuario," +
-                " FOREIGN KEY (matricula) REFERENCES Vehiculo," +
-                "FOREIGN KEY (NombreAseg)  REFERENCES Aseguradora ;";
+        sqlCreate = "CREATE TABLE Usuarios (usuario varchar(40) NOT NULL PRIMARY KEY,\n" +
+                "                nombre varchar(40) ,\n" +
+                "                apellidos varchar(40),\n" +
+                "                contrasenya varchar(40) ,\n" +
+                "                telefono varchar(9) ,\n" +
+                "                licenciaCond varchar(40) ,\n" +
+                "                fechaVenc varchar(40) ,\n" + // NO OLVIDAR CONVERTIRLO EN DATE
+                "                direccion varchar(40));\n" +
+                "                \n" +
+                "                CREATE TABLE Vehiculo (\n" +
+                "                tipo varchar(40),\n" +
+                "                matricula varchar(40) NOT NULL PRIMARY KEY,\n" +
+                "                marca varchar(40),\n" +
+                "                modelo varchar(40),\n" +
+                "                NombreAseg varchar(40) NOT NULL,\n" +
+                "                numPoliza varchar(40) NOT NULL\n" +
+                "                );\n" +
+                "                CREATE TABLE Accidente \n" +
+                "                (usuario varchar(40) ,\n" +
+                "                matricula varchar(40) ,\n" +
+                "                fechaAcc DATE ,\n" +
+                "                hora varchar(40) ,\n" +
+                "                localizacion varchar(40) ,\n" +
+                "                PRIMARY KEY(usuario,matricula),\n" +
+                "                FOREIGN KEY(usuario) REFERENCES Usuario,\n" +
+                "                FOREIGN KEY (matricula) REFERENCES Vehiculo);";
 
     }
 
@@ -97,14 +93,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         reg.put("licenciaCond", lic);
         reg.put("fechaVenc", expDate);
         reg.put("direccion", adress);
-        db.update("Usuarios", reg, user = "usuario", null);
+        db.update("Usuarios", reg, user + " = usuario", null);
 
     }
 
     public void creaUsuario (SQLiteDatabase db, String user, String pass){
         ContentValues reg = new ContentValues();
         reg.put("usuario", user);
-        reg.put("password", pass );
+        reg.put("contrasenya", pass );
         reg.put("nombre", (String)null);
         reg.put("apellidos", (String)null);
         reg.put("telefono", (String)null );
@@ -112,7 +108,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         reg.put("fechaVenc", (String)null);
         reg.put("direccion", (String)null);
 
-        db.insert("Usuario", null, reg);
+        db.insert("Usuarios", null, reg);
 
     }
 
@@ -133,11 +129,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     public String cargarDatos(SQLiteDatabase db){
-        Cursor c = db.rawQuery("select record from Usuarios", null);
 
         String r = "hola";
-        if(c.moveToFirst()){
-            r = c.getString(0);
+        try {
+            Cursor c = db.rawQuery("select record from Usuarios", null);
+
+            if (c.moveToFirst()) {
+                r = c.getString(0);
+            }
+        }
+        catch (Exception e){
+
         }
 
         return r;
