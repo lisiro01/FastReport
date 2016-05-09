@@ -2,6 +2,7 @@ package db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -81,7 +82,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         reg.put("NombreAseg", nombAseg );
         reg.put("numPoliza", numPol);
 
-        db.insert("Vehiculo",null, reg);
+        db.insert("Vehiculo", null, reg);
 
     }
 
@@ -111,7 +112,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         reg.put("fechaVenc", (String)null);
         reg.put("direccion", (String)null);
 
-        db.insert("Usuario",null, reg);
+        db.insert("Usuario", null, reg);
 
     }
 
@@ -129,6 +130,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         reg.put("localizacion", local );
 
         db.insert("Accidente",null, reg);
+    }
+
+    public String cargarDatos(SQLiteDatabase db){
+        Cursor c = db.rawQuery("select record from Usuarios", null);
+
+        String r = "hola";
+        if(c.moveToFirst()){
+            r = c.getString(0);
+        }
+
+        return r;
     }
 
 

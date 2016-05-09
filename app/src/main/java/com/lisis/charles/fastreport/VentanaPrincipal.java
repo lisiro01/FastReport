@@ -43,6 +43,7 @@ public class VentanaPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(VentanaPrincipal.this, DatosPersonales.class);
+                in.putExtra("username", nomUser.toString());
                 startActivity(in);
             }
         });

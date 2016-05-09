@@ -22,12 +22,12 @@ public class DatosPersonales extends AppCompatActivity {
 
     private Button btnGuardar, btnAtras;
     private EditText nomb, apell, dir, tel, numLic, fechaVenc;
-    private MainActivity login;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private String nomUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,15 @@ public class DatosPersonales extends AppCompatActivity {
         numLic = (EditText) findViewById(R.id.edNPermiso);
         fechaVenc = (EditText) findViewById(R.id.etFVenc);
 
+
+        //Para coger lo que nos envia la otra clase (username )
+        Bundle param = getIntent().getExtras();
+
+        if(param != null){
+            nomUser = param.getString("username");
+        }
+
+        cargardatos();
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +100,15 @@ public class DatosPersonales extends AppCompatActivity {
         customDialog.show();
     }
 
+    public void cargardatos(){
+        SQLiteHelper admin = new SQLiteHelper(this, "admin", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+
+        nomb.setText(admin.cargarDatos(bd));
+
+    }
+
+
     public void guardarDatos() {
         SQLiteHelper admin = new SQLiteHelper(this, "admin", null, 1);
         SQLiteDatabase bd = admin.getWritableDatabase();
@@ -103,7 +121,7 @@ public class DatosPersonales extends AppCompatActivity {
         String lic = numLic.getText().toString();
         String expDate = dir.getText().toString();
 
-        admin.actualizaDatosUsuario(bd,login.getNombreUsuario(), name, lastN, phone, lic, expDate, adress);
+        admin.actualizaDatosUsuario(bd,nomUser, name, lastN, phone, lic, expDate, adress);
     }
 
 
