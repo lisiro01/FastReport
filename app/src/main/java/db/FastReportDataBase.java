@@ -22,31 +22,7 @@ import android.os.Bundle;
                 SQLiteDatabase db = usdbh.getWritableDatabase();
 
                 //Si hemos abierto correctamente la base de datos
-                if(db == null)
-                {
-                    int codigo = 12;
-                    String nombre = "Jorge Valdes";
-                    //Insertamos los datos en la tabla Usuarios
-                    db.execSQL("CREATE TABLE `Usuario` (\n" +
-                            "\t`usuario`\tTEXT NOT NULL UNIQUE,\n" +
-                            "\t`nombre`\tTEXT NOT NULL,\n" +
-                            "\t`apellidos `\tTEXT NOT NULL,\n" +
-                            "\t`password`\tTEXT NOT NULL,\n" +
-                            "\t`telefono`\tTEXT NOT NULL,\n" +
-                            "\t`licenciaCond`\tTEXT NOT NULL,\n" +
-                            "\t`fechaVenc`\tDATE NOT NULL,\n" +
-                            "\t`direccion`\tTEXT NOT NULL,\n" +
-                            "\tPRIMARY KEY(usuario)\n" +
-                            "); " +
-                            "CREATE TABLE `Vehiculo` (\n" +
-                            "\t`tipo`\tTEXT,\n" +
-                            "\t`matricula`\tTEXT NOT NULL,\n" +
-                            "\t`marca`\tTEXT,\n" +
-                            "\t`modelo`\tTEXT,\n" +
-                            "\tPRIMARY KEY(matricula)\n" +
-                            ");");
 
-                }
 
                     //Cerramos la base de datos
                     db.close();

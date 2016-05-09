@@ -2,7 +2,6 @@ package db;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -11,36 +10,18 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Lis on 27/4/16.
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
-    //Sentencia SQL para crear la tabla de Usuarios
-    String sqlCreate;
 
+   private  String sqlCreate;
     {
-        sqlCreate = "CREATE TABLE Usuarios (usuario varchar(40) NOT NULL PRIMARY KEY,\n" +
-                "                nombre varchar(40) ,\n" +
-                "                apellidos varchar(40),\n" +
-                "                contrasenya varchar(40) ,\n" +
-                "                telefono varchar(9) ,\n" +
-                "                licenciaCond varchar(40) ,\n" +
-                "                fechaVenc varchar(40) ,\n" + // NO OLVIDAR CONVERTIRLO EN DATE
-                "                direccion varchar(40));\n" +
-                "                \n" +
-                "                CREATE TABLE Vehiculo (\n" +
-                "                tipo varchar(40),\n" +
-                "                matricula varchar(40) NOT NULL PRIMARY KEY,\n" +
-                "                marca varchar(40),\n" +
-                "                modelo varchar(40),\n" +
-                "                NombreAseg varchar(40) NOT NULL,\n" +
-                "                numPoliza varchar(40) NOT NULL\n" +
-                "                );\n" +
-                "                CREATE TABLE Accidente \n" +
-                "                (usuario varchar(40) ,\n" +
-                "                matricula varchar(40) ,\n" +
-                "                fechaAcc DATE ,\n" +
-                "                hora varchar(40) ,\n" +
-                "                localizacion varchar(40) ,\n" +
-                "                PRIMARY KEY(usuario,matricula),\n" +
-                "                FOREIGN KEY(usuario) REFERENCES Usuario,\n" +
-                "                FOREIGN KEY (matricula) REFERENCES Vehiculo);";
+        sqlCreate = "CREATE TABLE Usuarios " +
+                "               (usuario TEXT NOT NULL PRIMARY KEY,\n" +
+                "                nombre TEXT ,\n" +
+                "                apellidos TEXT,\n" +
+                "                contrasenya TEXT ,\n" +
+                "                telefono TEXT ,\n" +
+                "                licenciaCond TEXT ,\n" +
+                "                fechaVenc TEXT,\n" + // NO OLVIDAR CONVERTIRLO EN DATE
+                "                direccion TEXT);" ;
 
     }
 
@@ -52,7 +33,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Se ejecuta la sentencia SQL de creación de la tabla
-        db.execSQL(sqlCreate);
+        if(db.isReadOnly()) {
+            db = getWritableDatabase();
+            db.execSQL(sqlCreate);
+        }
     }
 
 
@@ -83,8 +67,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
 
-    public void actualizaDatosUsuario (SQLiteDatabase db,String user, String name, String lastN,
-                                  String phone, String lic, String expDate, String adress){
+    public void actualizaDatosUsuario (String user, String name, String lastN,
+                                       String phone, String lic, String expDate, String adress){
+
+        String cond = "usuario=" + user;
+        SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues reg = new ContentValues();
         reg.put("nombre", name);
@@ -93,11 +80,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         reg.put("licenciaCond", lic);
         reg.put("fechaVenc", expDate);
         reg.put("direccion", adress);
-        db.update("Usuarios", reg, user + " = usuario", null);
-
+        db.update("Usuarios", reg,cond,null);
+        db.close();
     }
 
-    public void creaUsuario (SQLiteDatabase db, String user, String pass){
+    public void creaUsuario ( String user, String pass){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
         ContentValues reg = new ContentValues();
         reg.put("usuario", user);
         reg.put("contrasenya", pass );
@@ -109,6 +99,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         reg.put("direccion", (String)null);
 
         db.insert("Usuarios", null, reg);
+        db.close();
+       /* db.execSQL("INSERT INTO Usuarios (usuario,nombre,apellidos,contrasenya, telefono,licenciaCond, fechaVenc, direccion)" +
+                "VALUES ('lisPrueba',null,null,'123',null,null,null,null )");*/
 
     }
 
@@ -128,21 +121,24 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.insert("Accidente",null, reg);
     }
 
-    public String cargarDatos(SQLiteDatabase db){
+   /* public String cargarDatos(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String r = "Hola";
 
-        String r = "hola";
-        try {
             Cursor c = db.rawQuery("select record from Usuarios", null);
 
-            if (c.moveToFirst()) {
+            if (c.moveToFirst())
                 r = c.getString(0);
-            }
-        }
-        catch (Exception e){
 
-        }
 
         return r;
+    }*/
+
+    public void obtener (){
+
+
+
+
     }
 
 

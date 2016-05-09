@@ -1,7 +1,6 @@
 package com.lisis.charles.fastreport;
 
 import android.app.Dialog;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -51,7 +50,7 @@ public class DatosPersonales extends AppCompatActivity {
             nomUser = param.getString("username");
         }
 
-        cargardatos();
+        //cargardatos();
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,30 +99,30 @@ public class DatosPersonales extends AppCompatActivity {
         customDialog.show();
     }
 
-    public void cargardatos(){
+   /* public void cargardatos(){
         SQLiteHelper admin = new SQLiteHelper(this, "admin", null, 1);
         SQLiteDatabase bd = admin.getWritableDatabase();
 
-        nomb.setText(admin.cargarDatos(bd));
+            nomb.setText(admin.cargarDatos(bd));
 
-    }
+    }*/
 
 
     public void guardarDatos() {
-        SQLiteHelper admin = new SQLiteHelper(this, "admin", null, 1);
-        SQLiteDatabase bd = admin.getWritableDatabase();
-        //EditText nomb,apell,dir,tel,numLic,fechaVenc
+        SQLiteHelper admin = new SQLiteHelper(getApplicationContext(), "admin", null, 1);
 
-        String name = nomb.getText().toString();
-        String lastN = apell.getText().toString();
-        String adress = dir.getText().toString();
-        String phone = tel.getText().toString();
-        String lic = numLic.getText().toString();
-        String expDate = dir.getText().toString();
+            String name = nomb.getText().toString();
+            String lastN = apell.getText().toString();
+            String adress = dir.getText().toString();
+            String phone = tel.getText().toString();
+            String lic = numLic.getText().toString();
+            String expDate = dir.getText().toString();
 
-        admin.creaUsuario(bd, nomUser, "123");
+            admin.creaUsuario( "invento", "123");
 
-        admin.actualizaDatosUsuario(bd,nomUser, name, lastN, phone, lic, expDate, adress);
+
+ //ESTA DA ERROR
+       // admin.actualizaDatosUsuario(nomUser, name, lastN, phone, lic, expDate, adress);
     }
 
 
