@@ -10,6 +10,7 @@ public class VentanaPrincipal extends AppCompatActivity {
 
 
     private Button btnFastEm, btnDatPers, btnMisVeh, btnHisAcc, btnAtras;
+    private String nomUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,13 @@ public class VentanaPrincipal extends AppCompatActivity {
         btnMisVeh = (Button) findViewById(R.id.btMisVeh);
         btnHisAcc = (Button) findViewById(R.id.btHistAcc);
         btnAtras = (Button) findViewById(R.id.btAtrasPRINC);
+
+        //Para coger lo que nos envia la otra clase (username )
+        Bundle param = getIntent().getExtras();
+
+        if(param != null){
+            nomUser = param.getString("username");
+        }
 
 
         btnFastEm.setOnClickListener(new View.OnClickListener() {
