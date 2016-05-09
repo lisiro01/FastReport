@@ -15,6 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.lisis.charles.fastreport.DatosPersonales"/>
+        <activity android:name="com.lisis.charles.fastreport.FastEmail"/>
+        <activity android:name="com.lisis.charles.fastreport.HistorialAccidentes"/>
+        <activity android:name="com.lisis.charles.fastreport.MisVehiculos"/>
+        <activity android:name="com.lisis.charles.fastreport.Registro"/>
+        <activity android:name="com.lisis.charles.fastreport.VentanaPrincipal"/>
     </application>
 
 </manifest>

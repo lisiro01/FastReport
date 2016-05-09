@@ -5,50 +5,38 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FAST EMAIL"
-        android:id="@+id/btFastEmail"
-        android:layout_marginTop="56dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Datos Personales "
-        android:id="@+id/btDatosPers"
-        android:layout_marginTop="51dp"
-        android:layout_below="@+id/btFastEmail"
-        android:layout_alignLeft="@+id/btFastEmail"
-        android:layout_alignStart="@+id/btFastEmail"
-        android:layout_alignRight="@+id/btFastEmail"
-        android:layout_alignEnd="@+id/btFastEmail" />
+        android:id="@+id/btDatPersPRINC"
+        android:layout_above="@+id/btMisVeh"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="126dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mis Verhículos"
-        android:id="@+id/btMisVehic"
-        android:layout_marginTop="45dp"
-        android:layout_below="@+id/btDatosPers"
-        android:layout_alignLeft="@+id/btDatosPers"
-        android:layout_alignStart="@+id/btDatosPers"
-        android:layout_alignRight="@+id/btDatosPers"
-        android:layout_alignEnd="@+id/btDatosPers" />
+        android:text="Mis Vehículos"
+        android:id="@+id/btMisVeh"
+        android:layout_alignBaseline="@+id/btNuevoAcc"
+        android:layout_alignBottom="@+id/btNuevoAcc"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Historial Accidentes"
-        android:id="@+id/btHist"
-        android:layout_marginTop="33dp"
-        android:layout_below="@+id/btMisVehic"
-        android:layout_alignLeft="@+id/btMisVehic"
-        android:layout_alignStart="@+id/btMisVehic"
-        android:layout_alignRight="@+id/btMisVehic"
-        android:layout_alignEnd="@+id/btMisVehic" />
+        android:text="Nuevo Accidente"
+        android:id="@+id/btNuevoAcc"
+        android:layout_alignBaseline="@+id/btHistAcc"
+        android:layout_alignBottom="@+id/btHistAcc"
+        android:layout_alignLeft="@+id/btMisVeh"
+        android:layout_alignStart="@+id/btMisVeh" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Historial Accidentes "
+        android:id="@+id/btHistAcc"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/btMisVeh"
+        android:layout_alignEnd="@+id/btMisVeh"
+        android:layout_marginTop="164dp" />
 </RelativeLayout>

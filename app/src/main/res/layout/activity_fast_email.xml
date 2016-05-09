@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Guardar"
-        android:id="@+id/btGuardACC"
+        android:id="@+id/btGuardFE"
         android:layout_alignTop="@+id/btEnviar"
         android:layout_alignRight="@+id/tvTitFastEmail"
         android:layout_alignEnd="@+id/tvTitFastEmail" />
@@ -149,5 +149,14 @@
         android:layout_alignBottom="@+id/btGuardACC"
         android:layout_alignLeft="@+id/etEmail"
         android:layout_alignStart="@+id/etEmail" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Atras"
+        android:id="@+id/btAtrasFE"
+        android:layout_alignTop="@+id/btGuardFE"
+        android:layout_toLeftOf="@+id/etSelVeh"
+        android:layout_toStartOf="@+id/etSelVeh" />
 
 </RelativeLayout>
