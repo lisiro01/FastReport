@@ -6,8 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.Date;
-
 /**
  * Created by Lis on 27/4/16.
  */
@@ -18,13 +16,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     {
         sqlCreate = "CREATE TABLE Usuario (\n" +
                 "usuario TEXT NOT NULL UNIQUE,\n" +
-                "nombre TEXT NOT NULL,\n" +
-                "apellidos TEXT NOT NULL,\n" +
-                "password TEXT NOT NULL,\n" +
-                "telefono TEXT NOT NULL,\n" +
-                "licenciaCond TEXT NOT NULL,\n" +
-                "fechaVenc DATE NOT NULL,\n" +
-                "direccion TEXT NOT NULL,\n" +
+                "nombre TEXT ,\n" +
+                "apellidos TEXT \n" +
+                "password TEXT ,\n" +
+                "telefono TEXT ,\n" +
+                "licenciaCond TEXT ,\n" +
+                "fechaVenc DATE ,\n" +
+                "direccion TEXT ,\n" +
                 "PRIMARY KEY(usuario)\n" +
                 "); " +
                 "CREATE TABLE Vehiculo (\n" +
@@ -50,8 +48,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
 
-    public SQLiteHelper(Context contexto, String nombre,
-                        CursorFactory factory, int version) {
+    public SQLiteHelper(Context contexto, String nombre, CursorFactory factory, int version) {
         super(contexto, nombre, factory, version);
     }
 
@@ -89,20 +86,33 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
 
-    public void insertarUsuario (SQLiteDatabase db, String user, String name, String lastN,
-                                 String pass, String phone, String lic, Date expDate, String adress){
+    public void actualizaDatosUsuario (SQLiteDatabase db,String user, String name, String lastN,
+                                  String phone, String lic, String expDate, String adress){
 
         ContentValues reg = new ContentValues();
-        reg.put("usuario", user);
         reg.put("nombre", name);
         reg.put("apellidos", lastN);
-        reg.put("password", pass );
         reg.put("telefono", phone );
         reg.put("licenciaCond", lic);
-        reg.put("fechaVenc", expDate.toString());
+        reg.put("fechaVenc", expDate);
         reg.put("direccion", adress);
+        db.update("Usuarios", reg, user = "usuario", null);
+
+    }
+
+    public void creaUsuario (SQLiteDatabase db, String user, String pass){
+        ContentValues reg = new ContentValues();
+        reg.put("usuario", user);
+        reg.put("password", pass );
+        reg.put("nombre", (String)null);
+        reg.put("apellidos", (String)null);
+        reg.put("telefono", (String)null );
+        reg.put("licenciaCond", (String)null);
+        reg.put("fechaVenc", (String)null);
+        reg.put("direccion", (String)null);
 
         db.insert("Usuario",null, reg);
+
     }
 
 

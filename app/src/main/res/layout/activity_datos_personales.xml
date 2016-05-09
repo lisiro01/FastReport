@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:text="Atras"
                 android:id="@+id/btAtrasDatos"
-                android:layout_below="@+id/etFechaVencimiento"
+                android:layout_below="@+id/etFVenc"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="30dp"
@@ -39,7 +39,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/edNombre"
+                android:id="@+id/etNombre"
                 android:layout_below="@+id/tvNombre"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -75,7 +75,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Apellidos"
                 android:id="@+id/tvApellidos"
-                android:layout_below="@+id/edNombre"
+                android:layout_below="@+id/etNombre"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="20dp"
@@ -132,7 +132,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/edEmail"
+                android:id="@+id/etTel"
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/tvtel"
                 android:layout_alignParentLeft="true"
@@ -151,7 +151,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
-                android:layout_below="@+id/edEmail" />
+                android:layout_below="@+id/etTel" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -161,8 +161,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
-                android:layout_alignRight="@+id/edEmail"
-                android:layout_alignEnd="@+id/edEmail"
+                android:layout_alignRight="@+id/etTel"
+                android:layout_alignEnd="@+id/etTel"
                 android:layout_marginLeft="10dp" />
 
             <TextView
@@ -178,7 +178,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/etFechaVencimiento"
+                android:id="@+id/etFVenc"
                 android:layout_below="@+id/tvFechaVencimiento"
                 android:layout_alignLeft="@+id/tvFechaVencimiento"
                 android:layout_alignStart="@+id/tvFechaVencimiento"

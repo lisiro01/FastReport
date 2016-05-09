@@ -1,18 +1,33 @@
 package com.lisis.charles.fastreport;
 
 import android.app.Dialog;
-import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import db.SQLiteHelper;
 
 public class DatosPersonales extends AppCompatActivity {
 
 
     private Button btnGuardar, btnAtras;
+    private EditText nomb, apell, dir, tel, numLic, fechaVenc;
+    private MainActivity login;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +36,19 @@ public class DatosPersonales extends AppCompatActivity {
 
         btnGuardar = (Button) findViewById(R.id.btGuardarDatos);
         btnAtras = (Button) findViewById(R.id.btAtrasDatos);
+        nomb = (EditText) findViewById(R.id.etNombre);
+        apell = (EditText) findViewById(R.id.edApellidos);
+        dir = (EditText) findViewById(R.id.edDireccion);
+        tel = (EditText) findViewById(R.id.etTel);
+        numLic = (EditText) findViewById(R.id.edNPermiso);
+        fechaVenc = (EditText) findViewById(R.id.etFVenc);
+
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { // aqui hay que meter los datos en la bbdd, si se inserto bien, entonces de muestr popup
+
+                guardarDatos();
                 mostrarDialog();
             }
         });
@@ -37,10 +61,12 @@ public class DatosPersonales extends AppCompatActivity {
             }
         });
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    public void mostrarDialog()
-    {
+    public void mostrarDialog() {
         final Dialog customDialog = new Dialog(this);
         //deshabilitamos el título por defecto
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -64,4 +90,61 @@ public class DatosPersonales extends AppCompatActivity {
 
         customDialog.show();
     }
+
+    public void guardarDatos() {
+        SQLiteHelper admin = new SQLiteHelper(this, "admin", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        //EditText nomb,apell,dir,tel,numLic,fechaVenc
+
+        String name = nomb.getText().toString();
+        String lastN = apell.getText().toString();
+        String adress = dir.getText().toString();
+        String phone = tel.getText().toString();
+        String lic = numLic.getText().toString();
+        String expDate = dir.getText().toString();
+
+        admin.actualizaDatosUsuario(bd,login.getNombreUsuario(), name, lastN, phone, lic, expDate, adress);
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "DatosPersonales Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.lisis.charles.fastreport/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "DatosPersonales Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.lisis.charles.fastreport/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }
+
