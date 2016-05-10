@@ -70,7 +70,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void actualizaDatosUsuario (String user, String name, String lastN,
                                        String phone, String lic, String expDate, String adress){
 
-        String cond = "usuario=" + user;
+
+        String cond = "usuario='"+user+"'";
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues reg = new ContentValues();

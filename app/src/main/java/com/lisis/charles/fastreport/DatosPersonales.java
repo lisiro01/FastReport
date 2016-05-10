@@ -122,7 +122,7 @@ public class DatosPersonales extends AppCompatActivity {
 
 
  //ESTA DA ERROR
-       // admin.actualizaDatosUsuario(nomUser, name, lastN, phone, lic, expDate, adress);
+      admin.actualizaDatosUsuario("invento", name, lastN, phone, lic, expDate, adress);
     }
 
 
