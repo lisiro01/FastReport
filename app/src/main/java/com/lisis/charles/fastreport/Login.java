@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     private Button btnEntrar;
     private TextView tvRegistrarse;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(MainActivity.this, VentanaPrincipal.class);
+                Intent in = new Intent(Login.this, VentanaPrincipal.class);
                 in.putExtra("username", userName.toString());
                 startActivity(in);
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         tvRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this, Registro.class);
+                Intent in = new Intent(Login.this, Registro.class);
                 startActivity(in);
             }
         });

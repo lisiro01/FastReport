@@ -14,6 +14,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import db.DatabaseSQLiteHelper;
 import db.SQLiteHelper;
 
 public class DatosPersonales extends AppCompatActivity {
@@ -21,12 +22,8 @@ public class DatosPersonales extends AppCompatActivity {
 
     private Button btnGuardar, btnAtras;
     private EditText nomb, apell, dir, tel, numLic, fechaVenc;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
     private GoogleApiClient client;
-    private String nomUser;
+    private long user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,20 +40,17 @@ public class DatosPersonales extends AppCompatActivity {
         fechaVenc = (EditText) findViewById(R.id.etFVenc);
 
 
-        //Para coger lo que nos envia la otra clase (username )
-        Bundle param = getIntent().getExtras();
-
-        if(param != null){
-            nomUser = param.getString("username");
+        //Para coger lo que nos envia la otra clase (user_id )
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            user_id = extras.getLong("user_id");
         }
-
-        //cargardatos();
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { // aqui hay que meter los datos en la bbdd, si se inserto bien, entonces de muestr popup
 
-                guardarDatos();
+                updateUserInfo();
                 mostrarDialog();
             }
         });
@@ -99,31 +93,28 @@ public class DatosPersonales extends AppCompatActivity {
         customDialog.show();
     }
 
-   /* public void cargardatos(){
-        SQLiteHelper admin = new SQLiteHelper(this, "admin", null, 1);
-        SQLiteDatabase bd = admin.getWritableDatabase();
-
-            nomb.setText(admin.cargarDatos(bd));
-
-    }*/
-
-
-    public void guardarDatos() {
+    public void cargardatos(){
         SQLiteHelper admin = new SQLiteHelper(getApplicationContext(), "admin", null, 1);
 
-            String name = nomb.getText().toString();
-            String lastN = apell.getText().toString();
-            String adress = dir.getText().toString();
-            String phone = tel.getText().toString();
-            String lic = numLic.getText().toString();
-            String expDate = dir.getText().toString();
+            nomb.setText(admin.cargarDatos());
 
-            admin.creaUsuario( "invento", "123");
-
-
- //ESTA DA ERROR
-      admin.actualizaDatosUsuario("invento", name, lastN, phone, lic, expDate, adress);
     }
+
+    //Updating user´s method. Already have email/user and pass
+    public void updateUserInfo(){
+        DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
+        User user = new User();
+        user.setName(nomb.getText().toString());
+        user.setLastname(apell.getText().toString());
+        user.setAddress(dir.getText().toString());
+        user.setDriverLicense(numLic.getText().toString());
+        user.setPhoneNumber(tel.getText().toString());
+        user.setExpiration_date(fechaVenc.getText().toString());
+
+        //TODO: coger el long user_id y pasarlo aqui en esta funcion de segundo parametro.
+        fastReportDB.updateUserDB(user, 1);
+    }
+
 
 
     @Override

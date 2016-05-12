@@ -10,7 +10,7 @@ public class VentanaPrincipal extends AppCompatActivity {
 
 
     private Button btnFastEm, btnDatPers, btnMisVeh, btnHisAcc, btnAtras;
-    private String nomUser;
+    private long user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,18 +23,17 @@ public class VentanaPrincipal extends AppCompatActivity {
         btnHisAcc = (Button) findViewById(R.id.btHistAcc);
         btnAtras = (Button) findViewById(R.id.btAtrasPRINC);
 
-        //Para coger lo que nos envia la otra clase (username )
-        Bundle param = getIntent().getExtras();
+        //Para coger lo que nos envia la otra clase (user_id )
 
-        if(param != null){
-            nomUser = param.getString("username");
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+             user_id = extras.getLong("user_id");
         }
-
 
         btnFastEm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(VentanaPrincipal.this, FastEmail.class);
+                Intent in = new Intent(getApplicationContext(), FastEmail.class);
                 startActivity(in);
             }
         });
@@ -42,16 +41,16 @@ public class VentanaPrincipal extends AppCompatActivity {
         btnDatPers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(VentanaPrincipal.this, DatosPersonales.class);
-                in.putExtra("username", nomUser.toString());
-                startActivity(in);
+                Intent myIntent = new Intent(getApplicationContext(), DatosPersonales.class);
+                myIntent.putExtra("user_id", user_id);
+                startActivity(myIntent);
             }
         });
 
         btnMisVeh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(VentanaPrincipal.this, MisVehiculos.class);
+                Intent in = new Intent(getApplicationContext(), MisVehiculos.class);
                 startActivity(in);
             }
         });
@@ -59,7 +58,7 @@ public class VentanaPrincipal extends AppCompatActivity {
         btnHisAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(VentanaPrincipal.this, HistorialAccidentes.class);
+                Intent in = new Intent(getApplicationContext(), HistorialAccidentes.class);
                 startActivity(in);
             }
         });

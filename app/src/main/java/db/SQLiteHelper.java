@@ -2,6 +2,7 @@ package db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -11,9 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
 
-   private  String sqlCreate;
-    {
-        sqlCreate = "CREATE TABLE Usuarios " +
+   private  String sqlCreate = "CREATE TABLE Usuarios " +
                 "               (usuario TEXT NOT NULL PRIMARY KEY,\n" +
                 "                nombre TEXT ,\n" +
                 "                apellidos TEXT,\n" +
@@ -23,7 +22,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "                fechaVenc TEXT,\n" + // NO OLVIDAR CONVERTIRLO EN DATE
                 "                direccion TEXT);" ;
 
-    }
+
 
 
     public SQLiteHelper(Context contexto, String nombre, CursorFactory factory, int version) {
@@ -33,10 +32,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Se ejecuta la sentencia SQL de creación de la tabla
-        if(db.isReadOnly()) {
-            db = getWritableDatabase();
-            db.execSQL(sqlCreate);
-        }
+        db = getWritableDatabase();
+        db.execSQL(sqlCreate);
     }
 
 
@@ -91,13 +88,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         ContentValues reg = new ContentValues();
         reg.put("usuario", user);
-        reg.put("contrasenya", pass );
-        reg.put("nombre", (String)null);
+        reg.put("password", pass );
+        reg.put("nombre", "Carlos");
         reg.put("apellidos", (String)null);
         reg.put("telefono", (String)null );
         reg.put("licenciaCond", (String)null);
         reg.put("fechaVenc", (String)null);
         reg.put("direccion", (String)null);
+
 
         db.insert("Usuarios", null, reg);
         db.close();
@@ -122,18 +120,24 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.insert("Accidente",null, reg);
     }
 
-   /* public String cargarDatos(){
+    public String cargarDatos(){
         SQLiteDatabase db = this.getReadableDatabase();
         String r = "Hola";
 
-            Cursor c = db.rawQuery("select record from Usuarios", null);
+        try {
+            Cursor c = db.rawQuery("select nombre from Usuarios", null);
 
             if (c.moveToFirst())
                 r = c.getString(0);
-
+        }
+        catch (Exception e)
+        {
+            System.out.println("Ha saltado la exception");
+        }
 
         return r;
-    }*/
+    }
+
 
     public void obtener (){
 
