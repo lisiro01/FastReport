@@ -56,9 +56,10 @@ public class Registro extends AppCompatActivity {
 
     //Creating a user for the very first time
     public void createUser(String user, String pass){
+
         DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
 
-        long user_Id = fastReportDB.createUserDB(user, pass);
+        user_id = fastReportDB.createUserDB(user, pass);
     }
 
     //PopUp showed when the passwords don´ match

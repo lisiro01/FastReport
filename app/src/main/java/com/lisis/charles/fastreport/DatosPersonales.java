@@ -1,6 +1,7 @@
 package com.lisis.charles.fastreport;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +53,7 @@ public class DatosPersonales extends AppCompatActivity {
 
                 updateUserInfo();
                 mostrarDialog();
+
             }
         });
 
@@ -69,6 +71,7 @@ public class DatosPersonales extends AppCompatActivity {
     }
 
     public void mostrarDialog() {
+
         final Dialog customDialog = new Dialog(this);
         //deshabilitamos el título por defecto
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -79,7 +82,7 @@ public class DatosPersonales extends AppCompatActivity {
 
         ((TextView) customDialog.findViewById(R.id.titulo)).setText("¡Guardado!");
         ((TextView) customDialog.findViewById(R.id.textoPopUp)).setText("Se ha guardado correctamente");
-
+        customDialog.show();
 
         (customDialog.findViewById(R.id.btnAceptarPopUp)).setOnClickListener(new View.OnClickListener() {
 
@@ -87,10 +90,12 @@ public class DatosPersonales extends AppCompatActivity {
             public void onClick(View view) {
 
                 customDialog.dismiss();
+                Intent myIntent = new Intent(getApplicationContext(), VentanaPrincipal.class);
+                startActivity(myIntent);
             }
         });
 
-        customDialog.show();
+
     }
 
     public void cargardatos(){
@@ -102,7 +107,9 @@ public class DatosPersonales extends AppCompatActivity {
 
     //Updating user´s method. Already have email/user and pass
     public void updateUserInfo(){
+
         DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
+
         User user = new User();
         user.setName(nomb.getText().toString());
         user.setLastname(apell.getText().toString());
@@ -111,7 +118,6 @@ public class DatosPersonales extends AppCompatActivity {
         user.setPhoneNumber(tel.getText().toString());
         user.setExpiration_date(fechaVenc.getText().toString());
 
-        //TODO: coger el long user_id y pasarlo aqui en esta funcion de segundo parametro.
         fastReportDB.updateUserDB(user, user_id);
     }
 
