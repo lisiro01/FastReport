@@ -49,7 +49,7 @@ public class DatosPersonales extends AppCompatActivity {
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { // aqui hay que meter los datos en la bbdd, si se inserto bien, entonces de muestr popup
+            public void onClick(View v) {
 
                 updateUserInfo();
                 mostrarDialog();

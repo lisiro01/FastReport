@@ -2,8 +2,10 @@ package db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.lisis.charles.fastreport.User;
 
@@ -138,6 +140,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_PHONE_NUMBER, str);
         values.put(KEY_DRIVERS_LICENSE, str);
         values.put(KEY_EXPIRATION_DATE, str);
+        values.put(KEY_ADDRESS, str);
 
 
         // insert row
@@ -167,6 +170,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_PHONE_NUMBER, user.getPhoneNumber());
         values.put(KEY_DRIVERS_LICENSE, user.getDriverLicense());
         values.put(KEY_EXPIRATION_DATE, user.getExpiration_date());
+        values.put(KEY_ADDRESS, user.getAddress());
 
         Integer id = (int)(long)user_id;
 
@@ -175,4 +179,46 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+
+    //******************************************************************************************
+    //******************************************************************************************
+
+    /*
+ * Checking USER and PASS
+ */
+
+
+    public int checkUserPassBD(String username, String pass){
+        int success = -1;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE " + KEY_EMAIL + " = '" + username + "'";
+        Log.e(LOG,selectQuery);
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        if (cursor != null) {
+            try {
+                cursor.moveToFirst();
+                String passSavedInDataBase = cursor.getString(cursor.getColumnIndex(KEY_PASS));
+                if(pass.equals(passSavedInDataBase)){
+                    success = cursor.getInt(cursor.getColumnIndex(KEY_ID));
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                return -1;
+            }
+
+        }
+
+        return success;
+    }
+
 }
+
+
+//******************************************************************************************
+//******************************************************************************************
+

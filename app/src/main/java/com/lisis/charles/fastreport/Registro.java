@@ -35,14 +35,10 @@ public class Registro extends AppCompatActivity {
                 if(pass.getText().toString().equalsIgnoreCase(pass2.getText().toString())) {
                     createUser(user.getText().toString(), pass.getText().toString());
                     //This allows us to send the userId to the other activities.
-                    Intent myIntent = new Intent(getApplicationContext(), VentanaPrincipal.class);
-                    myIntent.putExtra("user_id", user_id);
-                    startActivity(myIntent);
+                    popUpRegisterSuccessful();
                 } else {
                     popUpErrorPass();
                 }
-
-
             }
         });
 
@@ -65,25 +61,39 @@ public class Registro extends AppCompatActivity {
     //PopUp showed when the passwords don´ match
     public void popUpErrorPass() {
         final Dialog customDialog = new Dialog(this);
-        //deshabilitamos el título por defecto
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //obligamos al usuario a pulsar los botones para cerrarlo
         customDialog.setCancelable(false);
-        //establecemos el contenido de nuestro dialog
         customDialog.setContentView(R.layout.pop_up_notificar);
-
         ((TextView) customDialog.findViewById(R.id.titulo)).setText("¡Error!");
         ((TextView) customDialog.findViewById(R.id.textoPopUp)).setText("Las contraseñas no coinciden");
-
         (customDialog.findViewById(R.id.btnAceptarPopUp)).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-
                 customDialog.dismiss();
             }
         });
+        customDialog.show();
+    }
 
+    //PopUp showen when the user successfully
+    public void popUpRegisterSuccessful() {
+        final Dialog customDialog = new Dialog(this);
+        customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        customDialog.setCancelable(false);
+        customDialog.setContentView(R.layout.pop_up_notificar);
+        ((TextView) customDialog.findViewById(R.id.titulo)).setText("¡Bienvenido!");
+        ((TextView) customDialog.findViewById(R.id.textoPopUp)).setText("Su registro fue exitoso");
+        (customDialog.findViewById(R.id.btnAceptarPopUp)).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                customDialog.dismiss();
+                Intent myIntent = new Intent(getApplicationContext(), VentanaPrincipal.class);
+                myIntent.putExtra("user_id", user_id);
+                startActivity(myIntent);
+            }
+        });
         customDialog.show();
     }
 }
