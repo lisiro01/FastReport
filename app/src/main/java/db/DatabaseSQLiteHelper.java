@@ -156,20 +156,23 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
  */
 
     //Update user with email/user and password
-    public long updateUserDB(User user, long user_id) {
+    public void updateUserDB(User user, long user_id) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
-        values.put(KEY_NAME, "");
-        values.put(KEY_LAST_NAME, "");
-        values.put(KEY_PHONE_NUMBER, "");
-        values.put(KEY_DRIVERS_LICENSE, "");
-        values.put(KEY_EXPIRATION_DATE, "");
+        values.put(KEY_NAME, user.getName());
+        values.put(KEY_LAST_NAME, user.getLastname());
+        values.put(KEY_PHONE_NUMBER, user.getPhoneNumber());
+        values.put(KEY_DRIVERS_LICENSE, user.getDriverLicense());
+        values.put(KEY_EXPIRATION_DATE, user.getExpiration_date());
 
+        Integer id = (int)(long)user_id;
+
+        // updating row
+        db.update(TABLE_USERS, values, KEY_ID + " = " + id, null);
         db.close();
-        return user_id;
     }
 
 }

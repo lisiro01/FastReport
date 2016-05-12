@@ -112,7 +112,7 @@ public class DatosPersonales extends AppCompatActivity {
         user.setExpiration_date(fechaVenc.getText().toString());
 
         //TODO: coger el long user_id y pasarlo aqui en esta funcion de segundo parametro.
-        fastReportDB.updateUserDB(user, 1);
+        fastReportDB.updateUserDB(user, user_id);
     }
 
 
