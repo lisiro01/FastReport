@@ -16,7 +16,6 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import db.DatabaseSQLiteHelper;
-import db.SQLiteHelper;
 
 public class DatosPersonales extends AppCompatActivity {
 
@@ -98,12 +97,7 @@ public class DatosPersonales extends AppCompatActivity {
 
     }
 
-    public void cargardatos(){
-        SQLiteHelper admin = new SQLiteHelper(getApplicationContext(), "admin", null, 1);
 
-            nomb.setText(admin.cargarDatos());
-
-    }
 
     //Updating user´s method. Already have email/user and pass
     public void updateUserInfo(){

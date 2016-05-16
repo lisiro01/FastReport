@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.lisis.charles.fastreport.User;
+import com.lisis.charles.fastreport.Vehicle;
 
 
 public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
@@ -23,6 +24,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
     // Table Names TODO: crear las demas tablas
     private static final String TABLE_USERS = "users";
+    private static final String TABLE_VEHICLES = "vehicles";
     //private static final String TABLE_TAG = "tags";
     //private static final String TABLE_TODO_TAG = "todo_tags";
 
@@ -38,6 +40,14 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_DRIVERS_LICENSE = "drivers_license";
     private static final String KEY_EXPIRATION_DATE = "expiration_date";
     private static final String KEY_ADDRESS = "address";
+
+    // VEHICLES Table - column names
+    private static final String KEY_BRAND = "brand";
+    private static final String KEY_MODEL = "model";
+    private static final String KEY_REG_NUMBER = "registration_number";
+    private static final String KEY_INSURANCE = "insurance";
+    private static final String KEY_POLICY_NUMBER = "policy_number";
+
 
 
     /*// TAGS Table - column names
@@ -64,6 +74,19 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
             + KEY_ADDRESS + " TEXT"
             + ")";
 
+    // Vehicles table create statement
+
+    private static final String CREATE_TABLE_VEHICLES = "CREATE TABLE "
+            + TABLE_VEHICLES +
+            "("
+            + KEY_REG_NUMBER + " INTEGER PRIMARY KEY,"
+            + KEY_BRAND + " TEXT,"
+            + KEY_MODEL + " TEXT,"
+            + KEY_INSURANCE + " TEXT,"
+            + KEY_POLICY_NUMBER + " TEXT"
+            + ")";
+
+
     /*// Tag table create statement
     private static final String CREATE_TABLE_TAG = "CREATE TABLE " + TABLE_TAG
             + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TAG_NAME + " TEXT,"
@@ -84,6 +107,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
         // creating required tables
         db.execSQL(CREATE_TABLE_USERS);
+        db.execSQL(CREATE_TABLE_VEHICLES);
         /*db.execSQL(CREATE_TABLE_TAG);
         db.execSQL(CREATE_TABLE_TODO_TAG);*/
     }
@@ -92,6 +116,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_VEHICLES);
         /*db.execSQL("DROP TABLE IF EXISTS " + TABLE_TAG);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TODO_TAG);*/
 
@@ -215,6 +240,60 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
         return success;
     }
+
+
+    /* Creating a VEHICLE
+    */
+    //Generic method to create a complete vehicle
+    public long createVehicleDB(Vehicle vehicle) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_BRAND, vehicle.getBrand());
+        values.put(KEY_MODEL, vehicle.getModel());
+        values.put(KEY_REG_NUMBER, vehicle.getRegistrationNumber());
+        values.put(KEY_INSURANCE, vehicle.getInsurance());
+        values.put(KEY_POLICY_NUMBER, vehicle.getPolicyNumber());
+
+        // insert row
+        long vehicle_id = db.insert(TABLE_VEHICLES, null, values);
+
+        db.close();
+        return vehicle_id;
+    }
+
+        /*
+ * Updating a VEHICLE
+ */
+
+    //Update Vehicle with vehicle_id
+    public void updateVehiclerDB(Vehicle vehicle, long vehicle_id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_BRAND, vehicle.getBrand());
+        values.put(KEY_MODEL, vehicle.getModel());
+        values.put(KEY_REG_NUMBER, vehicle.getRegistrationNumber());
+        values.put(KEY_INSURANCE, vehicle.getInsurance());
+        values.put(KEY_POLICY_NUMBER, vehicle.getPolicyNumber());
+
+        Integer id = (int)(long)vehicle_id;
+
+        // updating row
+        db.update(TABLE_VEHICLES, values, KEY_ID + " = " + id, null);
+        db.close();
+    }
+
+
+
+
+
+
+
+
 
 }
 
