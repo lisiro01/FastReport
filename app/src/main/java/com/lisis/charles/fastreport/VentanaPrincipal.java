@@ -50,7 +50,7 @@ public class VentanaPrincipal extends AppCompatActivity {
         btnMisVeh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), MisVehiculos.class);
+                Intent in = new Intent(getApplicationContext(), act_lista_Vehiculos.class);
                 startActivity(in);
             }
         });

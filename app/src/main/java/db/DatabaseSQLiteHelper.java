@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.lisis.charles.fastreport.User;
-import com.lisis.charles.fastreport.Vehicle;
+import com.lisis.charles.fastreport.DB_User;
+import com.lisis.charles.fastreport.DB_Vehicle;
 
 
 public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
@@ -130,19 +130,19 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     /*
  * Creating a USER
  */
-    //Generic method to create a complete user
-    public long createUserDB(User user) {
+    //Generic method to create a complete DBUser
+    public long createUserDB(DB_User DBUser) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, user.getName());
-        values.put(KEY_LAST_NAME, user.getLastname());
-        values.put(KEY_EMAIL, user.getEmail());
-        values.put(KEY_PASS, user.getPass());
-        values.put(KEY_PHONE_NUMBER, user.getPhoneNumber());
-        values.put(KEY_DRIVERS_LICENSE, user.getDriverLicense());
-        values.put(KEY_EXPIRATION_DATE, user.getExpiration_date());
+        values.put(KEY_NAME, DBUser.getName());
+        values.put(KEY_LAST_NAME, DBUser.getLastname());
+        values.put(KEY_EMAIL, DBUser.getEmail());
+        values.put(KEY_PASS, DBUser.getPass());
+        values.put(KEY_PHONE_NUMBER, DBUser.getPhoneNumber());
+        values.put(KEY_DRIVERS_LICENSE, DBUser.getDriverLicense());
+        values.put(KEY_EXPIRATION_DATE, DBUser.getExpiration_date());
 
         // insert row
         long user_id = db.insert(TABLE_USERS, null, values);
@@ -183,19 +183,19 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
  * Updating a USER
  */
 
-    //Update user with email/user and password
-    public void updateUserDB(User user, long user_id) {
+    //Update DBUser with email/DBUser and password
+    public void updateUserDB(DB_User DBUser, long user_id) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
-        values.put(KEY_NAME, user.getName());
-        values.put(KEY_LAST_NAME, user.getLastname());
-        values.put(KEY_PHONE_NUMBER, user.getPhoneNumber());
-        values.put(KEY_DRIVERS_LICENSE, user.getDriverLicense());
-        values.put(KEY_EXPIRATION_DATE, user.getExpiration_date());
-        values.put(KEY_ADDRESS, user.getAddress());
+        values.put(KEY_NAME, DBUser.getName());
+        values.put(KEY_LAST_NAME, DBUser.getLastname());
+        values.put(KEY_PHONE_NUMBER, DBUser.getPhoneNumber());
+        values.put(KEY_DRIVERS_LICENSE, DBUser.getDriverLicense());
+        values.put(KEY_EXPIRATION_DATE, DBUser.getExpiration_date());
+        values.put(KEY_ADDRESS, DBUser.getAddress());
 
         Integer id = (int)(long)user_id;
 
@@ -245,16 +245,16 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     /* Creating a VEHICLE
     */
     //Generic method to create a complete vehicle
-    public long createVehicleDB(Vehicle vehicle) {
+    public long createVehicleDB(DB_Vehicle DBVehicle) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_BRAND, vehicle.getBrand());
-        values.put(KEY_MODEL, vehicle.getModel());
-        values.put(KEY_REG_NUMBER, vehicle.getRegistrationNumber());
-        values.put(KEY_INSURANCE, vehicle.getInsurance());
-        values.put(KEY_POLICY_NUMBER, vehicle.getPolicyNumber());
+        values.put(KEY_BRAND, DBVehicle.getBrand());
+        values.put(KEY_MODEL, DBVehicle.getModel());
+        values.put(KEY_REG_NUMBER, DBVehicle.getRegistrationNumber());
+        values.put(KEY_INSURANCE, DBVehicle.getInsurance());
+        values.put(KEY_POLICY_NUMBER, DBVehicle.getPolicyNumber());
 
         // insert row
         long vehicle_id = db.insert(TABLE_VEHICLES, null, values);
@@ -267,18 +267,18 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
  * Updating a VEHICLE
  */
 
-    //Update Vehicle with vehicle_id
-    public void updateVehiclerDB(Vehicle vehicle, long vehicle_id) {
+    //Update DB_Vehicle with vehicle_id
+    public void updateVehicleDB(DB_Vehicle DBVehicle, long vehicle_id) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
-        values.put(KEY_BRAND, vehicle.getBrand());
-        values.put(KEY_MODEL, vehicle.getModel());
-        values.put(KEY_REG_NUMBER, vehicle.getRegistrationNumber());
-        values.put(KEY_INSURANCE, vehicle.getInsurance());
-        values.put(KEY_POLICY_NUMBER, vehicle.getPolicyNumber());
+        values.put(KEY_BRAND, DBVehicle.getBrand());
+        values.put(KEY_MODEL, DBVehicle.getModel());
+        values.put(KEY_REG_NUMBER, DBVehicle.getRegistrationNumber());
+        values.put(KEY_INSURANCE, DBVehicle.getInsurance());
+        values.put(KEY_POLICY_NUMBER, DBVehicle.getPolicyNumber());
 
         Integer id = (int)(long)vehicle_id;
 
@@ -286,12 +286,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         db.update(TABLE_VEHICLES, values, KEY_ID + " = " + id, null);
         db.close();
     }
-
-
-
-
-
-
 
 
 

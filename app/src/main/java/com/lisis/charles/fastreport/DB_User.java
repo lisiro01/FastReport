@@ -3,7 +3,7 @@ package com.lisis.charles.fastreport;
 /**
  * Created by Lis on 11/5/16.
  */
-public class User {
+public class DB_User {
 
     private String name;
     private String lastname;
@@ -14,7 +14,7 @@ public class User {
     private String expiration_date;
     private String address;
 
-    public User() {
+    public DB_User() {
         this.name = null;
         this.lastname = null;
         this.email = null;
@@ -25,7 +25,7 @@ public class User {
         this.address = null;
     }
 
-    public User(String name, String lastname, String email, String pass, String phoneNumber, String driverLicense, String expiration_date, String address) {
+    public DB_User(String name, String lastname, String email, String pass, String phoneNumber, String driverLicense, String expiration_date, String address) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
@@ -76,7 +76,7 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public User(String name, String lastname) {
+    public DB_User(String name, String lastname) {
         this.name = name;
         this.lastname = lastname;
     }

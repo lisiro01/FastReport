@@ -9,7 +9,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MisVehiculos extends AppCompatActivity {
+public class act_lista_Vehiculos extends AppCompatActivity {
 
     private TextView tvAnadirNuevo;
     private Button btnAtras;
@@ -18,7 +18,7 @@ public class MisVehiculos extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mis_vehiculos);
+        setContentView(R.layout.activity_lista_vehiculos);
 
         tvAnadirNuevo = (TextView) findViewById(R.id.tvAnyadir);
         btnAtras = (Button) findViewById(R.id.btAtrasMisVeh);
@@ -26,16 +26,18 @@ public class MisVehiculos extends AppCompatActivity {
         tvAnadirNuevo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), Vehiculo.class);
+                Intent myIntent = new Intent(act_lista_Vehiculos.this, act_Vehiculo.class);
 
-                startActivity(in);
+                startActivity(myIntent);
             }
         });
 
         btnAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent myIntent = new Intent(act_lista_Vehiculos.this, VentanaPrincipal.class);
+
+                startActivity(myIntent);
             }
         });
 

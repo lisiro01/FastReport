@@ -15,7 +15,7 @@ import db.DatabaseSQLiteHelper;
 /**
  * Created by Lis on 14/5/16.
  */
-public class Vehiculo extends AppCompatActivity {
+public class act_Vehiculo extends AppCompatActivity {
 
     private EditText marca, modelo, numMat, aseguradora, numPol;
     private Button bTatras, bTguardar;
@@ -39,16 +39,16 @@ public class Vehiculo extends AppCompatActivity {
         bTatras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), MisVehiculos.class);
+                Intent in = new Intent(getApplicationContext(), act_lista_Vehiculos.class);
                 startActivity(in);
             }
         });
 
-        bTatras.setOnClickListener(new View.OnClickListener() {
+        bTguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), MisVehiculos.class);
-                startActivity(in);
+                createVehicleInfo();
+                popUpSavedVehicle();
             }
         });
 
@@ -57,7 +57,7 @@ public class Vehiculo extends AppCompatActivity {
 
 
 
-    public void mostrarDialog() {
+    public void popUpSavedVehicle() {
 
         final Dialog customDialog = new Dialog(this);
         //deshabilitamos el título por defecto
@@ -85,18 +85,18 @@ public class Vehiculo extends AppCompatActivity {
 
     }
 
-    public void updateUserInfo(){
+    public void createVehicleInfo(){
 
         DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
 
-        Vehicle v= new Vehicle();
+        DB_Vehicle v= new DB_Vehicle();
         v.setBrand(marca.getText().toString());
         v.setInsurance(aseguradora.getText().toString());
         v.setModel(modelo.getText().toString());
         v.setPolicyNumber(numPol.getText().toString());
         v.setRegistrationNumber(numMat.getText().toString());
 
-        fastReportDB.updateVehiclerDB(v, vehicle_id); // ****PREGUNTAR, CREO QUE ESO NO HACE FALTA
+        fastReportDB.createVehicleDB(v);
     }
 
     }

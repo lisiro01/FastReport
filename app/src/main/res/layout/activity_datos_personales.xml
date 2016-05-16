@@ -4,7 +4,7 @@
     tools:context="com.lisis.charles.fastreport.Datos_personales">
 
         <RelativeLayout
-            tools:context="com.lisis.charles.fastreport.Registro"
+            tools:context=".act_Registro"
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"

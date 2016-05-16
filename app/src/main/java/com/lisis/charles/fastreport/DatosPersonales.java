@@ -104,15 +104,15 @@ public class DatosPersonales extends AppCompatActivity {
 
         DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
 
-        User user = new User();
-        user.setName(nomb.getText().toString());
-        user.setLastname(apell.getText().toString());
-        user.setAddress(dir.getText().toString());
-        user.setDriverLicense(numLic.getText().toString());
-        user.setPhoneNumber(tel.getText().toString());
-        user.setExpiration_date(fechaVenc.getText().toString());
+        DB_User DBUser = new DB_User();
+        DBUser.setName(nomb.getText().toString());
+        DBUser.setLastname(apell.getText().toString());
+        DBUser.setAddress(dir.getText().toString());
+        DBUser.setDriverLicense(numLic.getText().toString());
+        DBUser.setPhoneNumber(tel.getText().toString());
+        DBUser.setExpiration_date(fechaVenc.getText().toString());
 
-        fastReportDB.updateUserDB(user, user_id);
+        fastReportDB.updateUserDB(DBUser, user_id);
     }
 
 

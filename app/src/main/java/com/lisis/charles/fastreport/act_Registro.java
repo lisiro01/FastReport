@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import db.DatabaseSQLiteHelper;
 
-public class Registro extends AppCompatActivity {
+public class act_Registro extends AppCompatActivity {
 
     private Button btnRegistrarse, btnAtras;
     private EditText user, pass, pass2;

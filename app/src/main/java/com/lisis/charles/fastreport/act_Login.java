@@ -13,7 +13,7 @@ import android.widget.TextView;
 import db.DatabaseSQLiteHelper;
 
 
-public class Login extends AppCompatActivity {
+public class act_Login extends AppCompatActivity {
 
     private Button btnEntrar;
     private TextView tvRegistrarse;
@@ -36,7 +36,7 @@ public class Login extends AppCompatActivity {
 
                 checkUserPass();
                 if(userid != -1) {
-                    Intent in = new Intent(Login.this, VentanaPrincipal.class);
+                    Intent in = new Intent(act_Login.this, VentanaPrincipal.class);
                     in.putExtra("user_id", userid);
                     startActivity(in);
                 } else{
@@ -49,7 +49,7 @@ public class Login extends AppCompatActivity {
         tvRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(Login.this, Registro.class);
+                Intent in = new Intent(act_Login.this, act_Registro.class);
                 startActivity(in);
             }
         });

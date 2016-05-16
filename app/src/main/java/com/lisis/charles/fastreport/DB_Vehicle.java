@@ -3,7 +3,7 @@ package com.lisis.charles.fastreport;
 /**
  * Created by Lis on 13/5/16.
  */
-public class Vehicle {
+public class DB_Vehicle {
 
     private String brand;
     private String model;
@@ -11,7 +11,7 @@ public class Vehicle {
     private String insurance;
     private String policyNumber;
 
-    public Vehicle() {
+    public DB_Vehicle() {
         this.brand = null;
         this.model = null;
         this.registrationNumber = null;
@@ -19,7 +19,7 @@ public class Vehicle {
         this.policyNumber = null;
     }
 
-    public Vehicle(String brand, String model, String registrationNumber, String insurance, String policyNumber, String ownerId) {
+    public DB_Vehicle(String brand, String model, String registrationNumber, String insurance, String policyNumber, String ownerId) {
         this.brand = brand;
         this.model = model;
         this.registrationNumber = registrationNumber;

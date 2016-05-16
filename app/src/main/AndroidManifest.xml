@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login">
+        <activity android:name=".act_Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,8 +18,9 @@
         <activity android:name="com.lisis.charles.fastreport.DatosPersonales"/>
         <activity android:name="com.lisis.charles.fastreport.FastEmail"/>
         <activity android:name="com.lisis.charles.fastreport.HistorialAccidentes"/>
-        <activity android:name="com.lisis.charles.fastreport.MisVehiculos"/>
-        <activity android:name="com.lisis.charles.fastreport.Registro"/>
+        <activity android:name=".act_lista_Vehiculos"/>
+        <activity android:name=".act_Vehiculo"/>
+        <activity android:name=".act_Registro"/>
         <activity android:name="com.lisis.charles.fastreport.VentanaPrincipal"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
