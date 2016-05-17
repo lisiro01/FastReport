@@ -39,7 +39,7 @@ public class act_Vehiculo extends AppCompatActivity {
         bTatras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), act_lista_Vehiculos.class);
+                Intent in = new Intent(getApplicationContext(), act_Lista_Vehiculos.class);
                 startActivity(in);
             }
         });

@@ -16,9 +16,9 @@
             </intent-filter>
         </activity>
         <activity android:name="com.lisis.charles.fastreport.DatosPersonales"/>
-        <activity android:name="com.lisis.charles.fastreport.FastEmail"/>
+        <activity android:name=".act_Fast_Email"/>
         <activity android:name="com.lisis.charles.fastreport.HistorialAccidentes"/>
-        <activity android:name=".act_lista_Vehiculos"/>
+        <activity android:name=".act_Lista_Vehiculos"/>
         <activity android:name=".act_Vehiculo"/>
         <activity android:name=".act_Registro"/>
         <activity android:name="com.lisis.charles.fastreport.VentanaPrincipal"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for

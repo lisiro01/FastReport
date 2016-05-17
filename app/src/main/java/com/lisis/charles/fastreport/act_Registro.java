@@ -32,12 +32,16 @@ public class act_Registro extends AppCompatActivity {
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pass.getText().toString().equalsIgnoreCase(pass2.getText().toString())) {
-                    createUser(user.getText().toString(), pass.getText().toString());
-                    //This allows us to send the userId to the other activities.
-                    popUpRegisterSuccessful();
+                if(!checkIfUserExist(user.getText().toString())){
+                    if(pass.getText().toString().equalsIgnoreCase(pass2.getText().toString())) {
+                        createUser(user.getText().toString(), pass.getText().toString());
+                        //This allows us to send the userId to the other activities.
+                        popUpRegisterSuccessful();
+                    } else {
+                        popUpErrorPass();
+                    }
                 } else {
-                    popUpErrorPass();
+                    popUpErrorUser();
                 }
             }
         });
@@ -58,6 +62,18 @@ public class act_Registro extends AppCompatActivity {
         user_id = fastReportDB.createUserDB(user, pass);
     }
 
+    //Checks if a user exist
+    public boolean checkIfUserExist(String user){
+
+        DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
+
+        user_id = fastReportDB.findUserDB(user);
+
+        if (user_id != -1)
+            return true;
+        return false;
+    }
+
     //PopUp showed when the passwords don´ match
     public void popUpErrorPass() {
         final Dialog customDialog = new Dialog(this);
@@ -75,6 +91,26 @@ public class act_Registro extends AppCompatActivity {
         });
         customDialog.show();
     }
+
+
+    //PopUp showed when the user already exists
+    public void popUpErrorUser() {
+        final Dialog customDialog = new Dialog(this);
+        customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        customDialog.setCancelable(false);
+        customDialog.setContentView(R.layout.pop_up_notificar);
+        ((TextView) customDialog.findViewById(R.id.titulo)).setText("¡Error!");
+        ((TextView) customDialog.findViewById(R.id.textoPopUp)).setText("EL usuario ya existe");
+        (customDialog.findViewById(R.id.btnAceptarPopUp)).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                customDialog.dismiss();
+            }
+        });
+        customDialog.show();
+    }
+
 
     //PopUp showen when the user successfully
     public void popUpRegisterSuccessful() {

@@ -33,7 +33,7 @@ public class VentanaPrincipal extends AppCompatActivity {
         btnFastEm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), FastEmail.class);
+                Intent in = new Intent(getApplicationContext(), act_Fast_Email.class);
                 startActivity(in);
             }
         });
@@ -50,7 +50,7 @@ public class VentanaPrincipal extends AppCompatActivity {
         btnMisVeh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), act_lista_Vehiculos.class);
+                Intent in = new Intent(getApplicationContext(), act_Lista_Vehiculos.class);
                 startActivity(in);
             }
         });

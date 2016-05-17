@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.lisis.charles.fastreport.DB_Accident;
 import com.lisis.charles.fastreport.DB_User;
 import com.lisis.charles.fastreport.DB_Vehicle;
 
@@ -25,8 +26,8 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     // Table Names TODO: crear las demas tablas
     private static final String TABLE_USERS = "users";
     private static final String TABLE_VEHICLES = "vehicles";
-    //private static final String TABLE_TAG = "tags";
-    //private static final String TABLE_TODO_TAG = "todo_tags";
+    private static final String TABLE_ACCIDENT = "accident";
+    private static final String TABLE_USER_VEHICLE = "user_vehicle";
 
     // Common column names
     private static final String KEY_ID = "id";
@@ -48,16 +49,20 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_INSURANCE = "insurance";
     private static final String KEY_POLICY_NUMBER = "policy_number";
 
+    // Accident Table - column names
+    private static final String KEY_USER_ID = "user_id";
+    private static final String KEY_VEHICLE_ID = "vehicle_id";
+    private static final String KEY_DATE = "date";
+    private static final String KEY_LOCATION = "location";
+    private static final String KEY_EMAIL_ADDRESSEE = "email_addressee";
 
+    // USER_VEHICLE Table - column names
+    private static final String KEY_US_ID = "user_id";
+    private static final String KEY_VE_ID = "vehicle_id";
 
-    /*// TAGS Table - column names
-    private static final String KEY_TAG_NAME = "tag_name";
-
-    // NOTE_TAGS Table - column names
-    private static final String KEY_TODO_ID = "todo_id";
-    private static final String KEY_TAG_ID = "tag_id";*/
 
     // Table Create Statements
+
     // Users table create statement
 
     private static final String CREATE_TABLE_USERS = "CREATE TABLE "
@@ -87,16 +92,25 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
             + ")";
 
 
-    /*// Tag table create statement
-    private static final String CREATE_TABLE_TAG = "CREATE TABLE " + TABLE_TAG
-            + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TAG_NAME + " TEXT,"
-            + KEY_CREATED_AT + " DATETIME" + ")";
+    // Accident table create statement
+    private static final String CREATE_TABLE_ACCIDENT = "CREATE TABLE "
+            + TABLE_ACCIDENT +
+            "("
+            + KEY_ID + " INTEGER PRIMARY KEY,"
+            + KEY_USER_ID + " INTEGER,"
+            + KEY_VEHICLE_ID + " INTEGER,"
+            + KEY_DATE + " DATETIME"
+            + KEY_LOCATION + " TEXT"
+            + KEY_EMAIL_ADDRESSEE + " TEXT"
+            + ")";
 
-    // todo_tag table create statement
-    private static final String CREATE_TABLE_TODO_TAG = "CREATE TABLE "
-            + TABLE_TODO_TAG + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
-            + KEY_TODO_ID + " INTEGER," + KEY_TAG_ID + " INTEGER,"
-            + KEY_CREATED_AT + " DATETIME" + ")";*/
+    // User_Vehicle table create statement
+    private static final String CREATE_TABLE_USER_VEHICLE = "CREATE TABLE "
+            + TABLE_USER_VEHICLE +
+            "("
+            + KEY_US_ID + "INTEGER,"
+            + KEY_VE_ID + "INTEGER,"
+            + ")";
 
     public DatabaseSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -108,17 +122,18 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         // creating required tables
         db.execSQL(CREATE_TABLE_USERS);
         db.execSQL(CREATE_TABLE_VEHICLES);
-        /*db.execSQL(CREATE_TABLE_TAG);
-        db.execSQL(CREATE_TABLE_TODO_TAG);*/
+        db.execSQL(CREATE_TABLE_ACCIDENT);
+        db.execSQL(CREATE_TABLE_USER_VEHICLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_VEHICLES);
-        /*db.execSQL("DROP TABLE IF EXISTS " + TABLE_TAG);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TODO_TAG);*/
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCIDENT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER_VEHICLE);
 
         // create new tables
         onCreate(db);
@@ -151,6 +166,8 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         return user_id;
     }
 
+
+
     //Create user with email/user and password
     public long createUserDB(String email, String pass) {
 
@@ -176,8 +193,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     }
 
 
-    //******************************************************************************************
-    //******************************************************************************************
 
     /*
  * Updating a USER
@@ -197,7 +212,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_EXPIRATION_DATE, DBUser.getExpiration_date());
         values.put(KEY_ADDRESS, DBUser.getAddress());
 
-        Integer id = (int)(long)user_id;
+        Integer id = (int) (long) user_id;
 
         // updating row
         db.update(TABLE_USERS, values, KEY_ID + " = " + id, null);
@@ -205,20 +220,17 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     }
 
 
-    //******************************************************************************************
-    //******************************************************************************************
-
     /*
  * Checking USER and PASS
  */
 
 
-    public int checkUserPassBD(String username, String pass){
+    public int checkUserPassBD(String username, String pass) {
         int success = -1;
         SQLiteDatabase db = this.getWritableDatabase();
 
         String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE " + KEY_EMAIL + " = '" + username + "'";
-        Log.e(LOG,selectQuery);
+        Log.e(LOG, selectQuery);
 
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -227,11 +239,10 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
             try {
                 cursor.moveToFirst();
                 String passSavedInDataBase = cursor.getString(cursor.getColumnIndex(KEY_PASS));
-                if(pass.equals(passSavedInDataBase)){
+                if (pass.equals(passSavedInDataBase)) {
                     success = cursor.getInt(cursor.getColumnIndex(KEY_ID));
                 }
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 return -1;
             }
@@ -240,6 +251,41 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
         return success;
     }
+
+
+
+    /*
+ * Find User
+ */
+
+
+    public int findUserDB(String email) {
+        int success = -1;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE " + KEY_EMAIL + " = '" + email + "'";
+        Log.e(LOG, selectQuery);
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        if (cursor != null) {
+            try {
+                cursor.moveToFirst();
+                success = cursor.getInt(cursor.getColumnIndex(KEY_ID));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return -1;
+            }
+
+        }
+
+        return success;
+    }
+
+
+//******************************************************************************************
+//******************************************************************************************
 
 
     /* Creating a VEHICLE
@@ -263,7 +309,9 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         return vehicle_id;
     }
 
-        /*
+
+
+    /*
  * Updating a VEHICLE
  */
 
@@ -280,7 +328,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_INSURANCE, DBVehicle.getInsurance());
         values.put(KEY_POLICY_NUMBER, DBVehicle.getPolicyNumber());
 
-        Integer id = (int)(long)vehicle_id;
+        Integer id = (int) (long) vehicle_id;
 
         // updating row
         db.update(TABLE_VEHICLES, values, KEY_ID + " = " + id, null);
@@ -289,9 +337,135 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
 
 
+    /*
+ * Find a vehicle
+ */
+
+
+    public int findVehicleDB(String registrationNumber) {
+        int success = -1;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLE_VEHICLES + " WHERE " + KEY_REG_NUMBER + " = '" + registrationNumber + "'";
+        Log.e(LOG, selectQuery);
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        if (cursor != null) {
+            try {
+                cursor.moveToFirst();
+                success = cursor.getInt(cursor.getColumnIndex(KEY_ID));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return -1;
+            }
+
+        }
+
+        return success;
+    }
+
+
+//******************************************************************************************
+//******************************************************************************************
+
+    /*
+ * Creating an Accident
+ */
+
+
+    //Generic method to create a complete DBAccident
+    public long createAccidentDB(DB_Accident DBAccident) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_USER_ID, DBAccident.getUser_id());
+        values.put(KEY_VEHICLE_ID, DBAccident.getVehicle_id());
+        values.put(KEY_DATE, DBAccident.getDate());
+        values.put(KEY_LOCATION, DBAccident.getLocation());
+        values.put(KEY_EMAIL_ADDRESSEE, DBAccident.getEmail_addressee());
+
+        // insert row
+        long accident_id = db.insert(TABLE_ACCIDENT, null, values);
+
+        db.close();
+        return accident_id;
+    }
+
+
+    /*
+ * Updating an ACCIDENT
+ */
+
+    //Updating an Accident with accident_id
+    public void updateAccidentDB(DB_Accident DBAccident, long accident_id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_USER_ID, DBAccident.getUser_id());
+        values.put(KEY_VEHICLE_ID, DBAccident.getVehicle_id());
+        values.put(KEY_DATE, DBAccident.getDate());
+        values.put(KEY_LOCATION, DBAccident.getLocation());
+        values.put(KEY_EMAIL_ADDRESSEE, DBAccident.getEmail_addressee());
+
+        Integer id = (int) (long) accident_id;
+
+        // updating row
+        db.update(TABLE_ACCIDENT, values, KEY_ID + " = " + id, null);
+        db.close();
+    }
+
+//******************************************************************************************
+//******************************************************************************************
+
+    /*
+ * Creating a User_Vehicle
+ */
+
+
+    //Generic method to create a complete User_Vehicle relation
+    public long createUserVehicleDB(int user, int vehicle) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_US_ID, user);
+        values.put(KEY_VE_ID, vehicle);
+
+
+        // insert row
+        long user_vehicle_id = db.insert(TABLE_USER_VEHICLE, null, values);
+
+        db.close();
+        return user_vehicle_id;
+    }
+
+
+    /*
+ * Updating a User_Vehicle row
+ */
+
+    //Updating a User_Vehicle relation with the id
+    public void updateUserVehicleDB(int user, int vehicle, int user_vehicle_id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_US_ID, user);
+        values.put(KEY_VE_ID, vehicle);
+
+        Integer id = (int) (long) user_vehicle_id;
+
+        // updating row
+        db.update(TABLE_USER_VEHICLE, values, KEY_ID + " = " + id, null);
+        db.close();
+    }
+
 }
-
-
-//******************************************************************************************
-//******************************************************************************************
-
