@@ -125,7 +125,7 @@ public class act_Registro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 customDialog.dismiss();
-                Intent myIntent = new Intent(getApplicationContext(), VentanaPrincipal.class);
+                Intent myIntent = new Intent(getApplicationContext(), act_Ventana_Principal.class);
                 myIntent.putExtra("user_id", user_id);
                 startActivity(myIntent);
             }

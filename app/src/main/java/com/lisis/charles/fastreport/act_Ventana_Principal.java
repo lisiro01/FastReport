@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class VentanaPrincipal extends AppCompatActivity {
+public class act_Ventana_Principal extends AppCompatActivity {
 
 
     private Button btnFastEm, btnDatPers, btnMisVeh, btnHisAcc, btnAtras;
@@ -15,7 +15,7 @@ public class VentanaPrincipal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_principal);
+        setContentView(R.layout.activity_ventana_principal);
 
         btnFastEm = (Button) findViewById(R.id.btFastEmail);
         btnDatPers = (Button) findViewById(R.id.btDatPersPRINC);
@@ -41,7 +41,7 @@ public class VentanaPrincipal extends AppCompatActivity {
         btnDatPers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(getApplicationContext(), DatosPersonales.class);
+                Intent myIntent = new Intent(getApplicationContext(), act_Datos_Personales.class);
                 myIntent.putExtra("user_id", user_id);
                 startActivity(myIntent);
             }
@@ -50,8 +50,9 @@ public class VentanaPrincipal extends AppCompatActivity {
         btnMisVeh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), act_Lista_Vehiculos.class);
-                startActivity(in);
+                Intent myIntent = new Intent(getApplicationContext(), act_Lista_Vehiculos.class);
+                myIntent.putExtra("user_id", user_id);
+                startActivity(myIntent);
             }
         });
 

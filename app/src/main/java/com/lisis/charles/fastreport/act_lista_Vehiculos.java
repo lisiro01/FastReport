@@ -13,6 +13,7 @@ public class act_Lista_Vehiculos extends AppCompatActivity {
 
     private TextView tvAnadirNuevo;
     private Button btnAtras;
+    private long user_id;
 
 
     @Override
@@ -23,11 +24,19 @@ public class act_Lista_Vehiculos extends AppCompatActivity {
         tvAnadirNuevo = (TextView) findViewById(R.id.tvAnyadir);
         btnAtras = (Button) findViewById(R.id.btAtrasMisVeh);
 
+        //Para coger el id del usuario que nos envia la clase ventana principal
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            user_id = extras.getLong("user_id");
+        }
+
+
+
         tvAnadirNuevo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(act_Lista_Vehiculos.this, act_Vehiculo.class);
-
+                myIntent.putExtra("user_id", user_id);
                 startActivity(myIntent);
             }
         });
@@ -35,7 +44,7 @@ public class act_Lista_Vehiculos extends AppCompatActivity {
         btnAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(act_Lista_Vehiculos.this, VentanaPrincipal.class);
+                Intent myIntent = new Intent(act_Lista_Vehiculos.this, act_Ventana_Principal.class);
 
                 startActivity(myIntent);
             }

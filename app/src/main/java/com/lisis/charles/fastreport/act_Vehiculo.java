@@ -19,7 +19,8 @@ public class act_Vehiculo extends AppCompatActivity {
 
     private EditText marca, modelo, numMat, aseguradora, numPol;
     private Button bTatras, bTguardar;
-    private long vehicle_id;
+    private long vehicle_id, user_id, user_vehicle_id;
+
 
 
     @Override
@@ -34,6 +35,13 @@ public class act_Vehiculo extends AppCompatActivity {
         numMat = (EditText) findViewById(R.id.etMat);
         aseguradora = (EditText) findViewById(R.id.etAseg);
         numPol = (EditText) findViewById(R.id.etNumPol);
+
+
+        //Para coger el id del usuario que nos envia la clase lista de vehiculos
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            user_id = extras.getLong("user_id");
+        }
 
 
         bTatras.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +85,7 @@ public class act_Vehiculo extends AppCompatActivity {
             public void onClick(View view) {
 
                 customDialog.dismiss();
-                Intent myIntent = new Intent(getApplicationContext(), VentanaPrincipal.class);
+                Intent myIntent = new Intent(getApplicationContext(), act_Lista_Vehiculos.class);
                 startActivity(myIntent);
             }
         });
@@ -89,17 +97,23 @@ public class act_Vehiculo extends AppCompatActivity {
 
         DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
 
-        DB_Vehicle v= new DB_Vehicle();
-        v.setBrand(marca.getText().toString());
-        v.setInsurance(aseguradora.getText().toString());
-        v.setModel(modelo.getText().toString());
-        v.setPolicyNumber(numPol.getText().toString());
-        v.setRegistrationNumber(numMat.getText().toString());
+        DB_Vehicle vehicle= new DB_Vehicle();
+        vehicle.setBrand(marca.getText().toString());
+        vehicle.setInsurance(aseguradora.getText().toString());
+        vehicle.setModel(modelo.getText().toString());
+        vehicle.setPolicyNumber(numPol.getText().toString());
+        vehicle.setRegistrationNumber(numMat.getText().toString());
 
-        fastReportDB.createVehicleDB(v);
+        //Creating the new vehicle
+        vehicle_id = fastReportDB.createVehicleDB(vehicle);
+
+        //Creating the relationship betwen the vehicle and the user
+        user_vehicle_id = fastReportDB.createUserVehicleDB(user_id, vehicle_id);
     }
 
-    }
+
+
+}
 
 
 

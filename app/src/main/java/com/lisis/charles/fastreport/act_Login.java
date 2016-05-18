@@ -36,7 +36,7 @@ public class act_Login extends AppCompatActivity {
 
                 checkUserPass();
                 if(userid != -1) {
-                    Intent in = new Intent(act_Login.this, VentanaPrincipal.class);
+                    Intent in = new Intent(act_Login.this, act_Ventana_Principal.class);
                     in.putExtra("user_id", userid);
                     startActivity(in);
                 } else{

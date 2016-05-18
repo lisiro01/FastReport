@@ -284,6 +284,42 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     }
 
 
+        /*
+ * Resturn User
+ */
+
+
+    public DB_User getUserDB(long user_id) {
+        DB_User user = new DB_User();
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE " + KEY_ID + " = '" + user_id + "'";
+        Log.e(LOG, selectQuery);
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        if (cursor != null) {
+            try {
+                cursor.moveToFirst();
+                user.setName(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
+                user.setLastname(cursor.getString(cursor.getColumnIndex(KEY_LAST_NAME)));
+                user.setAddress(cursor.getString(cursor.getColumnIndex(KEY_ADDRESS)));
+                user.setDriverLicense(cursor.getString(cursor.getColumnIndex(KEY_DRIVERS_LICENSE)));
+                user.setExpiration_date(cursor.getString(cursor.getColumnIndex(KEY_EXPIRATION_DATE)));
+                user.setPhoneNumber(cursor.getString(cursor.getColumnIndex(KEY_PHONE_NUMBER)));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+
+        }
+
+        return user;
+    }
+
+
+
 //******************************************************************************************
 //******************************************************************************************
 
@@ -429,7 +465,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
 
     //Generic method to create a complete User_Vehicle relation
-    public long createUserVehicleDB(int user, int vehicle) {
+    public long createUserVehicleDB(long user, long vehicle) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 

@@ -17,7 +17,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import db.DatabaseSQLiteHelper;
 
-public class DatosPersonales extends AppCompatActivity {
+public class act_Datos_Personales extends AppCompatActivity {
 
 
     private Button btnGuardar, btnAtras;
@@ -29,6 +29,7 @@ public class DatosPersonales extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_personales);
+
 
         btnGuardar = (Button) findViewById(R.id.btGuardarDatos);
         btnAtras = (Button) findViewById(R.id.btAtrasDatos);
@@ -44,7 +45,10 @@ public class DatosPersonales extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             user_id = extras.getLong("user_id");
+            fillUserData();
         }
+
+
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +93,7 @@ public class DatosPersonales extends AppCompatActivity {
             public void onClick(View view) {
 
                 customDialog.dismiss();
-                Intent myIntent = new Intent(getApplicationContext(), VentanaPrincipal.class);
+                Intent myIntent = new Intent(getApplicationContext(), act_Ventana_Principal.class);
                 startActivity(myIntent);
             }
         });
@@ -116,6 +120,26 @@ public class DatosPersonales extends AppCompatActivity {
     }
 
 
+    //Fills all the edit texts with the user´s data
+    public void fillUserData (){
+
+        DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
+
+        DB_User user = new DB_User();
+        user = fastReportDB.getUserDB(user_id);
+        if(user != null) {
+            //Fills all edit texts
+            nomb.setText(user.getName());
+            apell.setText(user.getLastname());
+            dir.setText(user.getAddress());
+            tel.setText(user.getPhoneNumber());
+            numLic.setText(user.getExpiration_date());
+            fechaVenc.setText(user.getExpiration_date());
+        }
+
+    }
+
+
 
     @Override
     public void onStart() {
@@ -126,7 +150,7 @@ public class DatosPersonales extends AppCompatActivity {
         client.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
-                "DatosPersonales Page", // TODO: Define a title for the content shown.
+                "act_Datos_Personales Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
@@ -145,7 +169,7 @@ public class DatosPersonales extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
-                "DatosPersonales Page", // TODO: Define a title for the content shown.
+                "act_Datos_Personales Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.

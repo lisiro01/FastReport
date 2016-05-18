@@ -15,13 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.lisis.charles.fastreport.DatosPersonales"/>
+        <activity android:name=".act_Datos_Personales"/>
         <activity android:name=".act_Fast_Email"/>
         <activity android:name="com.lisis.charles.fastreport.HistorialAccidentes"/>
         <activity android:name=".act_Lista_Vehiculos"/>
         <activity android:name=".act_Vehiculo"/>
         <activity android:name=".act_Registro"/>
-        <activity android:name="com.lisis.charles.fastreport.VentanaPrincipal"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+        <activity android:name=".act_Ventana_Principal"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"
