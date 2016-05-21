@@ -420,7 +420,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         DB_Vehicle vehicle = new DB_Vehicle();
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String selectQuery = "SELECT * FROM " + TABLE_VEHICLES + " WHERE " + KEY_USER_ID + " = '" + vehicle_id + "'";
+        String selectQuery = "SELECT * FROM " + TABLE_VEHICLES + " WHERE " + KEY_VEHICLE_ID + " = '" + vehicle_id + "'";
         Log.e(LOG, selectQuery);
 
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -428,6 +428,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
         if (cursor != null) {
             try {
+                cursor.moveToFirst();
                 vehicle.setBrand(cursor.getString(cursor.getColumnIndex(KEY_BRAND)));
                 vehicle.setModel(cursor.getString(cursor.getColumnIndex(KEY_MODEL)));
                 vehicle.setRegistrationNumber(cursor.getString(cursor.getColumnIndex(KEY_REG_NUMBER)));

@@ -22,7 +22,8 @@ import java.util.ArrayList;
 
 import db.DatabaseSQLiteHelper;
 
-public class act_Lista_Vehiculos extends AppCompatActivity {
+public class act_Lista_Vehiculos2 extends AppCompatActivity {
+
 
     private TextView tvAnadirNuevo;
     private Button btnAtras;
@@ -60,7 +61,7 @@ public class act_Lista_Vehiculos extends AppCompatActivity {
         tvAnadirNuevo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(act_Lista_Vehiculos.this, act_Vehiculo.class);
+                Intent myIntent = new Intent(act_Lista_Vehiculos2.this, act_Vehiculo.class);
                 myIntent.putExtra("user_id", user_id);
                 myIntent.putExtra("saveOrMod", 2);
                 startActivity(myIntent);
@@ -70,7 +71,7 @@ public class act_Lista_Vehiculos extends AppCompatActivity {
         btnAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(act_Lista_Vehiculos.this, act_Ventana_Principal.class);
+                Intent myIntent = new Intent(act_Lista_Vehiculos2.this, act_Ventana_Principal.class);
 
                 startActivity(myIntent);
             }
@@ -79,9 +80,12 @@ public class act_Lista_Vehiculos extends AppCompatActivity {
         listaVehiculos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent myIntent = new Intent(act_Lista_Vehiculos.this, act_Vehiculo.class);
+                String num_vehiculo = listaVehiculos.getItemAtPosition(position).toString();
+
+                Intent myIntent = new Intent(act_Lista_Vehiculos2.this, act_Vehiculo.class);
                 myIntent.putExtra("user_id", user_id);
                 myIntent.putExtra("saveOrMod", 1);
+                myIntent.putExtra("mat_vehiculo", num_vehiculo);
                 startActivity(myIntent);
 
             }
@@ -151,5 +155,6 @@ public class act_Lista_Vehiculos extends AppCompatActivity {
         adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vehicles);
         listaVehiculos.setAdapter(adaptador);
     }
+
 
 }

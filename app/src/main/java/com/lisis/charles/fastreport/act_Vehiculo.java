@@ -26,6 +26,8 @@ public class act_Vehiculo extends AppCompatActivity {
     private Button bTatras, bTguardar;
     private long vehicle_id, user_id, user_vehicle_id;
     private int saveOrMod;
+
+    private String numMatricula;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -52,14 +54,16 @@ public class act_Vehiculo extends AppCompatActivity {
         if (extras != null) {
             user_id = extras.getLong("user_id");
             saveOrMod = extras.getInt("saveOrMod");
+            if(saveOrMod == 1){
+                numMatricula = extras.getString("mat_vehiculo");
+            }
         }
 
 
         bTatras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), act_Lista_Vehiculos.class);
-                startActivity(in);
+                finish();
             }
         });
 
@@ -143,10 +147,13 @@ public class act_Vehiculo extends AppCompatActivity {
     //Fills all the edit texts with the vehicle´s data
     public void fillVehicleData() {
 
+        numMat.setText(numMatricula);
+
         DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
 
-        DB_Vehicle vehicle = new DB_Vehicle();
-        vehicle = fastReportDB.getVehicleDB(vehicle_id);
+        vehicle_id = fastReportDB.findVehicleDB(numMatricula);
+        DB_Vehicle vehicle = fastReportDB.getVehicleDB(vehicle_id);
+
         if (vehicle != null) {
             //Fills all edit texts
             marca.setText(vehicle.getBrand());
@@ -155,7 +162,6 @@ public class act_Vehiculo extends AppCompatActivity {
             aseguradora.setText(vehicle.getInsurance());
             numPol.setText(vehicle.getPolicyNumber());
         }
-
     }
 
 
@@ -165,14 +171,13 @@ public class act_Vehiculo extends AppCompatActivity {
         customDialog.setCancelable(false);
         customDialog.setContentView(R.layout.pop_up_notificar);
         ((TextView) customDialog.findViewById(R.id.titulo)).setText("¡Éxito!");
-        ((TextView) customDialog.findViewById(R.id.textoPopUp)).setText("EL vehículo se ha guardado correctamente");
+        ((TextView) customDialog.findViewById(R.id.textoPopUp)).setText("El vehículo se ha guardado correctamente");
         (customDialog.findViewById(R.id.btnAceptarPopUp)).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 customDialog.dismiss();
-                Intent in = new Intent(getApplicationContext(), act_Lista_Vehiculos.class);
-                startActivity(in);
+                finish();
             }
         });
         customDialog.show();

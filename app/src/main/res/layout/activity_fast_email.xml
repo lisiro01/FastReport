@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#c6d1ff">
 
     <TextView
         android:layout_width="wrap_content"
@@ -8,20 +9,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Fecha"
         android:id="@+id/tvFecha"
-        android:layout_below="@+id/tvTitFastEmail"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FAST EMAIL"
-        android:id="@+id/tvTitFastEmail"
-        android:textSize="30dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp" />
+        android:layout_alignLeft="@+id/btAtrasFE"
+        android:layout_alignStart="@+id/btAtrasFE"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,24 +37,25 @@
         android:layout_marginTop="10dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:text="Enviar"
         android:id="@+id/btEnviar"
+        android:background="@drawable/boton_azul1"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:text="Guardar"
         android:id="@+id/btGuardFE"
+        android:background="@drawable/boton_azul1"
         android:layout_alignTop="@+id/btEnviar"
-        android:layout_alignRight="@+id/tvTitFastEmail"
-        android:layout_alignEnd="@+id/tvTitFastEmail" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -93,10 +86,11 @@
         android:ems="10"
         android:id="@+id/etSelVeh"
         android:text="Selecciona Vehiculo"
-        android:layout_below="@+id/tvFotos"
-        android:layout_alignLeft="@+id/tvTitFastEmail"
-        android:layout_alignStart="@+id/tvTitFastEmail"
-        android:layout_marginTop="5dp" />
+        android:layout_alignBottom="@+id/tvVeh"
+        android:layout_toRightOf="@+id/tvVeh"
+        android:layout_toEndOf="@+id/tvVeh"
+        android:layout_marginBottom="-7dp"
+        android:layout_marginLeft="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -128,8 +122,10 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/etHora"
-        android:layout_centerHorizontal="true"
-        android:layout_alignBottom="@+id/tvHora" />
+        android:layout_alignBottom="@+id/tvHora"
+        android:layout_alignLeft="@+id/etFecha"
+        android:layout_alignStart="@+id/etFecha"
+        android:layout_marginBottom="-7dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -137,26 +133,30 @@
         android:inputType="time"
         android:ems="10"
         android:id="@+id/etFecha"
-        android:layout_above="@+id/etHora"
-        android:layout_alignLeft="@+id/etHora"
-        android:layout_alignStart="@+id/etHora" />
+        android:layout_alignBottom="@+id/tvFecha"
+        android:layout_toRightOf="@+id/tvFecha"
+        android:layout_toEndOf="@+id/tvFecha"
+        android:layout_marginBottom="-7dp"
+        android:layout_marginLeft="10dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:text="Atras"
         android:id="@+id/btAtrasFE"
-        android:layout_alignBottom="@+id/btGuardACC"
-        android:layout_alignLeft="@+id/etEmail"
-        android:layout_alignStart="@+id/etEmail" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Atras"
-        android:id="@+id/btAtrasFE"
+        android:background="@drawable/boton_azul1"
         android:layout_alignTop="@+id/btGuardFE"
-        android:layout_toLeftOf="@+id/etSelVeh"
-        android:layout_toStartOf="@+id/etSelVeh" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp" />
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageView2"
+        android:background="@drawable/texto_fast_email"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" />
 
 </RelativeLayout>

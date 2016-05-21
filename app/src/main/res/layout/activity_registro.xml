@@ -1,18 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".act_Registro">
+    tools:context=".act_Registro"
+    android:background="#c6d1ff">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REGISTRO"
-        android:id="@+id/tvTituloRegistro"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="30dp"
-        android:layout_marginTop="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,7 +55,7 @@
 
     <Button
         android:layout_width="120dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="Atras"
         android:id="@+id/btAtrasR"
         android:layout_marginLeft="27dp"
@@ -72,17 +63,19 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="27dp" />
+        android:layout_marginStart="27dp"
+        android:background="@drawable/boton_azul1" />
 
     <Button
         android:layout_width="120dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="Registrarse"
         android:id="@+id/btRegistrarseR"
         android:layout_alignTop="@+id/btAtrasR"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="30dp" />
+        android:layout_marginRight="30dp"
+        android:background="@drawable/boton_azul1" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -117,5 +110,14 @@
         android:layout_alignRight="@+id/edContraseñaR"
         android:layout_alignEnd="@+id/edContraseñaR"
         android:layout_marginLeft="10dp" />
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="65dp"
+        android:id="@+id/imageView7"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/texto_registro"
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>

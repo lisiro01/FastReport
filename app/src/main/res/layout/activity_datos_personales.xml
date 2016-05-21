@@ -11,11 +11,12 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/relDatosPers">
+            android:id="@+id/relDatosPers"
+            android:background="#c6d1ff">
 
             <Button
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:text="Atras"
                 android:id="@+id/btAtrasDatos"
                 android:layout_below="@+id/etFVenc"
@@ -23,18 +24,19 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="50dp"
-                android:layout_marginBottom="10dp" />
+                android:background="@drawable/boton_azul1" />
 
             <Button
                 android:layout_width="120dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:text="Guardar"
                 android:id="@+id/btGuardarDatos"
                 android:layout_alignTop="@+id/btAtrasDatos"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="30dp"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/boton_azul1" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -51,23 +53,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DATOS PERSONALES"
-                android:id="@+id/tvTituloDatos"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:textSize="30dp"
-                android:layout_marginTop="30dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Nombre"
                 android:id="@+id/tvNombre"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="80dp" />
+                android:layout_marginTop="90dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -185,6 +177,15 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="10dp" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:id="@+id/imageView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/texto_datos_personales"
+                android:layout_marginTop="15dp" />
 
         </RelativeLayout>
 </ScrollView>
