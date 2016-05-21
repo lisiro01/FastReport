@@ -16,24 +16,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="****Aqui tiene que salir una lista d elos vehículos guardado "
-        android:id="@+id/textView"
-        android:layout_marginTop="42dp"
-        android:layout_below="@+id/tvTitMisVeh"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Añadir nuevo vehículo"
         android:id="@+id/tvAnyadir"
         android:clickable="false"
         android:textStyle="bold"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/tvTitMisVeh"
-        android:layout_alignStart="@+id/tvTitMisVeh"
-        android:layout_marginBottom="166dp" />
+        android:layout_above="@+id/btAtrasMisVeh"
+        android:layout_alignRight="@+id/tvTitMisVeh"
+        android:layout_alignEnd="@+id/tvTitMisVeh"
+        android:layout_marginBottom="30dp" />
 
     <Button
         android:layout_width="120dp"
@@ -45,5 +35,17 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="20dp"
         android:layout_marginRight="10dp" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listViewVehiculos"
+        android:layout_below="@+id/tvTitMisVeh"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/tvAnyadir"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_margin="10dp" />
 
 </RelativeLayout>

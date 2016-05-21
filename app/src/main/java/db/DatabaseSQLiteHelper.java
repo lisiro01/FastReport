@@ -11,6 +11,8 @@ import com.lisis.charles.fastreport.DB_Accident;
 import com.lisis.charles.fastreport.DB_User;
 import com.lisis.charles.fastreport.DB_Vehicle;
 
+import java.util.ArrayList;
+
 
 public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
@@ -29,10 +31,9 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     private static final String TABLE_ACCIDENT = "accident";
     private static final String TABLE_USER_VEHICLE = "user_vehicle";
 
-    // Common column names
-    private static final String KEY_ID = "id";
 
     // USERS Table - column names
+    private static final String KEY_USER_ID = "user_id";
     private static final String KEY_NAME = "name";
     private static final String KEY_LAST_NAME = "last_name";
     private static final String KEY_EMAIL = "email";
@@ -43,6 +44,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_ADDRESS = "address";
 
     // VEHICLES Table - column names
+    private static final String KEY_VEHICLE_ID = "vehicle_id";
     private static final String KEY_BRAND = "brand";
     private static final String KEY_MODEL = "model";
     private static final String KEY_REG_NUMBER = "registration_number";
@@ -50,15 +52,17 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_POLICY_NUMBER = "policy_number";
 
     // Accident Table - column names
-    private static final String KEY_USER_ID = "user_id";
-    private static final String KEY_VEHICLE_ID = "vehicle_id";
+    private static final String KEY_ACCIDENT_ID = "accident_id";
+    private static final String KEY_A_USER_ID = "user_id";
+    private static final String KEY_A_VEHICLE_ID = "vehicle_id";
     private static final String KEY_DATE = "date";
     private static final String KEY_LOCATION = "location";
     private static final String KEY_EMAIL_ADDRESSEE = "email_addressee";
 
     // USER_VEHICLE Table - column names
-    private static final String KEY_US_ID = "user_id";
-    private static final String KEY_VE_ID = "vehicle_id";
+    private static final String KEY_USER_VEHICLE_ID = "user_vehicle_id";
+    private static final String KEY_UV_USER_ID = "user_id";
+    private static final String KEY_UV_VEHICLE_ID = "vehicle_id";
 
 
     // Table Create Statements
@@ -68,7 +72,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_USERS = "CREATE TABLE "
             + TABLE_USERS +
             "("
-            + KEY_ID + " INTEGER PRIMARY KEY,"
+            + KEY_USER_ID + " INTEGER PRIMARY KEY,"
             + KEY_NAME + " TEXT,"
             + KEY_LAST_NAME + " TEXT,"
             + KEY_EMAIL + " TEXT,"
@@ -84,7 +88,8 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_VEHICLES = "CREATE TABLE "
             + TABLE_VEHICLES +
             "("
-            + KEY_REG_NUMBER + " INTEGER PRIMARY KEY,"
+            + KEY_VEHICLE_ID + " INTEGER PRIMARY KEY,"
+            + KEY_REG_NUMBER + " TEXT,"
             + KEY_BRAND + " TEXT,"
             + KEY_MODEL + " TEXT,"
             + KEY_INSURANCE + " TEXT,"
@@ -96,20 +101,25 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_ACCIDENT = "CREATE TABLE "
             + TABLE_ACCIDENT +
             "("
-            + KEY_ID + " INTEGER PRIMARY KEY,"
-            + KEY_USER_ID + " INTEGER,"
-            + KEY_VEHICLE_ID + " INTEGER,"
-            + KEY_DATE + " DATETIME"
-            + KEY_LOCATION + " TEXT"
-            + KEY_EMAIL_ADDRESSEE + " TEXT"
+            + KEY_ACCIDENT_ID + " INTEGER PRIMARY KEY,"
+            + KEY_A_USER_ID + " INTEGER,"
+            + KEY_A_VEHICLE_ID + " INTEGER,"
+            + KEY_DATE + " DATETIME,"
+            + KEY_LOCATION + " TEXT,"
+            + KEY_EMAIL_ADDRESSEE + " TEXT,"
+            + "FOREIGN KEY(" + KEY_A_USER_ID + ") REFERENCES " + TABLE_USERS + ","
+            + "FOREIGN KEY(" + KEY_A_VEHICLE_ID + ") REFERENCES " + TABLE_VEHICLES
             + ")";
 
     // User_Vehicle table create statement
     private static final String CREATE_TABLE_USER_VEHICLE = "CREATE TABLE "
             + TABLE_USER_VEHICLE +
             "("
-            + KEY_US_ID + "INTEGER,"
-            + KEY_VE_ID + "INTEGER,"
+            + KEY_USER_VEHICLE_ID + " INTEGER PRIMARY KEY,"
+            + KEY_UV_USER_ID + " INTEGER,"
+            + KEY_UV_VEHICLE_ID + " INTEGER,"
+            + "FOREIGN KEY(" + KEY_UV_USER_ID + ") REFERENCES " + TABLE_USERS + ","
+            + "FOREIGN KEY(" + KEY_UV_VEHICLE_ID + ") REFERENCES " + TABLE_VEHICLES
             + ")";
 
     public DatabaseSQLiteHelper(Context context) {
@@ -167,13 +177,12 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     }
 
 
-
     //Create user with email/user and password
     public long createUserDB(String email, String pass) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String str = "null";
+        String str = "";
         ContentValues values = new ContentValues();
         values.put(KEY_PASS, pass);
         values.put(KEY_EMAIL, email);
@@ -215,7 +224,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         Integer id = (int) (long) user_id;
 
         // updating row
-        db.update(TABLE_USERS, values, KEY_ID + " = " + id, null);
+        db.update(TABLE_USERS, values, KEY_USER_ID + " = " + id, null);
         db.close();
     }
 
@@ -240,7 +249,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
                 cursor.moveToFirst();
                 String passSavedInDataBase = cursor.getString(cursor.getColumnIndex(KEY_PASS));
                 if (pass.equals(passSavedInDataBase)) {
-                    success = cursor.getInt(cursor.getColumnIndex(KEY_ID));
+                    success = cursor.getInt(cursor.getColumnIndex(KEY_USER_ID));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -272,7 +281,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         if (cursor != null) {
             try {
                 cursor.moveToFirst();
-                success = cursor.getInt(cursor.getColumnIndex(KEY_ID));
+                success = cursor.getInt(cursor.getColumnIndex(KEY_USER_ID));
             } catch (Exception e) {
                 e.printStackTrace();
                 return -1;
@@ -293,7 +302,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         DB_User user = new DB_User();
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE " + KEY_ID + " = '" + user_id + "'";
+        String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE " + KEY_USER_ID + " = '" + user_id + "'";
         Log.e(LOG, selectQuery);
 
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -317,7 +326,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
         return user;
     }
-
 
 
 //******************************************************************************************
@@ -367,7 +375,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         Integer id = (int) (long) vehicle_id;
 
         // updating row
-        db.update(TABLE_VEHICLES, values, KEY_ID + " = " + id, null);
+        db.update(TABLE_VEHICLES, values, KEY_VEHICLE_ID + " = " + id, null);
         db.close();
     }
 
@@ -391,7 +399,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         if (cursor != null) {
             try {
                 cursor.moveToFirst();
-                success = cursor.getInt(cursor.getColumnIndex(KEY_ID));
+                success = cursor.getInt(cursor.getColumnIndex(KEY_VEHICLE_ID));
             } catch (Exception e) {
                 e.printStackTrace();
                 return -1;
@@ -400,6 +408,40 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         }
 
         return success;
+    }
+
+
+            /*
+ * Resturn User
+ */
+
+
+    public DB_Vehicle getVehicleDB(long vehicle_id) {
+        DB_Vehicle vehicle = new DB_Vehicle();
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLE_VEHICLES + " WHERE " + KEY_USER_ID + " = '" + vehicle_id + "'";
+        Log.e(LOG, selectQuery);
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        if (cursor != null) {
+            try {
+                vehicle.setBrand(cursor.getString(cursor.getColumnIndex(KEY_BRAND)));
+                vehicle.setModel(cursor.getString(cursor.getColumnIndex(KEY_MODEL)));
+                vehicle.setRegistrationNumber(cursor.getString(cursor.getColumnIndex(KEY_REG_NUMBER)));
+                vehicle.setInsurance(cursor.getString(cursor.getColumnIndex(KEY_INSURANCE)));
+                vehicle.setPolicyNumber(cursor.getString(cursor.getColumnIndex(KEY_POLICY_NUMBER)));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+
+        }
+
+        return vehicle;
     }
 
 
@@ -452,7 +494,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         Integer id = (int) (long) accident_id;
 
         // updating row
-        db.update(TABLE_ACCIDENT, values, KEY_ID + " = " + id, null);
+        db.update(TABLE_ACCIDENT, values, KEY_ACCIDENT_ID + " = " + id, null);
         db.close();
     }
 
@@ -471,8 +513,8 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
 
-        values.put(KEY_US_ID, user);
-        values.put(KEY_VE_ID, vehicle);
+        values.put(KEY_UV_USER_ID, user);
+        values.put(KEY_UV_VEHICLE_ID, vehicle);
 
 
         // insert row
@@ -494,14 +536,72 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
 
-        values.put(KEY_US_ID, user);
-        values.put(KEY_VE_ID, vehicle);
+        values.put(KEY_UV_USER_ID, user);
+        values.put(KEY_UV_VEHICLE_ID, vehicle);
 
         Integer id = (int) (long) user_vehicle_id;
 
         // updating row
-        db.update(TABLE_USER_VEHICLE, values, KEY_ID + " = " + id, null);
+        db.update(TABLE_USER_VEHICLE, values, KEY_USER_VEHICLE_ID + " = " + id, null);
         db.close();
     }
+
+
+    /*
+* getting all vehicles under single user_id
+* */
+    public ArrayList<DB_Vehicle> getAllVehiclesByUserId(long user_id) {
+
+        String selectQuery = "SELECT * FROM " + TABLE_USER_VEHICLE + " NATURAL JOIN " + TABLE_VEHICLES +
+                " WHERE " + KEY_UV_USER_ID + " = " + user_id;
+
+        Log.e(LOG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+        ArrayList<DB_Vehicle> vehiclesList = new ArrayList<DB_Vehicle>();
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                DB_Vehicle v = new DB_Vehicle();
+                v.setBrand(c.getString(c.getColumnIndex(KEY_BRAND)));
+                v.setModel(c.getString(c.getColumnIndex(KEY_MODEL)));
+                v.setRegistrationNumber(c.getString(c.getColumnIndex(KEY_REG_NUMBER)));
+
+                vehiclesList.add(v);
+            } while (c.moveToNext());
+        }
+
+        return vehiclesList;
+    }
+
+
+    /*
+* getting all vehicles under single user_id
+* */
+    public ArrayList<String> getAllVehiclesByUserIdString(long user_id) {
+
+        String selectQuery = "SELECT * FROM " + TABLE_USER_VEHICLE + " NATURAL JOIN " + TABLE_VEHICLES +
+                " WHERE " + KEY_UV_USER_ID + " = " + user_id;
+
+        Log.e(LOG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+        ArrayList<String> vehiclesList = new ArrayList<String>();
+        String matricula;
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                matricula = c.getString(c.getColumnIndex(KEY_REG_NUMBER));
+                vehiclesList.add(matricula);
+            } while (c.moveToNext());
+        }
+
+        return vehiclesList;
+    }
+
 
 }

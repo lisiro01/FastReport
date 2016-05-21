@@ -43,11 +43,10 @@ public class act_Datos_Personales extends AppCompatActivity {
 
         //Para coger lo que nos envia la otra clase (user_id )
         Bundle extras = getIntent().getExtras();
+        fillUserData();
         if (extras != null) {
             user_id = extras.getLong("user_id");
-            fillUserData();
         }
-
 
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +127,7 @@ public class act_Datos_Personales extends AppCompatActivity {
         DB_User user = new DB_User();
         user = fastReportDB.getUserDB(user_id);
         if(user != null) {
+
             //Fills all edit texts
             nomb.setText(user.getName());
             apell.setText(user.getLastname());
@@ -159,6 +159,7 @@ public class act_Datos_Personales extends AppCompatActivity {
                 Uri.parse("android-app://com.lisis.charles.fastreport/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
+        fillUserData();
     }
 
     @Override
