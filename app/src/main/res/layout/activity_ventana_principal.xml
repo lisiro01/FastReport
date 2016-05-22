@@ -48,11 +48,9 @@
         android:layout_height="50dp"
         android:text="Atras"
         android:id="@+id/btAtrasPRINC"
-        android:layout_marginRight="30dp"
-        android:layout_marginEnd="45dp"
+        android:background="@drawable/boton_azul1"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/boton_azul1" />
+        android:layout_alignLeft="@+id/btHistAcc"
+        android:layout_alignStart="@+id/btHistAcc"
+        android:layout_marginBottom="20dp" />
 </RelativeLayout>

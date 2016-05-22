@@ -49,7 +49,8 @@ public class act_Login extends AppCompatActivity {
         tvRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(act_Login.this, act_Registro.class);
+                //Intent in = new Intent(act_Login.this, act_Registro.class);
+                Intent in = new Intent(act_Login.this, act_About.class);
                 startActivity(in);
             }
         });

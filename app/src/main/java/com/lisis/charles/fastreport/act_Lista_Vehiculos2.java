@@ -70,12 +70,9 @@ public class act_Lista_Vehiculos2 extends AppCompatActivity {
 
         btnAtras.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(act_Lista_Vehiculos2.this, act_Ventana_Principal.class);
-
-                startActivity(myIntent);
+            public void onClick(View v) {finish();
             }
-        });
+        }); // Para volver a la ventana principal
 
         listaVehiculos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

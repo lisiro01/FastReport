@@ -177,7 +177,7 @@ public class act_Vehiculo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 customDialog.dismiss();
-                finish();
+                finish(); // Para volver a la lista de vehiculos
             }
         });
         customDialog.show();

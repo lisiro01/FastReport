@@ -41,6 +41,9 @@ public class act_Datos_Personales extends AppCompatActivity {
         fechaVenc = (EditText) findViewById(R.id.etFVenc);
 
 
+        tel.setText("Hooolaaaa");
+
+
         //Para coger lo que nos envia la otra clase (user_id )
         Bundle extras = getIntent().getExtras();
         fillUserData();
@@ -92,8 +95,7 @@ public class act_Datos_Personales extends AppCompatActivity {
             public void onClick(View view) {
 
                 customDialog.dismiss();
-                Intent myIntent = new Intent(getApplicationContext(), act_Ventana_Principal.class);
-                startActivity(myIntent);
+                finish(); // Para volver a la ventana principal
             }
         });
 
@@ -124,8 +126,8 @@ public class act_Datos_Personales extends AppCompatActivity {
 
         DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
 
-        DB_User user = new DB_User();
-        user = fastReportDB.getUserDB(user_id);
+        DB_User user = fastReportDB.getUserDB(user_id);
+
         if(user != null) {
 
             //Fills all edit texts
@@ -136,6 +138,7 @@ public class act_Datos_Personales extends AppCompatActivity {
             numLic.setText(user.getExpiration_date());
             fechaVenc.setText(user.getExpiration_date());
         }
+
 
     }
 

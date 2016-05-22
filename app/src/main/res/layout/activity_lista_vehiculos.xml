@@ -11,21 +11,20 @@
         android:id="@+id/tvAnyadir"
         android:clickable="false"
         android:textStyle="bold"
-        android:layout_above="@+id/btAtrasMisVeh"
-        android:layout_marginBottom="30dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="15dp" />
 
     <Button
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:text="Atras"
         android:id="@+id/btAtrasMisVeh"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/boton_azul1" />
+        android:background="@drawable/boton_azul1"
+        android:layout_alignTop="@+id/tvAnyadir"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="25dp" />
 
     <ListView
         android:layout_width="wrap_content"

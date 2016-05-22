@@ -323,6 +323,9 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
             }
 
         }
+        else {
+            user.setLastname("apellidooo");
+        }
 
         return user;
     }
