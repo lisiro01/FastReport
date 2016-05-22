@@ -35,8 +35,9 @@ public class act_Ventana_Principal extends AppCompatActivity {
         btnFastEm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), act_Fast_Email.class);
-                startActivity(in);
+                Intent myIntent = new Intent(getApplicationContext(), act_Fast_Email.class);
+                myIntent.putExtra("user_id", user_id);
+                startActivity(myIntent);
             }
         });
 

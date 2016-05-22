@@ -5,14 +5,27 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import db.DatabaseSQLiteHelper;
 
 public class act_Fast_Email extends AppCompatActivity {
 
 
 
     private Button btnGuardar, btnEnviar, btnAtras;
+
+    private long user_id;
+
+    private ArrayAdapter<String> adaptador;
+    private ArrayList<String> vehicles;
+    private Spinner comboBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +35,16 @@ public class act_Fast_Email extends AppCompatActivity {
         btnGuardar = (Button) findViewById(R.id.btGuardFE);
         btnEnviar = (Button) findViewById(R.id.btEnviar);
         btnAtras = (Button) findViewById(R.id.btAtrasFE);
+        comboBox = (Spinner) findViewById(R.id.spinner);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            user_id = extras.getLong("user_id");
+        }
+
+        fillArrayListOfVehicles();
+        adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vehicles);
+        comboBox.setAdapter(adaptador);
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +93,14 @@ public class act_Fast_Email extends AppCompatActivity {
         });
 
         customDialog.show();
+    }
+
+
+    public void fillArrayListOfVehicles() {
+
+        DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
+
+        vehicles = fastReportDB.getAllVehiclesByUserIdString(user_id);
     }
 
 

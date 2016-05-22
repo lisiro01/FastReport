@@ -1,162 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="#c6d1ff">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Fecha"
-        android:id="@+id/tvFecha"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/btAtrasFE"
-        android:layout_alignStart="@+id/btAtrasFE"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="15dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Hora"
-        android:id="@+id/tvHora"
-        android:layout_below="@+id/tvFecha"
-        android:layout_alignLeft="@+id/tvFecha"
-        android:layout_alignStart="@+id/tvFecha" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Fecha"
+            android:id="@+id/tvFecha"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/btAtrasFE"
+            android:layout_alignStart="@+id/btAtrasFE"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Localización"
-        android:id="@+id/tvLocal"
-        android:layout_below="@+id/tvHora"
-        android:layout_alignLeft="@+id/tvHora"
-        android:layout_alignStart="@+id/tvHora"
-        android:layout_marginTop="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Hora"
+            android:id="@+id/tvHora"
+            android:layout_below="@+id/tvFecha"
+            android:layout_alignLeft="@+id/tvFecha"
+            android:layout_alignStart="@+id/tvFecha" />
 
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="Enviar"
-        android:id="@+id/btEnviar"
-        android:background="@drawable/presion_boton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Localización"
+            android:id="@+id/tvLocal"
+            android:layout_below="@+id/tvHora"
+            android:layout_alignLeft="@+id/tvHora"
+            android:layout_alignStart="@+id/tvHora"
+            android:layout_marginTop="20dp" />
 
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="Guardar"
-        android:id="@+id/btGuardFE"
-        android:background="@drawable/presion_boton"
-        android:layout_alignTop="@+id/btEnviar"
-        android:layout_centerHorizontal="true" />
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Enviar"
+            android:id="@+id/btEnviar"
+            android:background="@drawable/presion_boton"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Fotos"
-        android:id="@+id/tvFotos"
-        android:layout_below="@+id/tvLocal"
-        android:layout_alignLeft="@+id/tvLocal"
-        android:layout_alignStart="@+id/tvLocal"
-        android:layout_marginTop="40dp" />
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Guardar"
+            android:id="@+id/btGuardFE"
+            android:background="@drawable/presion_boton"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/tvLocal"
+            android:layout_toEndOf="@+id/tvLocal" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Vehiculo"
-        android:id="@+id/tvVeh"
-        android:layout_below="@+id/tvFotos"
-        android:layout_alignLeft="@+id/tvFotos"
-        android:layout_alignStart="@+id/tvFotos"
-        android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Fotos"
+            android:id="@+id/tvFotos"
+            android:layout_below="@+id/tvLocal"
+            android:layout_alignLeft="@+id/tvLocal"
+            android:layout_alignStart="@+id/tvLocal"
+            android:layout_marginTop="80dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/etSelVeh"
-        android:text="Selecciona Vehiculo"
-        android:layout_alignBottom="@+id/tvVeh"
-        android:layout_toRightOf="@+id/tvVeh"
-        android:layout_toEndOf="@+id/tvVeh"
-        android:layout_marginBottom="-7dp"
-        android:layout_marginLeft="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Vehiculo"
+            android:id="@+id/tvVeh"
+            android:layout_below="@+id/btnAnadirFoto1"
+            android:layout_alignLeft="@+id/btnAnadirFoto1"
+            android:layout_alignStart="@+id/btnAnadirFoto1"
+            android:layout_marginTop="30dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Enviar Datos a:"
-        android:id="@+id/tvEnvDat"
-        android:layout_below="@+id/tvVeh"
-        android:layout_alignLeft="@+id/tvVeh"
-        android:layout_alignStart="@+id/tvVeh"
-        android:layout_marginTop="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Enviar Datos a:"
+            android:id="@+id/tvEnvDat"
+            android:layout_below="@+id/tvVeh"
+            android:layout_alignLeft="@+id/tvVeh"
+            android:layout_alignStart="@+id/tvVeh"
+            android:layout_marginTop="30dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/etEmail"
-        android:text="Introduzca email"
-        android:layout_below="@+id/tvEnvDat"
-        android:layout_alignLeft="@+id/tvEnvDat"
-        android:layout_alignStart="@+id/tvEnvDat"
-        android:layout_alignRight="@+id/btEnviar"
-        android:layout_alignEnd="@+id/btEnviar" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/etEmail"
+            android:text="Introduzca email"
+            android:layout_below="@+id/tvEnvDat"
+            android:layout_alignLeft="@+id/tvEnvDat"
+            android:layout_alignStart="@+id/tvEnvDat"
+            android:layout_alignRight="@+id/btEnviar"
+            android:layout_alignEnd="@+id/btEnviar"
+            android:layout_marginTop="10dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/etHora"
-        android:layout_alignBottom="@+id/tvHora"
-        android:layout_alignLeft="@+id/etFecha"
-        android:layout_alignStart="@+id/etFecha"
-        android:layout_marginBottom="-7dp" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/etHora"
+            android:layout_alignBottom="@+id/tvHora"
+            android:layout_alignLeft="@+id/etFecha"
+            android:layout_alignStart="@+id/etFecha"
+            android:layout_marginBottom="-7dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/etFecha"
-        android:layout_alignBottom="@+id/tvFecha"
-        android:layout_toRightOf="@+id/tvFecha"
-        android:layout_toEndOf="@+id/tvFecha"
-        android:layout_marginBottom="-7dp"
-        android:layout_marginLeft="10dp" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/etFecha"
+            android:layout_alignBottom="@+id/tvFecha"
+            android:layout_toRightOf="@+id/tvFecha"
+            android:layout_toEndOf="@+id/tvFecha"
+            android:layout_marginBottom="-7dp"
+            android:layout_marginLeft="10dp" />
 
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="Atras"
-        android:id="@+id/btAtrasFE"
-        android:background="@drawable/presion_boton"
-        android:layout_alignTop="@+id/btGuardFE"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp" />
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Atras"
+            android:id="@+id/btAtrasFE"
+            android:background="@drawable/presion_boton"
+            android:layout_below="@+id/etEmail"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="40dp" />
 
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:id="@+id/imageView2"
-        android:background="@drawable/texto_fast_email"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp" />
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView2"
+            android:background="@drawable/texto_fast_email"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp" />
 
-</RelativeLayout>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/spinner"
+            android:layout_alignBottom="@+id/tvVeh"
+            android:layout_toRightOf="@+id/tvVeh"
+            android:layout_toEndOf="@+id/tvVeh"
+            android:layout_marginBottom="-10dp" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/btnAnadirFoto1"
+            android:layout_below="@+id/tvFotos"
+            android:layout_alignLeft="@+id/tvFotos"
+            android:layout_alignStart="@+id/tvFotos"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/anadir_foto" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/btnAnadirFoto2"
+            android:background="@drawable/anadir_foto"
+            android:layout_alignTop="@+id/btnAnadirFoto1"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/btnAnadirFoto3"
+            android:layout_alignTop="@+id/btnAnadirFoto2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/anadir_foto" />
+
+    </RelativeLayout>
+
+</ScrollView>
