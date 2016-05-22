@@ -57,7 +57,7 @@
             android:id="@+id/btnAceptarPopUp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:background="@drawable/boton_azul1" />
+            android:background="@drawable/presion_boton" />
     </LinearLayout>
 
 </LinearLayout>

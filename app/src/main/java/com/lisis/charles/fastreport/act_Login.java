@@ -50,7 +50,7 @@ public class act_Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Intent in = new Intent(act_Login.this, act_Registro.class);
-                Intent in = new Intent(act_Login.this, act_About.class);
+                Intent in = new Intent(act_Login.this, act_Registro.class);
                 startActivity(in);
             }
         });

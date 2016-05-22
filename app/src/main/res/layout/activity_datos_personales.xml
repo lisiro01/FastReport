@@ -24,7 +24,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="50dp"
-                android:background="@drawable/boton_azul1" />
+                android:background="@drawable/presion_boton" />
 
             <Button
                 android:layout_width="120dp"
@@ -36,7 +36,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/boton_azul1" />
+                android:background="@drawable/presion_boton" />
 
             <EditText
                 android:layout_width="wrap_content"

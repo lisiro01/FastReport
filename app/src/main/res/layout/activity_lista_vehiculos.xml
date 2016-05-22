@@ -21,7 +21,7 @@
         android:layout_height="50dp"
         android:text="Atras"
         android:id="@+id/btAtrasMisVeh"
-        android:background="@drawable/boton_azul1"
+        android:background="@drawable/presion_boton"
         android:layout_alignTop="@+id/tvAnyadir"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="25dp" />
