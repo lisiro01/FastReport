@@ -33,17 +33,24 @@ import db.DatabaseSQLiteHelper;
 
 public class act_Fast_Email extends AppCompatActivity implements LocationListener {
 
+    private Context c;
 
     //FOTOS
-    private static final int constante = 0;
+    private static final int CONSTANTE = 0;
     private int numFoto; // 1 para foto1, 2 para foto2, 3 para foto3
     private ImageButton foto1, foto2, foto3;
     //FOTOS
 
     //MAPA
-    private LocationManager locationManager;
-    boolean localizacionOk;
+    protected LocationManager locationManager;
+    private Location location;
+    boolean isGPSEnabled = false;
+    boolean isNetworkEnabled = false;
+    boolean canGetLocation = false;
     private String proveedor;
+
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
     //MAPA
 
     //INTERFAZ
@@ -74,24 +81,15 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
         comboBox = (Spinner) findViewById(R.id.spinner);
         email = (EditText) findViewById(R.id.etEmail);
 
+        c = this;
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             user_id = extras.getLong("user_id");
         }
 
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        proveedor = LocationManager.NETWORK_PROVIDER;
-        localizacionOk = false;
-        locationManager.requestLocationUpdates(proveedor, 1000, 1, this);
+        getLocation();
 
-        if(locationManager.isProviderEnabled(proveedor)){
-            Location lc = locationManager.getLastKnownLocation(proveedor);
-            if(lc!=null) {
-                localizacionOk = true;
-                altitud = String.valueOf(lc.getLatitude());
-                longitud = String.valueOf(lc.getLongitude());
-            }
-        }
 
         numFoto = 0;
 
@@ -122,10 +120,10 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
         localizacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(localizacionOk) {
-                    Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/" + altitud + ","+ longitud +"/data=!4m4!2m3!3m1!2s40.4290314,-3.6591383!4b1?nogmmr=1"));
+                //if(isGPSEnabled) {
+                    Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/" + "40.452814,-3.733439" +"/data=!4m4!2m3!3m1!2s40.4290314,-3.6591383!4b1?nogmmr=1"));
                     startActivity(in);
-                }
+                //}
             }
         });
 
@@ -134,7 +132,7 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
             public void onClick(View v) {
                 numFoto = 1;
                 Intent in = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(in, constante);
+                startActivityForResult(in, CONSTANTE);
             }
         });
 
@@ -143,7 +141,7 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
             public void onClick(View v) {
                 numFoto = 2;
                 Intent in = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(in, constante);
+                startActivityForResult(in, CONSTANTE);
             }
         });
 
@@ -152,7 +150,7 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
             public void onClick(View v) {
                 numFoto = 3;
                 Intent in = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(in, constante);
+                startActivityForResult(in, CONSTANTE);
             }
         });
     }
@@ -237,6 +235,32 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
             Toast.makeText(this, "Ha habido un problema con las fotos...", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public Location getLocation(){
+        /*
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        isGPSEnabled = locationManager.isProviderEnabled(locationManager.GPS_PROVIDER);
+
+        try {
+            if (isGPSEnabled) {
+                locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+
+                if (locationManager != null) {
+                    location = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
+                    if (location != null) {
+                        altitud = String.valueOf(location.getLatitude());
+                        longitud = String.valueOf(location.getLongitude());
+                    }
+                }
+
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+            Toast.makeText(this, "Ha habido un problema con la localizacion...", Toast.LENGTH_SHORT).show();
+        }
+        */
+        return location;
     }
 
     @Override
