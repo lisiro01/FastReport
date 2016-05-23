@@ -1,9 +1,11 @@
 package com.lisis.charles.fastreport;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
@@ -11,8 +13,10 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -44,20 +48,14 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
     //MAPA
     protected LocationManager locationManager;
     private Location location;
-    boolean isGPSEnabled = false;
-    boolean isNetworkEnabled = false;
-    boolean canGetLocation = false;
-    private String proveedor;
-
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
+    private boolean gpsActivo;
+    private String altitud, longitud;
     //MAPA
 
     //INTERFAZ
     private Button btnGuardar, btnEnviar, btnAtras, localizacion;
     private TextView tvFecha, tvHora;
     private EditText email;
-    private String altitud, longitud;
     //INTERFAZ
 
     private long user_id;
@@ -88,9 +86,6 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
             user_id = extras.getLong("user_id");
         }
 
-        getLocation();
-
-
         numFoto = 0;
 
         fillDateAndTime();
@@ -120,10 +115,10 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
         localizacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //if(isGPSEnabled) {
-                    Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/" + "40.452814,-3.733439" +"/data=!4m4!2m3!3m1!2s40.4290314,-3.6591383!4b1?nogmmr=1"));
-                    startActivity(in);
-                //}
+
+                getLocation();
+                Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/" + altitud + ","+ longitud + "/data=!4m4!2m3!3m1!2s40.4290314,-3.6591383!4b1?nogmmr=1"));
+                startActivity(in);
             }
         });
 
@@ -156,8 +151,7 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
     }
 
 
-    public void mostrarDialog()
-    {
+    public void mostrarDialog() {
         final Dialog customDialog = new Dialog(this);
         //deshabilitamos el título por defecto
         customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -183,7 +177,7 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
     }
 
 
-    public void fillDateAndTime(){
+    public void fillDateAndTime() {
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
@@ -210,44 +204,58 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(numFoto != 0) {
+        if (numFoto != 0) {
             if (resultCode == Activity.RESULT_OK) {
                 Bundle extras = data.getExtras();
                 Bitmap bmp = (Bitmap) extras.get("data");
-                switch (numFoto){
+                switch (numFoto) {
                     case 1:
                         foto1.setBackgroundResource(R.drawable.punto);
-                        foto1.setImageBitmap(bmp); break;
+                        foto1.setImageBitmap(bmp);
+                        break;
                     case 2:
                         foto2.setBackgroundResource(R.drawable.punto);
-                        foto2.setImageBitmap(bmp); break;
+                        foto2.setImageBitmap(bmp);
+                        break;
                     case 3:
                         foto3.setBackgroundResource(R.drawable.punto);
-                        foto3.setImageBitmap(bmp); break;
+                        foto3.setImageBitmap(bmp);
+                        break;
                 }
             }
-        }
-        else {
+        } else {
             Toast.makeText(this, "Ha habido un problema con las fotos...", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    public Location getLocation(){
-        /*
+    public void getLocation() {
+
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        isGPSEnabled = locationManager.isProviderEnabled(locationManager.GPS_PROVIDER);
+        gpsActivo = locationManager.isProviderEnabled(locationManager.NETWORK_PROVIDER);
 
         try {
-            if (isGPSEnabled) {
-                locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+            if (gpsActivo) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{
+                                Manifest.permission.INTERNET,
+                                Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.ACCESS_FINE_LOCATION
+                        }, 1);
+                    }
+
+
+                }
+                locationManager.requestLocationUpdates(locationManager.NETWORK_PROVIDER, 1000, 0, this);
 
                 if (locationManager != null) {
-                    location = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
+                    location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
                     if (location != null) {
                         altitud = String.valueOf(location.getLatitude());
                         longitud = String.valueOf(location.getLongitude());
@@ -259,8 +267,7 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
             e.printStackTrace();
             Toast.makeText(this, "Ha habido un problema con la localizacion...", Toast.LENGTH_SHORT).show();
         }
-        */
-        return location;
+
     }
 
     @Override

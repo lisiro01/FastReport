@@ -11,7 +11,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Fecha:"
+            android:text="Fecha"
             android:id="@+id/tvFecha"
             android:layout_alignParentTop="true"
             android:layout_alignLeft="@+id/btAtrasFE"
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Hora:"
+            android:text="Hora"
             android:id="@+id/tvHora"
             android:layout_below="@+id/tvFecha"
             android:layout_alignLeft="@+id/tvFecha"
@@ -72,7 +72,7 @@
             android:layout_below="@+id/tvLocal"
             android:layout_alignLeft="@+id/tvLocal"
             android:layout_alignStart="@+id/tvLocal"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="90dp"
             android:textStyle="bold" />
 
         <TextView
@@ -195,11 +195,25 @@
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:text="Ver Localización"
             android:id="@+id/button"
             android:layout_below="@+id/tvLocal"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignRight="@+id/tvHora2"
+            android:layout_alignEnd="@+id/tvHora2"
+            android:layout_toRightOf="@+id/btnAnadirFoto1"
+            android:layout_toEndOf="@+id/btnAnadirFoto1"
+            android:background="@drawable/presion_boton"
+            android:layout_marginTop="10dp" />
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/imageView3"
+            android:layout_alignTop="@+id/button"
+            android:layout_toLeftOf="@+id/button"
+            android:layout_toStartOf="@+id/button"
+            android:background="@drawable/boton_localizacion" />
 
     </RelativeLayout>
 
