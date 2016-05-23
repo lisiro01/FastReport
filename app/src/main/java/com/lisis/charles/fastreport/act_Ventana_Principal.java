@@ -92,7 +92,7 @@ public class act_Ventana_Principal extends AppCompatActivity {
 
         switch(id){
             case R.id.info:
-                Intent in = new Intent(getApplicationContext(), act_About.class);
+                Intent in = new Intent(getApplicationContext(), act_Acerca_de.class);
                 startActivity(in);
                 return true;
 
