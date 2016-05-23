@@ -2,10 +2,15 @@ package com.lisis.charles.fastreport;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -26,16 +31,27 @@ import java.util.Calendar;
 
 import db.DatabaseSQLiteHelper;
 
-public class act_Fast_Email extends AppCompatActivity {
+public class act_Fast_Email extends AppCompatActivity implements LocationListener {
 
 
+    //FOTOS
     private static final int constante = 0;
     private int numFoto; // 1 para foto1, 2 para foto2, 3 para foto3
-
     private ImageButton foto1, foto2, foto3;
-    private Button btnGuardar, btnEnviar, btnAtras;
+    //FOTOS
+
+    //MAPA
+    private LocationManager locationManager;
+    boolean localizacionOk;
+    private String proveedor;
+    //MAPA
+
+    //INTERFAZ
+    private Button btnGuardar, btnEnviar, btnAtras, localizacion;
     private TextView tvFecha, tvHora;
     private EditText email;
+    private String altitud, longitud;
+    //INTERFAZ
 
     private long user_id;
 
@@ -54,12 +70,27 @@ public class act_Fast_Email extends AppCompatActivity {
         btnGuardar = (Button) findViewById(R.id.btGuardFE);
         btnEnviar = (Button) findViewById(R.id.btEnviar);
         btnAtras = (Button) findViewById(R.id.btAtrasFE);
+        localizacion = (Button) findViewById(R.id.button);
         comboBox = (Spinner) findViewById(R.id.spinner);
         email = (EditText) findViewById(R.id.etEmail);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             user_id = extras.getLong("user_id");
+        }
+
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        proveedor = LocationManager.NETWORK_PROVIDER;
+        localizacionOk = false;
+        locationManager.requestLocationUpdates(proveedor, 1000, 1, this);
+
+        if(locationManager.isProviderEnabled(proveedor)){
+            Location lc = locationManager.getLastKnownLocation(proveedor);
+            if(lc!=null) {
+                localizacionOk = true;
+                altitud = String.valueOf(lc.getLatitude());
+                longitud = String.valueOf(lc.getLongitude());
+            }
         }
 
         numFoto = 0;
@@ -85,6 +116,16 @@ public class act_Fast_Email extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        localizacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(localizacionOk) {
+                    Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/" + altitud + ","+ longitud +"/data=!4m4!2m3!3m1!2s40.4290314,-3.6591383!4b1?nogmmr=1"));
+                    startActivity(in);
+                }
             }
         });
 
@@ -197,6 +238,23 @@ public class act_Fast_Email extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public void onLocationChanged(Location location){
+
+        if(location != null) {
+            altitud = String.valueOf(location.getLatitude());
+            longitud = String.valueOf(location.getLongitude());
+        }
+    }
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras){}
+    @Override
+    public void onProviderEnabled(String provider){}
+    @Override
+    public void onProviderDisabled(String provider){}
+
+
 
     public void createAccident() {
 
