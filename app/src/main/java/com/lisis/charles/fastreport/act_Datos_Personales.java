@@ -1,7 +1,6 @@
 package com.lisis.charles.fastreport;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -57,7 +56,7 @@ public class act_Datos_Personales extends AppCompatActivity {
             public void onClick(View v) {
 
                 updateUserInfo();
-                mostrarDialog();
+                showPopUpUserUpdated();
 
             }
         });
@@ -75,7 +74,7 @@ public class act_Datos_Personales extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    public void mostrarDialog() {
+    public void showPopUpUserUpdated() {
 
         final Dialog customDialog = new Dialog(this);
         //deshabilitamos el título por defecto
@@ -103,9 +102,8 @@ public class act_Datos_Personales extends AppCompatActivity {
     }
 
 
-
     //Updating user´s method. Already have email/user and pass
-    public void updateUserInfo(){
+    public void updateUserInfo() {
 
         DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
 
@@ -122,13 +120,13 @@ public class act_Datos_Personales extends AppCompatActivity {
 
 
     //Fills all the edit texts with the user´s data
-    public void fillUserData (){
+    public void fillUserData() {
 
         DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
 
         DB_User user = fastReportDB.getUserDB(user_id);
 
-        if(user != null) {
+        if (user != null) {
 
             //Fills all edit texts
             nomb.setText(user.getName());
@@ -141,7 +139,6 @@ public class act_Datos_Personales extends AppCompatActivity {
 
 
     }
-
 
 
     @Override

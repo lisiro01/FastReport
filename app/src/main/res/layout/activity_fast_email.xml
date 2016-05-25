@@ -213,7 +213,7 @@
             android:layout_alignTop="@+id/button"
             android:layout_toLeftOf="@+id/button"
             android:layout_toStartOf="@+id/button"
-            android:background="@drawable/boton_localizacion" />
+             />
 
     </RelativeLayout>
 
