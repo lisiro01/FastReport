@@ -29,27 +29,28 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import db.DatabaseSQLiteHelper;
+import db.PopUpHelper;
 
 public class act_Fast_Email extends AppCompatActivity implements LocationListener {
-
-    private Context c;
 
     //FOTOS
     private static final int CONSTANTE = 0;
     private int numFoto; // 1 para foto1, 2 para foto2, 3 para foto3
     private ImageButton foto1, foto2, foto3;
+    private byte[] image1, image2, image3;
     //FOTOS
 
     //MAPA
     protected LocationManager locationManager;
     private Location location;
     private boolean gpsActivo;
-    private String altitud, longitud;
+    private String date, hour, altitud, longitud;
     //MAPA
 
     //INTERFAZ
@@ -59,10 +60,15 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
     //INTERFAZ
 
     private long user_id;
+    private long accident_id;
+    private long user_accident_id;
 
     private ArrayAdapter<String> adaptador;
     private ArrayList<String> vehicles;
     private Spinner comboBox;
+
+    private PopUpHelper popUpHelper;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +85,9 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
         comboBox = (Spinner) findViewById(R.id.spinner);
         email = (EditText) findViewById(R.id.etEmail);
 
-        c = this;
+
+        context = this;
+        popUpHelper = new PopUpHelper();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -94,7 +102,8 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mostrarDialog();
+                createAccident();
+                popUpHelper.popUpNoAnswer(String.valueOf(accident_id), "Se ha guardado correctamente", context);
             }
         });
 
@@ -115,7 +124,6 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
         localizacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 getLocation();
                 Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/" + altitud + ","+ longitud + "/data=!4m4!2m3!3m1!2s40.4290314,-3.6591383!4b1?nogmmr=1"));
                 startActivity(in);
@@ -150,46 +158,21 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
         });
     }
 
-
-    public void mostrarDialog() {
-        final Dialog customDialog = new Dialog(this);
-        //deshabilitamos el título por defecto
-        customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //obligamos al usuario a pulsar los botones para cerrarlo
-        customDialog.setCancelable(false);
-        //establecemos el contenido de nuestro dialog
-        customDialog.setContentView(R.layout.pop_up_notificar);
-
-        ((TextView) customDialog.findViewById(R.id.titulo)).setText("¡Guardado!");
-        ((TextView) customDialog.findViewById(R.id.textoPopUp)).setText("Se ha guardado correctamente");
-
-
-        (customDialog.findViewById(R.id.btnAceptarPopUp)).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                customDialog.dismiss();
-            }
-        });
-
-        customDialog.show();
-    }
-
-
     public void fillDateAndTime() {
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
 
         tvFecha = (TextView) findViewById(R.id.tvFecha2);
-        tvFecha.setText(df.format(c.getTime()));
+        date = df.format(c.getTime());
+        tvFecha.setText(date);
 
         Calendar c2 = Calendar.getInstance();
         SimpleDateFormat df2 = new SimpleDateFormat("HH:mm");
 
         tvHora = (TextView) findViewById(R.id.tvHora2);
-        tvHora.setText(df2.format(c2.getTime()));
+        hour = df2.format(c2.getTime());
+        tvHora.setText(hour);
 
     }
 
@@ -212,16 +195,27 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
             if (resultCode == Activity.RESULT_OK) {
                 Bundle extras = data.getExtras();
                 Bitmap bmp = (Bitmap) extras.get("data");
+
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, bos);
+
                 switch (numFoto) {
                     case 1:
+                        image1 = bos.toByteArray();
+
                         foto1.setBackgroundResource(R.drawable.punto);
+
                         foto1.setImageBitmap(bmp);
                         break;
                     case 2:
+                        image2 = bos.toByteArray();
+
                         foto2.setBackgroundResource(R.drawable.punto);
                         foto2.setImageBitmap(bmp);
                         break;
                     case 3:
+                        image3 = bos.toByteArray();
+
                         foto3.setBackgroundResource(R.drawable.punto);
                         foto3.setImageBitmap(bmp);
                         break;
@@ -296,13 +290,26 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
 
         long vehicle_id = fastReportDB.findVehicleDB(comboBox.getSelectedItem().toString());
 
+        Toast.makeText(context, "" + vehicle_id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "" + date, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "" + hour, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "" + altitud, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "" + email.getText().toString(), Toast.LENGTH_SHORT).show();
+
         accident.setVehicle_id(vehicle_id);
-        accident.setDate(tvFecha.toString());
-        accident.setLocation("localizacion"+vehicle_id);
+        accident.setDate(date);
+        accident.setHour(hour);
+        accident.setLocation(altitud);
+        accident.setImage1(image1);
+        accident.setImage2(image2);
+        accident.setImage3(image3);
         accident.setEmail_addressee(email.getText().toString());
 
         //Creating the new vehicle
-        long accident_id = fastReportDB.createAccidentDB(accident);
+        accident_id = fastReportDB.createAccidentDB(accident);
+
+        //Creating the relationship betwen the vehicle and the user
+        user_accident_id = fastReportDB.createUserAccidentDB(user_id, accident_id);
 
 
     }

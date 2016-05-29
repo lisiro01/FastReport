@@ -30,6 +30,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     private static final String TABLE_VEHICLES = "vehicles";
     private static final String TABLE_ACCIDENT = "accident";
     private static final String TABLE_USER_VEHICLE = "user_vehicle";
+    private static final String TABLE_USER_ACCIDENT = "user_accident";
 
 
     // USERS Table - column names
@@ -56,7 +57,11 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_A_USER_ID = "user_id";
     private static final String KEY_A_VEHICLE_ID = "vehicle_id";
     private static final String KEY_DATE = "date";
+    private static final String KEY_HOUR = "hour";
     private static final String KEY_LOCATION = "location";
+    private static final String KEY_IMAGE1 = "image1";
+    private static final String KEY_IMAGE2 = "image2";
+    private static final String KEY_IMAGE3 = "image3";
     private static final String KEY_EMAIL_ADDRESSEE = "email_addressee";
 
     // USER_VEHICLE Table - column names
@@ -64,6 +69,10 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_UV_USER_ID = "user_id";
     private static final String KEY_UV_VEHICLE_ID = "vehicle_id";
 
+    // USER_ACCIDENT Table - column names
+    private static final String KEY_USER_ACCIDENT_ID = "user_accident_id";
+    private static final String KEY_UA_USER_ID = "user_id";
+    private static final String KEY_UA_ACCIDENT_ID = "accident_id";
 
     // Table Create Statements
 
@@ -104,8 +113,12 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
             + KEY_ACCIDENT_ID + " INTEGER PRIMARY KEY,"
             + KEY_A_USER_ID + " INTEGER,"
             + KEY_A_VEHICLE_ID + " INTEGER,"
-            + KEY_DATE + " DATETIME,"
+            + KEY_DATE + " TEXT,"
+            + KEY_HOUR + " TEXT,"
             + KEY_LOCATION + " TEXT,"
+            + KEY_IMAGE1 + " BLOB,"
+            + KEY_IMAGE2 + " BLOB,"
+            + KEY_IMAGE3 + " BLOB,"
             + KEY_EMAIL_ADDRESSEE + " TEXT,"
             + "FOREIGN KEY(" + KEY_A_USER_ID + ") REFERENCES " + TABLE_USERS + ","
             + "FOREIGN KEY(" + KEY_A_VEHICLE_ID + ") REFERENCES " + TABLE_VEHICLES
@@ -122,6 +135,17 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
             + "FOREIGN KEY(" + KEY_UV_VEHICLE_ID + ") REFERENCES " + TABLE_VEHICLES
             + ")";
 
+    // User_Accident table create statement
+    private static final String CREATE_TABLE_USER_ACCIDENT = "CREATE TABLE "
+            + TABLE_USER_ACCIDENT +
+            "("
+            + KEY_USER_ACCIDENT_ID + " INTEGER PRIMARY KEY,"
+            + KEY_UA_USER_ID + " INTEGER,"
+            + KEY_UA_ACCIDENT_ID + " INTEGER,"
+            + "FOREIGN KEY(" + KEY_UA_USER_ID + ") REFERENCES " + TABLE_USERS + ","
+            + "FOREIGN KEY(" + KEY_UA_ACCIDENT_ID + ") REFERENCES " + TABLE_ACCIDENT
+            + ")";
+
     public DatabaseSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -134,6 +158,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_VEHICLES);
         db.execSQL(CREATE_TABLE_ACCIDENT);
         db.execSQL(CREATE_TABLE_USER_VEHICLE);
+        db.execSQL(CREATE_TABLE_USER_ACCIDENT);
     }
 
     @Override
@@ -144,13 +169,14 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_VEHICLES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCIDENT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER_VEHICLE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER_ACCIDENT);
 
         // create new tables
         onCreate(db);
     }
 
-    //******************************************************************************************
-    //******************************************************************************************
+//*************************************************************************************************************************************************
+//*************************************************************************************************************************************************
 
     /*
  * Creating a USER
@@ -331,8 +357,8 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     }
 
 
-//******************************************************************************************
-//******************************************************************************************
+//*************************************************************************************************************************************************
+//*************************************************************************************************************************************************
 
 
     /* Creating a VEHICLE
@@ -449,8 +475,11 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     }
 
 
-//******************************************************************************************
-//******************************************************************************************
+
+
+
+//*************************************************************************************************************************************************
+//*************************************************************************************************************************************************
 
     /*
  * Creating an Accident
@@ -467,7 +496,11 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_USER_ID, DBAccident.getUser_id());
         values.put(KEY_VEHICLE_ID, DBAccident.getVehicle_id());
         values.put(KEY_DATE, DBAccident.getDate());
+        values.put(KEY_HOUR, DBAccident.getHour());
         values.put(KEY_LOCATION, DBAccident.getLocation());
+        values.put(KEY_IMAGE1, DBAccident.getImage1());
+        values.put(KEY_IMAGE2, DBAccident.getImage2());
+        values.put(KEY_IMAGE3, DBAccident.getImage3());
         values.put(KEY_EMAIL_ADDRESSEE, DBAccident.getEmail_addressee());
 
         // insert row
@@ -492,7 +525,11 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_USER_ID, DBAccident.getUser_id());
         values.put(KEY_VEHICLE_ID, DBAccident.getVehicle_id());
         values.put(KEY_DATE, DBAccident.getDate());
+        values.put(KEY_HOUR, DBAccident.getHour());
         values.put(KEY_LOCATION, DBAccident.getLocation());
+        values.put(KEY_IMAGE1, DBAccident.getImage1());
+        values.put(KEY_IMAGE2, DBAccident.getImage2());
+        values.put(KEY_IMAGE3, DBAccident.getImage3());
         values.put(KEY_EMAIL_ADDRESSEE, DBAccident.getEmail_addressee());
 
         Integer id = (int) (long) accident_id;
@@ -502,8 +539,74 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-//******************************************************************************************
-//******************************************************************************************
+
+
+    public int findAccidentDB(String date, String hour) {
+        int success = -1;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //String selectQuery = "SELECT * FROM " + TABLE_ACCIDENT + " WHERE " + KEY_DATE + " = '" + date + "' and " + KEY_HOUR + " = '" + hour + "'";
+        String selectQuery = "SELECT * FROM " + TABLE_ACCIDENT + " WHERE " + KEY_EMAIL_ADDRESSEE + " = '" + hour + "'";
+        Log.e(LOG, selectQuery);
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        if (cursor != null) {
+            try {
+                cursor.moveToFirst();
+                success = cursor.getInt(cursor.getColumnIndex(KEY_ACCIDENT_ID));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return -1;
+            }
+
+        }
+
+        return success;
+    }
+
+
+ /*
+ * Resturn User
+ */
+
+
+    public DB_Accident getAccidentDB(long accident_id) {
+        DB_Accident accident = new DB_Accident();
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLE_ACCIDENT + " WHERE " + KEY_ACCIDENT_ID + " = '" + accident_id + "'";
+        Log.e(LOG, selectQuery);
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        if (cursor != null) {
+            try {
+                cursor.moveToFirst();
+                accident.setDate(cursor.getString(cursor.getColumnIndex(KEY_DATE)));
+                accident.setHour(cursor.getString(cursor.getColumnIndex(KEY_HOUR)));
+                accident.setLocation(cursor.getString(cursor.getColumnIndex(KEY_LOCATION)));
+                accident.setImage1(cursor.getBlob(cursor.getColumnIndex(KEY_IMAGE1)));
+                accident.setImage2(cursor.getBlob(cursor.getColumnIndex(KEY_IMAGE2)));
+                accident.setImage3(cursor.getBlob(cursor.getColumnIndex(KEY_IMAGE3)));
+                accident.setEmail_addressee(cursor.getString(cursor.getColumnIndex(KEY_EMAIL_ADDRESSEE)));
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+
+        }
+
+        return accident;
+    }
+
+
+//*************************************************************************************************************************************************
+//*************************************************************************************************************************************************
 
     /*
  * Creating a User_Vehicle
@@ -549,6 +652,34 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         db.update(TABLE_USER_VEHICLE, values, KEY_USER_VEHICLE_ID + " = " + id, null);
         db.close();
     }
+
+
+
+
+//*************************************************************************************************************************************************
+//*************************************************************************************************************************************************
+
+    //Generic method to create a complete User_Vehicle relation
+    public long createUserAccidentDB(long user, long accident) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_UA_USER_ID, user);
+        values.put(KEY_UA_ACCIDENT_ID, accident);
+
+
+        // insert row
+        long user_accident_id = db.insert(TABLE_USER_ACCIDENT, null, values);
+
+        db.close();
+        return user_accident_id;
+    }
+
+
+//*************************************************************************************************************************************************
+//*************************************************************************************************************************************************
 
 
     /*
@@ -607,5 +738,72 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         return vehiclesList;
     }
 
+//*************************************************************************************************************************************************
+//*************************************************************************************************************************************************
 
+
+    public ArrayList<String> getAllAccidentsByUserIdString(long user_id) {
+
+        ArrayList<String> accidentList = new ArrayList<String>();
+
+        String selectQuery = "SELECT * FROM " + TABLE_USER_ACCIDENT + " NATURAL JOIN " + TABLE_ACCIDENT +
+        " WHERE " + KEY_UA_USER_ID + " = " + user_id;
+
+        Log.e(LOG, selectQuery);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+        String date, hour;
+
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                //date = c.getString(c.getColumnIndex(KEY_DATE));
+                //hour = c.getString(c.getColumnIndex(KEY_HOUR));
+                //accidentList.add(date + " " + hour);
+                date = c.getString(c.getColumnIndex(KEY_EMAIL_ADDRESSEE));
+                accidentList.add(date);
+            } while (c.moveToNext());
+        }
+
+        return accidentList;
+    }
+
+/*
+
+    public ArrayList<DB_Accident> getAllAccidentsByUserId(long user_id) {
+
+        String selectQuery = "SELECT * FROM " + TABLE_USER_ACCIDENT + " NATURAL JOIN " + TABLE_ACCIDENT +
+                " WHERE " + KEY_UA_USER_ID + " = " + user_id;
+
+        Log.e(LOG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+        ArrayList<DB_Accident> accidentList = new ArrayList<DB_Accident>();
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                DB_Accident a = new DB_Accident();
+
+                a.setVehicle_id(c.getLong(c.getColumnIndex(KEY_BRAND)));
+                a.setDate(tvFecha.toString());
+                a.setLocation("localizacion" + vehicle_id);
+                a.setImage1(image1);
+                a.setImage2(image2);
+                a.setImage3(image3);
+                a.setEmail_addressee(email.getText().toString());
+
+                a.setBrand(c.getString(c.getColumnIndex(KEY_BRAND)));
+                a.setModel(c.getString(c.getColumnIndex(KEY_MODEL)));
+                a.setRegistrationNumber(c.getString(c.getColumnIndex(KEY_REG_NUMBER)));
+
+                vehiclesList.add(v);
+            } while (c.moveToNext());
+        }
+
+        return vehiclesList;
+    }
+*/
 }

@@ -62,8 +62,9 @@ public class act_Ventana_Principal extends AppCompatActivity {
         btnHisAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), HistorialAccidentes.class);
-                startActivity(in);
+                Intent myIntent = new Intent(getApplicationContext(), HistorialAccidentes.class);
+                myIntent.putExtra("user_id", user_id);
+                startActivity(myIntent);
             }
         });
 

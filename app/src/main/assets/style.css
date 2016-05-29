@@ -10,7 +10,7 @@ body {
 	padding:0;
 	height:100%;
 
-	background: #2E64FE;
+	background: #C6D1FF;
 }
 
 #wrapper {
@@ -23,7 +23,7 @@ body {
 #sect {
 	padding-bottom:140px; /* Altura del #foot + la foto*/
 	padding-right: 30px;
-	background: #2E64FE;
+	background: #C6D1FF;
 }
 #foot {
 	background:#58D3F7;

@@ -1,26 +1,33 @@
 package com.lisis.charles.fastreport;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import db.DatabaseSQLiteHelper;
 import db.PopUpHelper;
 
 public class act_Registro extends AppCompatActivity {
 
+
+    private static final int CONSTANTE = 0; // necesario para el startActivityForResult
     private Button btnRegistrarse, btnAtras;
     private EditText user, pass, pass2;
     private long user_id = 0;
-    PopUpHelper popUpHelper;
-    final Dialog dialog;
 
-    public act_Registro(Dialog dialog) {
-        this.dialog = dialog;
-    }
+    private Dialog customDialog;
+    private PopUpHelper popUpHelper;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,8 @@ public class act_Registro extends AppCompatActivity {
         user = (EditText) findViewById(R.id.edNombreUsuario);
         pass = (EditText) findViewById(R.id.edContraseñaR);
         pass2 = (EditText) findViewById(R.id.edRepite);
+
+        context = this;
         popUpHelper = new PopUpHelper();
 
 
@@ -41,16 +50,14 @@ public class act_Registro extends AppCompatActivity {
             public void onClick(View v) {
                 if (!checkIfUserExist(user.getText().toString())) {
                     if (pass.getText().toString().equalsIgnoreCase(pass2.getText().toString())) {
-                        createUser(user.getText().toString(), pass.getText().toString());
-                        popUpHelper.popUpGeneral("Éxito :)", "Bienvenido, usuario creado.", dialog, user_id);
 
+                        createUser(user.getText().toString(), pass.getText().toString());
+                        popUpRegistroBien("Éxito :)", "Bienvenido, usuario creado.");
                     } else {
-                        //popUpErrorPass();
-                        popUpHelper.popUpGeneral("Lo sentimos :(", "Las contraseñas no coinciden", dialog);
+                        popUpHelper.popUpNoAnswer("Lo sentimos :(", "Las contraseñas no coinciden", context);
                     }
                 } else {
-                    popUpHelper.popUpGeneral("Lo sentimos :(", "Ese nombre de usuario esta en uso", dialog);
-                    //popUpErrorUser();
+                    popUpHelper.popUpNoAnswer("Lo sentimos :(", "Ese nombre de usuario esta en uso", context);
                 }
             }
         });
@@ -84,35 +91,28 @@ public class act_Registro extends AppCompatActivity {
         return false;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        finish();
+    }
 
 
-    /*public void popUpGeneral(String title, String message, final Boolean goToPrincipalWindow) {
-
-        final Dialog customDialog = new Dialog(this);
-        //deshabilitamos el título por defecto
-        customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //obligamos al usuario a pulsar los botones para cerrarlo
-        customDialog.setCancelable(false);
-        //establecemos el contenido de nuestro dialog
-        customDialog.setContentView(R.layout.pop_up_notificar);
-
-        ((TextView) customDialog.findViewById(R.id.titulo)).setText(title);
-        ((TextView) customDialog.findViewById(R.id.textoPopUp)).setText(message);
-        customDialog.show();
-
+    public void popUpRegistroBien(String title, String message){
+        customDialog = popUpHelper.popUpGeneral(title, message, context);
         (customDialog.findViewById(R.id.btnAceptarPopUp)).setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 customDialog.dismiss();
-                if (goToPrincipalWindow) {
-                    Intent myIntent = new Intent(getApplicationContext(), act_Ventana_Principal.class);
-                    myIntent.putExtra("user_id", user_id);
-                    startActivity(myIntent);
-                }
+
+                Intent myIntent = new Intent(getApplicationContext(), act_Ventana_Principal.class);
+                myIntent.putExtra("user_id", user_id);
+                startActivityForResult(myIntent, CONSTANTE);
             }
         });
+    }
 
 
-    }*/
 }
