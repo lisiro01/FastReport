@@ -21,14 +21,12 @@ public class MostrarAccidente extends AppCompatActivity {
 
 
     private Button btnGuardar, btnEnviar, btnAtras, localizacion;
-    private TextView tvFecha, tvHora;
+    private TextView tvFecha, tvHora, tvCoche;
     private EditText email;
 
     private ImageButton foto1, foto2, foto3;
     private byte[] image1, image2, image3;
 
-    private ArrayAdapter<String> adaptador;
-    private ArrayList<String> vehicles;
     private Spinner comboBox;
 
     private long user_id;
@@ -43,6 +41,7 @@ public class MostrarAccidente extends AppCompatActivity {
 
         tvFecha = (TextView) findViewById(R.id.tvFecha2);
         tvHora = (TextView) findViewById(R.id.tvHora2);
+        tvCoche = (TextView) findViewById(R.id.tvMuestraCoche);
         foto1 = (ImageButton) findViewById(R.id.btnAnadirFoto1);
         foto2 = (ImageButton) findViewById(R.id.btnAnadirFoto2);
         foto3 = (ImageButton) findViewById(R.id.btnAnadirFoto3);
@@ -69,6 +68,13 @@ public class MostrarAccidente extends AppCompatActivity {
             }
         });
 
+        btnEnviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enviarCorreo();
+            }
+        });
+
         localizacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,15 +93,37 @@ public class MostrarAccidente extends AppCompatActivity {
 
         if (accidente != null) {
 
-            tvFecha.setText(accidente.getHour());
-            tvHora.setText(accidente.getDate());
-            foto1.setImageBitmap(BitmapFactory.decodeByteArray(accidente.getImage1(), 0, accidente.getImage1().length));
-            foto2.setImageBitmap(BitmapFactory.decodeByteArray(accidente.getImage2(), 0, accidente.getImage2().length));
-            foto3.setImageBitmap(BitmapFactory.decodeByteArray(accidente.getImage3(), 0, accidente.getImage3().length));
-            altitud = accidente.getLocation();
-            longitud = accidente.getLocation();
+            tvFecha.setText(accidente.getDate());
+            tvHora.setText(accidente.getHour());
+
+            foto1.setBackgroundResource(R.drawable.punto);
+            if(accidente.getImage1()!=null)
+                foto1.setImageBitmap(BitmapFactory.decodeByteArray(accidente.getImage1(), 0, accidente.getImage1().length));
+
+            foto2.setBackgroundResource(R.drawable.punto);
+            if(accidente.getImage2()!=null)
+                foto2.setImageBitmap(BitmapFactory.decodeByteArray(accidente.getImage2(), 0, accidente.getImage2().length));
+
+            foto3.setBackgroundResource(R.drawable.punto);
+            if(accidente.getImage3()!=null)
+                foto3.setImageBitmap(BitmapFactory.decodeByteArray(accidente.getImage3(), 0, accidente.getImage3().length));
+
+
+            if(accidente.getLocation() != null) {
+
+                String localizacion = accidente.getLocation();;
+
+                String[] splited = localizacion.split("\\s+");
+
+                altitud = splited[0];
+                longitud = splited[1];
+            }
+
             rellenaComboBox(accidente);
+
             email.setText(accidente.getEmail_addressee());
+
+            btnGuardar.setVisibility(View.GONE);
         }
     }
 
@@ -105,10 +133,36 @@ public class MostrarAccidente extends AppCompatActivity {
 
         DB_Vehicle vehicle = fastReportDB.getVehicleDB(accidente.getVehicle_id());
 
-        vehicles.add(vehicle.getRegistrationNumber());
+        tvCoche.setText(vehicle.getRegistrationNumber());
 
-        adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vehicles);
-        comboBox.setAdapter(adaptador);
+        comboBox.setVisibility(View.INVISIBLE);
+    }
+
+    public void enviarCorreo(){
+
+        DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
+
+
+        DB_Accident accident = fastReportDB.getAccidentDB(accident_id);
+        DB_User user = fastReportDB.getUserDB(accident.getUser_id());
+        DB_Vehicle vehicle = fastReportDB.getVehicleDB(accident.getVehicle_id());
+
+        generarCuerpoMail gcm = new generarCuerpoMail(user, vehicle, accident);
+
+        String mail = gcm.generarMail();
+
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {email.getText().toString()});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Accidente a dia " + accident.getDate() + " a las " + accident.getHour());
+        emailIntent.putExtra(Intent.EXTRA_TEXT, mail);
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Enviando correo"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }

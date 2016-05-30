@@ -545,8 +545,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         int success = -1;
         SQLiteDatabase db = this.getWritableDatabase();
 
-        //String selectQuery = "SELECT * FROM " + TABLE_ACCIDENT + " WHERE " + KEY_DATE + " = '" + date + "' and " + KEY_HOUR + " = '" + hour + "'";
-        String selectQuery = "SELECT * FROM " + TABLE_ACCIDENT + " WHERE " + KEY_EMAIL_ADDRESSEE + " = '" + hour + "'";
+        String selectQuery = "SELECT * FROM " + TABLE_ACCIDENT + " WHERE " + KEY_DATE + " = '" + date + "' and " + KEY_HOUR + " = '" + hour + "'";
         Log.e(LOG, selectQuery);
 
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -585,6 +584,8 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         if (cursor != null) {
             try {
                 cursor.moveToFirst();
+                accident.setUser_id(cursor.getInt(cursor.getColumnIndex(KEY_USER_ID)));
+                accident.setVehicle_id(cursor.getInt(cursor.getColumnIndex(KEY_VEHICLE_ID)));
                 accident.setDate(cursor.getString(cursor.getColumnIndex(KEY_DATE)));
                 accident.setHour(cursor.getString(cursor.getColumnIndex(KEY_HOUR)));
                 accident.setLocation(cursor.getString(cursor.getColumnIndex(KEY_LOCATION)));
@@ -758,15 +759,19 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (c.moveToFirst()) {
             do {
-                //date = c.getString(c.getColumnIndex(KEY_DATE));
-                //hour = c.getString(c.getColumnIndex(KEY_HOUR));
-                //accidentList.add(date + " " + hour);
-                date = c.getString(c.getColumnIndex(KEY_EMAIL_ADDRESSEE));
-                accidentList.add(date);
+                date = c.getString(c.getColumnIndex(KEY_DATE));
+                hour = c.getString(c.getColumnIndex(KEY_HOUR));
+                accidentList.add(date + " " + hour);
             } while (c.moveToNext());
         }
 
-        return accidentList;
+        ArrayList<String> accidentListInverted = new ArrayList<String>();
+
+        for (int i = accidentList.size(); i > 0; i--){
+            accidentListInverted.add(accidentList.get(i-1)); //para devolver los accidentes con el más reciente el primero
+        }
+
+        return accidentListInverted;
     }
 
 /*

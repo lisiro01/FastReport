@@ -107,11 +107,12 @@
             android:layout_below="@+id/tvEnvDat"
             android:layout_alignLeft="@+id/tvEnvDat"
             android:layout_alignStart="@+id/tvEnvDat"
-            android:layout_alignRight="@+id/btEnviar"
-            android:layout_alignEnd="@+id/btEnviar"
             android:layout_marginTop="10dp"
             android:inputType="textEmailAddress"
-            android:hint="Introduzca email" />
+            android:hint="Introduzca email"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp" />
 
         <Button
             android:layout_width="100dp"
@@ -214,6 +215,17 @@
             android:layout_toLeftOf="@+id/button"
             android:layout_toStartOf="@+id/button"
             android:background="@drawable/boton_localizacion" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/tvMuestraCoche"
+            android:textStyle="bold"
+            android:layout_alignBottom="@+id/tvVeh"
+            android:layout_alignRight="@+id/spinner"
+            android:layout_alignEnd="@+id/spinner"
+            android:layout_marginRight="20dp" />
 
     </RelativeLayout>
 

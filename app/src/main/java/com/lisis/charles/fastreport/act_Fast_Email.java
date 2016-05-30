@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
@@ -60,8 +61,11 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
     //INTERFAZ
 
     private long user_id;
+    private long vehicle_id;
     private long accident_id;
     private long user_accident_id;
+
+    private boolean alreadySaved;
 
     private ArrayAdapter<String> adaptador;
     private ArrayList<String> vehicles;
@@ -85,7 +89,7 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
         comboBox = (Spinner) findViewById(R.id.spinner);
         email = (EditText) findViewById(R.id.etEmail);
 
-
+        alreadySaved = false;
         context = this;
         popUpHelper = new PopUpHelper();
 
@@ -102,15 +106,30 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createAccident();
-                popUpHelper.popUpNoAnswer(String.valueOf(accident_id), "Se ha guardado correctamente", context);
+                if(!alreadySaved) {
+                    alreadySaved = true;
+                    createAccident();
+                    popUpHelper.popUpNoAnswer("¡Guardado!", "Se ha guardado correctamente", context);
+                }
+                else {
+                    updateAccident();
+                    popUpHelper.popUpNoAnswer("¡Guardado!", "Se ha modificado correctamente", context);
+                }
             }
         });
 
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if(!alreadySaved) {
+                    alreadySaved = true;
+                    createAccident();
+                }
+                else {
+                    updateAccident();
+                }
+
+                enviarCorreo();
             }
         });
 
@@ -125,6 +144,10 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
             @Override
             public void onClick(View v) {
                 getLocation();
+                if(altitud == null || longitud == null){
+                    altitud = "40.4526297";
+                    longitud = "-3.7348567";
+                }
                 Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/" + altitud + ","+ longitud + "/data=!4m4!2m3!3m1!2s40.4290314,-3.6591383!4b1?nogmmr=1"));
                 startActivity(in);
             }
@@ -159,6 +182,8 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
     }
 
     public void fillDateAndTime() {
+
+        ((TextView) findViewById(R.id.tvMuestraCoche)).setText("");
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
@@ -288,18 +313,12 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
         DB_Accident accident = new DB_Accident();
         accident.setUser_id(user_id);
 
-        long vehicle_id = fastReportDB.findVehicleDB(comboBox.getSelectedItem().toString());
-
-        Toast.makeText(context, "" + vehicle_id, Toast.LENGTH_SHORT).show();
-        Toast.makeText(context, "" + date, Toast.LENGTH_SHORT).show();
-        Toast.makeText(context, "" + hour, Toast.LENGTH_SHORT).show();
-        Toast.makeText(context, "" + altitud, Toast.LENGTH_SHORT).show();
-        Toast.makeText(context, "" + email.getText().toString(), Toast.LENGTH_SHORT).show();
+        vehicle_id = fastReportDB.findVehicleDB(comboBox.getSelectedItem().toString());
 
         accident.setVehicle_id(vehicle_id);
         accident.setDate(date);
         accident.setHour(hour);
-        accident.setLocation(altitud);
+        accident.setLocation(altitud + " " + longitud);
         accident.setImage1(image1);
         accident.setImage2(image2);
         accident.setImage3(image3);
@@ -311,6 +330,56 @@ public class act_Fast_Email extends AppCompatActivity implements LocationListene
         //Creating the relationship betwen the vehicle and the user
         user_accident_id = fastReportDB.createUserAccidentDB(user_id, accident_id);
 
+
+    }
+
+    public void updateAccident(){
+
+        DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
+
+        DB_Accident accident = new DB_Accident();
+
+        accident.setUser_id(user_id);
+
+        accident.setVehicle_id(vehicle_id);
+        accident.setDate(date);
+        accident.setHour(hour);
+        accident.setLocation(altitud + " " + longitud);
+        accident.setImage1(image1);
+        accident.setImage2(image2);
+        accident.setImage3(image3);
+        accident.setEmail_addressee(email.getText().toString());
+
+        //Updating the vehicle
+        fastReportDB.updateAccidentDB(accident, accident_id);
+
+
+    }
+
+    public void enviarCorreo(){
+
+        DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
+
+
+        DB_User user = fastReportDB.getUserDB(user_id);
+        DB_Vehicle vehicle = fastReportDB.getVehicleDB(vehicle_id);
+        DB_Accident accident = fastReportDB.getAccidentDB(accident_id);
+
+        generarCuerpoMail gcm = new generarCuerpoMail(user, vehicle, accident);
+
+        String mail = gcm.generarMail();
+
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {email.getText().toString()});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Accidente a dia " + accident.getDate() + " a las " + accident.getHour());
+        emailIntent.putExtra(Intent.EXTRA_TEXT, mail);
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Enviando correo"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

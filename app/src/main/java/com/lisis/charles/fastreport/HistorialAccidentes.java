@@ -58,15 +58,12 @@ public class HistorialAccidentes extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String date_accidente = listaAccidentes.getItemAtPosition(position).toString();
 
-                //String[] splited = date_accidente.split("\\s+");
+                String[] splited = date_accidente.split("\\s+");
 
                 Intent myIntent = new Intent(HistorialAccidentes.this, MostrarAccidente.class);
                 myIntent.putExtra("user_id", user_id);
-                myIntent.putExtra("date", "28-may-2016");
-                myIntent.putExtra("hour", date_accidente);
-
-                //myIntent.putExtra("date", splited[0]);
-                //myIntent.putExtra("hour", splited[1]);
+                myIntent.putExtra("date", splited[0]);
+                myIntent.putExtra("hour", splited[1]);
                 startActivity(myIntent);
 
             }
@@ -84,6 +81,7 @@ public class HistorialAccidentes extends AppCompatActivity {
         adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, accidentes);
         listaAccidentes.setAdapter(adaptador);
     }
+
 
 
 }

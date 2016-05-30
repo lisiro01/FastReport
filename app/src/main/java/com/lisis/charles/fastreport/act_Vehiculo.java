@@ -81,7 +81,7 @@ public class act_Vehiculo extends AppCompatActivity {
                     }
 
                 } else if (saveOrMod == 1) {
-                    updateVehicle(vehicle_id);
+                    updateVehicle();
                     popUpSavedVehicle();
 
                 }
@@ -127,7 +127,7 @@ public class act_Vehiculo extends AppCompatActivity {
 
     }
 
-    public void updateVehicle(long vehicle_id) {
+    public void updateVehicle() {
 
         DatabaseSQLiteHelper fastReportDB = new DatabaseSQLiteHelper(getApplicationContext());
 
