@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#c6d1ff">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Marca"
+            android:id="@+id/tvMarca"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="10dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etMarca"
+            android:layout_below="@+id/tvMarca"
+            android:layout_alignLeft="@+id/tvMarca"
+            android:layout_alignStart="@+id/tvMarca"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Modelo"
+            android:id="@+id/tvModel"
+            android:layout_below="@+id/etMarca"
+            android:layout_alignLeft="@+id/etMarca"
+            android:layout_alignStart="@+id/etMarca"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etModel"
+            android:layout_below="@+id/tvModel"
+            android:layout_alignRight="@+id/etMarca"
+            android:layout_alignEnd="@+id/etMarca"
+            android:layout_alignLeft="@+id/tvModel"
+            android:layout_alignStart="@+id/tvModel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Nº Matrícula"
+            android:id="@+id/tvMat"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/etModel"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etMat"
+            android:layout_below="@+id/tvMat"
+            android:layout_alignRight="@+id/etModel"
+            android:layout_alignEnd="@+id/etModel"
+            android:layout_alignLeft="@+id/tvMat"
+            android:layout_alignStart="@+id/tvMat" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="Atras"
+            android:id="@+id/btAtrasVeh"
+            android:background="@drawable/presion_boton"
+            android:layout_below="@+id/tvNumP"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="15dp" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="Guardar"
+            android:id="@+id/btGuardarVeh"
+            android:background="@drawable/presion_boton"
+            android:layout_alignTop="@+id/btAtrasVeh"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Aseguradora"
+            android:id="@+id/tvAseg"
+            android:layout_below="@+id/etMat"
+            android:layout_alignLeft="@+id/etMat"
+            android:layout_alignStart="@+id/etMat"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etAseg"
+            android:layout_below="@+id/tvAseg"
+            android:layout_alignRight="@+id/etMat"
+            android:layout_alignEnd="@+id/etMat"
+            android:layout_alignLeft="@+id/tvAseg"
+            android:layout_alignStart="@+id/tvAseg" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Nº Póliza"
+            android:id="@+id/tvNumP"
+            android:layout_below="@+id/etAseg"
+            android:layout_alignLeft="@+id/etAseg"
+            android:layout_alignStart="@+id/etAseg"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etNumPol"
+            android:layout_below="@+id/tvNumP"
+            android:layout_alignLeft="@+id/tvNumP"
+            android:layout_alignStart="@+id/tvNumP"
+            android:layout_alignRight="@+id/btGuardarVeh"
+            android:layout_alignEnd="@+id/btGuardarVeh"
+            android:layout_marginBottom="50dp" />
+
+        <ImageView
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageView8"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/texto_vehiculo"
+            android:layout_marginTop="15dp" />
+
+    </RelativeLayout>
+</ScrollView>

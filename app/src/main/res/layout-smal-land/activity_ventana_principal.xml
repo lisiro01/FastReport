@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#c6d1ff">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Datos Personales "
+        android:id="@+id/btDatPersPRINC"
+        android:background="@drawable/presion_boton"
+        android:layout_above="@+id/btMisVeh"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Mis Vehículos"
+        android:id="@+id/btMisVeh"
+        android:background="@drawable/presion_boton"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Historial Accidentes "
+        android:id="@+id/btHistAcc"
+        android:background="@drawable/presion_boton"
+        android:layout_below="@+id/btMisVeh"
+        android:layout_alignLeft="@+id/btMisVeh"
+        android:layout_alignStart="@+id/btMisVeh"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="FAST EMAIL"
+        android:id="@+id/btFastEmail"
+        android:background="@drawable/presion_boton"
+        android:layout_above="@+id/btDatPersPRINC"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:text="Atras"
+        android:id="@+id/btAtrasPRINC"
+        android:background="@drawable/presion_boton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/btHistAcc"
+        android:layout_alignStart="@+id/btHistAcc"
+        android:layout_marginBottom="20dp" />
+</RelativeLayout>
