@@ -20,7 +20,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 
-import db.DatabaseSQLiteHelper;
+import Extras.DatabaseSQLiteHelper;
 
 public class act_Lista_Vehiculos2 extends AppCompatActivity {
 

@@ -83,8 +83,7 @@
         android:layout_width="280dp"
         android:layout_height="80dp"
         android:id="@+id/imageView6"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:background="@drawable/texto_login"
-        android:layout_marginTop="25dp" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

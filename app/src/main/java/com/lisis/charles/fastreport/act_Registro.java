@@ -1,21 +1,17 @@
 package com.lisis.charles.fastreport;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import db.DatabaseSQLiteHelper;
-import db.PopUpHelper;
+import Extras.DatabaseSQLiteHelper;
+import Extras.PopUpHelper;
 
 public class act_Registro extends AppCompatActivity {
 
@@ -28,6 +24,7 @@ public class act_Registro extends AppCompatActivity {
     private Dialog customDialog;
     private PopUpHelper popUpHelper;
     private Context context;
+    private static final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +40,23 @@ public class act_Registro extends AppCompatActivity {
         popUpHelper = new PopUpHelper();
 
 
-
-
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!checkIfUserExist(user.getText().toString())) {
-                    if (pass.getText().toString().equalsIgnoreCase(pass2.getText().toString())) {
+                if (user.getText().toString().trim().matches(emailPattern)) {
+                    if (!checkIfUserExist(user.getText().toString())) {
+                        if (pass.getText().toString().equalsIgnoreCase(pass2.getText().toString())) {
 
-                        createUser(user.getText().toString(), pass.getText().toString());
-                        popUpRegistroBien("Éxito :)", "Bienvenido, usuario creado.");
+                            createUser(user.getText().toString(), pass.getText().toString());
+                            popUpRegistroBien("Bienvenido :)", "Ahora solo conduzca con precaución.");
+                        } else {
+                            popUpHelper.popUpNoAnswer("Lo sentimos :(", "Las contraseñas no coinciden.", context);
+                        }
                     } else {
-                        popUpHelper.popUpNoAnswer("Lo sentimos :(", "Las contraseñas no coinciden", context);
+                        popUpHelper.popUpNoAnswer("Lo sentimos :(", "Ese nombre de usuario está en uso.", context);
                     }
                 } else {
-                    popUpHelper.popUpNoAnswer("Lo sentimos :(", "Ese nombre de usuario esta en uso", context);
+                    Toast.makeText(getApplicationContext(), "Email incorrecto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -100,7 +99,7 @@ public class act_Registro extends AppCompatActivity {
     }
 
 
-    public void popUpRegistroBien(String title, String message){
+    public void popUpRegistroBien(String title, String message) {
         customDialog = popUpHelper.popUpGeneral(title, message, context);
         (customDialog.findViewById(R.id.btnAceptarPopUp)).setOnClickListener(new View.OnClickListener() {
             @Override

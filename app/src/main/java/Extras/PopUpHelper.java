@@ -1,15 +1,12 @@
-package db;
+package Extras;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
 import com.lisis.charles.fastreport.R;
-import com.lisis.charles.fastreport.act_Ventana_Principal;
 
 
 public class PopUpHelper {

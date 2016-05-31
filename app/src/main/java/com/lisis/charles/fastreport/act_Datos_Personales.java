@@ -14,7 +14,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import db.DatabaseSQLiteHelper;
+import Extras.DatabaseSQLiteHelper;
 
 public class act_Datos_Personales extends AppCompatActivity {
 
