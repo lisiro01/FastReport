@@ -9,25 +9,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nombre de usuario"
+        android:text="Email:"
         android:id="@+id/tvNombreUsuario"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_below="@+id/imageView7"
+        android:layout_alignRight="@+id/tvRepite1"
+        android:layout_alignEnd="@+id/tvRepite1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="-20dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edNombreUsuario"
-        android:layout_below="@+id/tvNombreUsuario"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_alignBottom="@+id/tvNombreUsuario"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/tvContraseñaR"
+        android:layout_alignRight="@+id/btRegistrarseR"
+        android:layout_alignEnd="@+id/btRegistrarseR"
+        android:layout_marginLeft="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,36 +34,32 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Contraseña"
         android:id="@+id/tvContraseñaR"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/edNombreUsuario"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp" />
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/tvNombreUsuario"
+        android:layout_alignStart="@+id/tvNombreUsuario"
+        android:layout_marginLeft="-10dp" />
 
     <EditText
         android:inputType="textPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edContraseñaR"
-        android:layout_alignBottom="@+id/tvContraseñaR"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/edNombreUsuario"
+        android:layout_alignEnd="@+id/edNombreUsuario"
         android:layout_toRightOf="@+id/tvContraseñaR"
         android:layout_toEndOf="@+id/tvContraseñaR"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="5dp" />
 
     <Button
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:text="Atras"
         android:id="@+id/btAtrasR"
-        android:layout_marginLeft="27dp"
-        android:layout_marginBottom="70dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="27dp"
-        android:background="@drawable/presion_boton" />
+        android:background="@drawable/presion_boton"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="387dp" />
 
     <Button
         android:layout_width="120dp"
@@ -83,11 +78,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Repite la"
         android:id="@+id/tvRepite1"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/tvContraseñaR"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp" />
+        android:layout_below="@+id/tvRepite2"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -95,29 +88,25 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="contraseña"
         android:id="@+id/tvRepite2"
-        android:layout_below="@+id/tvRepite1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp" />
+        android:layout_below="@+id/btAtrasR"
+        android:layout_toLeftOf="@+id/btRegistrarseR"
+        android:layout_toStartOf="@+id/btRegistrarseR"
+        android:layout_marginTop="220dp" />
 
     <EditText
         android:inputType="textPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edRepite"
-        android:layout_alignBottom="@+id/tvRepite2"
-        android:layout_toRightOf="@+id/tvRepite2"
-        android:layout_alignRight="@+id/edContraseñaR"
-        android:layout_alignEnd="@+id/edContraseñaR"
-        android:layout_marginLeft="10dp" />
+        android:layout_below="@+id/edContraseñaR"
+        android:layout_alignParentLeft="true" />
 
     <ImageView
         android:layout_width="220dp"
         android:layout_height="65dp"
         android:id="@+id/imageView7"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:background="@drawable/texto_registro"
-        android:layout_marginTop="20dp" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

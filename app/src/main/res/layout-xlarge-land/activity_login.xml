@@ -10,23 +10,20 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Usuario"
         android:id="@+id/tvUsuario"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="125dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_below="@+id/imageView6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etUsuario"
         android:layout_below="@+id/tvUsuario"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_alignRight="@+id/tvAunNo"
+        android:layout_alignEnd="@+id/tvAunNo"
+        android:layout_alignLeft="@+id/etContraseña"
+        android:layout_alignStart="@+id/etContraseña"
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,10 +32,8 @@
         android:text="Contraseña"
         android:id="@+id/tvContraseña"
         android:layout_below="@+id/etUsuario"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
 
     <EditText
         android:inputType="textPassword"
@@ -46,12 +41,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/etContraseña"
         android:layout_below="@+id/tvContraseña"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_alignRight="@+id/tvAunNo"
+        android:layout_alignEnd="@+id/tvAunNo"
+        android:layout_alignLeft="@+id/tvAunNo"
+        android:layout_alignStart="@+id/tvAunNo"
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,11 +67,9 @@
         android:text="Entrar"
         android:id="@+id/btLogEntrar"
         android:background="@drawable/presion_boton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/tvAunNo"
-        android:layout_alignEnd="@+id/tvAunNo"
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="30dp" />
+        android:layout_below="@+id/tvAunNo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
 
     <ImageView
         android:layout_width="280dp"
@@ -86,5 +78,5 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/texto_login"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="130dp" />
 </RelativeLayout>

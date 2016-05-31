@@ -38,27 +38,34 @@ public class act_Registro extends AppCompatActivity {
 
         context = this;
         popUpHelper = new PopUpHelper();
+        Toast toast;
 
 
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (user.getText().toString().trim().matches(emailPattern)) {
-                    if (!checkIfUserExist(user.getText().toString())) {
-                        if (pass.getText().toString().equalsIgnoreCase(pass2.getText().toString())) {
 
-                            createUser(user.getText().toString(), pass.getText().toString());
-                            popUpRegistroBien("Bienvenido :)", "Ahora solo conduzca con precaución.");
+                    if (!checkIfUserExist(user.getText().toString())) {
+                        if (!pass.getText().toString().isEmpty()) {
+                            if (pass.getText().toString().equalsIgnoreCase(pass2.getText().toString())) {
+                                createUser(user.getText().toString(), pass.getText().toString());
+                                popUpRegistroBien("Bienvenido :)", "Ahora solo conduzca con precaución.");
+                            } else {
+                                popUpHelper.popUpNoAnswer("Lo sentimos :(", "Las contraseñas no coinciden.", context);
+                            }
                         } else {
-                            popUpHelper.popUpNoAnswer("Lo sentimos :(", "Las contraseñas no coinciden.", context);
+                            popUpHelper.popUpNoAnswer("Lo sentimos :(", "Debe ingresar una contraseña.", context);
+                            //Toast.makeText(getApplicationContext(), "Debe ingresar una contraseña", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         popUpHelper.popUpNoAnswer("Lo sentimos :(", "Ese nombre de usuario está en uso.", context);
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Email incorrecto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "El nombre de usuario tiene que ser un email válido", Toast.LENGTH_LONG).show();
                 }
             }
+
         });
 
         btnAtras.setOnClickListener(new View.OnClickListener() {
