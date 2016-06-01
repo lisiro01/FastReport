@@ -13,8 +13,6 @@ public class act_Acerca_de extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acerca_de);
 
-
-
         myView = (WebView) findViewById(R.id.mywebview);
         myView.loadUrl("file:///android_asset/view.html");
     }

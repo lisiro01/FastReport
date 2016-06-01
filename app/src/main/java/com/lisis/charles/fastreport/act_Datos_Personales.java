@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -23,6 +24,8 @@ public class act_Datos_Personales extends AppCompatActivity {
     private EditText nomb, apell, dir, tel, numLic, fechaVenc;
     private GoogleApiClient client;
     private long user_id;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +57,30 @@ public class act_Datos_Personales extends AppCompatActivity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int validation = validateFields();
+                switch (validation){
+                    case 0:
+                        updateUserInfo();
+                        showPopUpUserUpdated();
+                        break;
+                    case 1:
+                        Toast.makeText(getApplicationContext(), "El nombre solo puede contener letras.", Toast.LENGTH_LONG).show();
+                        break;
+                    case 2:
+                        Toast.makeText(getApplicationContext(), "El apellido  solo puede contener letras.", Toast.LENGTH_LONG).show();
+                        break;
+                    case 3:
+                        Toast.makeText(getApplicationContext(), "Utilice este formato para el número de teléfono: +34 XXX XXXXXX", Toast.LENGTH_LONG).show();
+                        break;
+                    case 4:
+                        Toast.makeText(getApplicationContext(), "Utilice este formato para la fecha de vencimiento: DD.MM.AAAA", Toast.LENGTH_LONG).show();
+                        break;
+                    case 5:
+                        Toast.makeText(getApplicationContext(), "El número de permiso de conducir es incorrecto, verifíquelo.", Toast.LENGTH_LONG).show();
+                        break;
 
-                updateUserInfo();
-                showPopUpUserUpdated();
+                }
+
 
             }
         });
@@ -133,7 +157,7 @@ public class act_Datos_Personales extends AppCompatActivity {
             apell.setText(user.getLastname());
             dir.setText(user.getAddress());
             tel.setText(user.getPhoneNumber());
-            numLic.setText(user.getExpiration_date());
+            numLic.setText(user.getDriverLicense());
             fechaVenc.setText(user.getExpiration_date());
         }
 
@@ -180,6 +204,31 @@ public class act_Datos_Personales extends AppCompatActivity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    public int validateFields (){
+        int result = 0;
+        // \\p{L} is a Unicode Character Property that matches any kind of letter from any language
+        String onlyLettersPattern = "^[\\p{L} .'-]+$";
+        //Regular expression for phone numbers in spain (home made :D)
+        String phoneNumberPattern = "(\\+?34)?(.\\d{3})(.\\d{6}$)";
+        //Regular expression for date DD.MM.AAAA
+        String datePattern = "([0-3]{1}[0-9]{1}).([0-1]{1}[0-9]{1}).([1-2]{1}[0-9]{1}[0-9]{1}[0-9]{1})";
+        //Regular expression for DNI or NIE (Licence number is the same here in Spain)
+        String dniNiePattern = "(x?\\d{8}[a-zA-Z])|([xyzXYZ]\\d{7}[a-zA-Z])|([xyzXYZ]\\d{7}\\W{1}[a-zA-Z])";
+
+        if (!nomb.getText().toString().trim().matches(onlyLettersPattern))
+            return 1;
+        if (!apell.getText().toString().trim().matches(onlyLettersPattern))
+            return 2;
+        if (!tel.getText().toString().trim().matches(phoneNumberPattern))
+            return 3;
+        if (!fechaVenc.getText().toString().trim().matches(datePattern))
+            return 4;
+        if (!numLic.getText().toString().trim().matches(dniNiePattern))
+            return 5;
+
+        return result;
     }
 }
 

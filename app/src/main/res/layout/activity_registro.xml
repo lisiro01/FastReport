@@ -20,14 +20,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/edNombreUsuario"
-        android:layout_alignTop="@+id/tvNombreUsuario"
+        android:minWidth="20dp"
+        android:minHeight="40dp"
         android:layout_alignBottom="@+id/tvNombreUsuario"
         android:layout_alignRight="@+id/edContraseñaR"
         android:layout_alignEnd="@+id/edContraseñaR"
-        android:layout_alignStart="@+id/imageView7"
-        android:layout_marginRight="0dp"
-        android:layout_alignLeft="@+id/tvNombreUsuario"
-        android:layout_marginLeft="0dp" />
+        android:layout_toRightOf="@+id/tvNombreUsuario"
+        android:layout_toEndOf="@+id/tvNombreUsuario" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,7 +50,8 @@
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/tvContraseñaR"
         android:layout_marginRight="10dp"
-        android:layout_toRightOf="@+id/tvContraseñaR" />
+        android:layout_toRightOf="@+id/tvContraseñaR"
+        android:minWidth="15dp" />
 
     <Button
         android:layout_width="120dp"

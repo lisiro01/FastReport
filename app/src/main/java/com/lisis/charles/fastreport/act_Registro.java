@@ -24,7 +24,7 @@ public class act_Registro extends AppCompatActivity {
     private Dialog customDialog;
     private PopUpHelper popUpHelper;
     private Context context;
-    private static final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,28 +44,29 @@ public class act_Registro extends AppCompatActivity {
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (user.getText().toString().trim().matches(emailPattern)) {
+                int validation = validateFields();
+                switch (validation) {
+                    case 0:
+                        createUser(user.getText().toString(), pass.getText().toString());
+                        popUpRegistroBien("Bienvenido :)", "Ahora conduzca con precaución.");
+                        break;
+                    case 1:
+                        Toast.makeText(getApplicationContext(), "El usuario debe ser un email válido.", Toast.LENGTH_LONG).show();
+                        break;
+                    case 2:
+                        Toast.makeText(getApplicationContext(), "El usuario ya esta en uso, por favor, elija uno diferente.", Toast.LENGTH_LONG).show();
+                        break;
+                    case 3:
+                        Toast.makeText(getApplicationContext(), "Por su seguridad la contraseña debe contener una mayúscula, una minúscula, un número y ser de 8 caracteres como mínimo.", Toast.LENGTH_LONG).show();
+                        break;
+                    case 4:
+                        Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden.", Toast.LENGTH_LONG).show();
+                        break;
 
-                    if (!checkIfUserExist(user.getText().toString())) {
-                        if (!pass.getText().toString().isEmpty()) {
-                            if (pass.getText().toString().equalsIgnoreCase(pass2.getText().toString())) {
-                                createUser(user.getText().toString(), pass.getText().toString());
-                                popUpRegistroBien("Bienvenido :)", "Ahora solo conduzca con precaución.");
-                            } else {
-                                popUpHelper.popUpNoAnswer("Lo sentimos :(", "Las contraseñas no coinciden.", context);
-                            }
-                        } else {
-                            popUpHelper.popUpNoAnswer("Lo sentimos :(", "Debe ingresar una contraseña.", context);
-                            //Toast.makeText(getApplicationContext(), "Debe ingresar una contraseña", Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        popUpHelper.popUpNoAnswer("Lo sentimos :(", "Ese nombre de usuario está en uso.", context);
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "El nombre de usuario tiene que ser un email válido", Toast.LENGTH_LONG).show();
                 }
-            }
 
+
+            }
         });
 
         btnAtras.setOnClickListener(new View.OnClickListener() {
@@ -120,5 +121,22 @@ public class act_Registro extends AppCompatActivity {
         });
     }
 
+    public int validateFields() {
+        //Regular expression for Password, must has Upper case, one Lower case, one number and at least 8 chars
+        String passPattern = "^.*(?=.{8,})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).*$";
+        //Regular expression for Email
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+        if (!user.getText().toString().trim().matches(emailPattern))
+            return 1;
+        if (checkIfUserExist(user.getText().toString()))
+            return 2;
+        if (!pass.getText().toString().trim().matches(passPattern))
+            return 3;
+        if (!pass.getText().toString().equalsIgnoreCase(pass2.getText().toString()))
+            return 4;
+
+        return 0;
+    }
 
 }
