@@ -206,11 +206,14 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     //Create user with email/user and password
     public long createUserDB(String email, String pass) {
 
+        PasswordHashHelper passwordHashHelper = new PasswordHashHelper();
+        String hashed_password = passwordHashHelper.hashPassword(pass);
+
         SQLiteDatabase db = this.getWritableDatabase();
 
         String str = "";
         ContentValues values = new ContentValues();
-        values.put(KEY_PASS, pass);
+        values.put(KEY_PASS, hashed_password);
         values.put(KEY_EMAIL, email);
         values.put(KEY_NAME, str);
         values.put(KEY_LAST_NAME, str);
@@ -263,6 +266,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     public int checkUserPassBD(String username, String pass) {
         int success = -1;
         SQLiteDatabase db = this.getWritableDatabase();
+        PasswordHashHelper passwordHashHelper = new PasswordHashHelper();
 
         String selectQuery = "SELECT * FROM " + TABLE_USERS + " WHERE " + KEY_EMAIL + " = '" + username + "'";
         Log.e(LOG, selectQuery);
@@ -274,9 +278,9 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
             try {
                 cursor.moveToFirst();
                 String passSavedInDataBase = cursor.getString(cursor.getColumnIndex(KEY_PASS));
-                if (pass.equals(passSavedInDataBase)) {
+                if (passwordHashHelper.checkPassword(pass, passSavedInDataBase))
+                    //if (pass.equals(passSavedInDataBase)) {
                     success = cursor.getInt(cursor.getColumnIndex(KEY_USER_ID));
-                }
             } catch (Exception e) {
                 e.printStackTrace();
                 return -1;
@@ -320,7 +324,7 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
 
         /*
- * Resturn User
+ * Return User
  */
 
 
