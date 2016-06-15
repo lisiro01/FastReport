@@ -1,7 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lisis.charles.fastreport.Datos_personales">
+    tools:context="com.lisis.charles.fastreport.Datos_personales"
+    android:background="#c6d1ff">
 
         <RelativeLayout
             tools:context=".act_Registro"
@@ -15,20 +16,21 @@
             android:background="#c6d1ff">
 
             <Button
-                android:layout_width="120dp"
-                android:layout_height="50dp"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
                 android:text="Atras"
                 android:id="@+id/btAtrasDatos"
                 android:layout_below="@+id/etFVenc"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/presion_boton" />
+                android:layout_marginTop="100dp"
+                android:background="@drawable/presion_boton"
+                android:textSize="25dp" />
 
             <Button
-                android:layout_width="120dp"
-                android:layout_height="50dp"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
                 android:text="Guardar"
                 android:id="@+id/btGuardarDatos"
                 android:layout_alignTop="@+id/btAtrasDatos"
@@ -36,7 +38,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/presion_boton" />
+                android:background="@drawable/presion_boton"
+                android:textSize="25dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -59,7 +62,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="90dp" />
+                android:layout_marginTop="170dp"
+                android:textSize="35dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,8 +74,9 @@
                 android:layout_below="@+id/etNombre"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="35dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -91,11 +96,12 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Direccion"
                 android:id="@+id/tvDireccion"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_below="@+id/edApellidos"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="35dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -117,9 +123,10 @@
                 android:id="@+id/tvtel"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="10dp"
-                android:layout_below="@+id/edDireccion" />
+                android:layout_below="@+id/edDireccion"
+                android:textSize="35dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -141,9 +148,10 @@
                 android:id="@+id/tvNPermiso"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="10dp"
-                android:layout_below="@+id/etTel" />
+                android:layout_below="@+id/etTel"
+                android:textSize="35dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -163,9 +171,10 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Fecha de vencimiento"
                 android:id="@+id/tvFechaVencimiento"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="10dp"
-                android:layout_below="@+id/edNPermiso" />
+                android:layout_below="@+id/edNPermiso"
+                android:textSize="35dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -180,7 +189,7 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/imageView"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"

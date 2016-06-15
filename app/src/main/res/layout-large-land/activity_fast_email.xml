@@ -16,9 +16,10 @@
             android:layout_alignParentTop="true"
             android:layout_alignLeft="@+id/btAtrasFE"
             android:layout_alignStart="@+id/btAtrasFE"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="100dp"
             android:layout_marginBottom="15dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="30dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,7 +30,9 @@
             android:layout_below="@+id/tvFecha"
             android:layout_alignLeft="@+id/tvFecha"
             android:layout_alignStart="@+id/tvFecha"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:layout_marginTop="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -41,27 +44,30 @@
             android:layout_alignLeft="@+id/tvHora"
             android:layout_alignStart="@+id/tvHora"
             android:layout_marginTop="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="30dp" />
 
         <Button
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
             android:text="Enviar"
             android:id="@+id/btEnviar"
             android:background="@drawable/presion_boton"
             android:layout_alignTop="@+id/btAtrasFE"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="30dp"
+            android:textSize="20dp" />
 
         <Button
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
             android:text="Guardar"
             android:id="@+id/btGuardFE"
             android:background="@drawable/presion_boton"
             android:layout_alignTop="@+id/btEnviar"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -73,7 +79,8 @@
             android:layout_alignLeft="@+id/tvLocal"
             android:layout_alignStart="@+id/tvLocal"
             android:layout_marginTop="90dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="30dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -85,7 +92,8 @@
             android:layout_alignLeft="@+id/btnAnadirFoto1"
             android:layout_alignStart="@+id/btnAnadirFoto1"
             android:layout_marginTop="30dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="30dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -97,7 +105,8 @@
             android:layout_alignLeft="@+id/tvVeh"
             android:layout_alignStart="@+id/tvVeh"
             android:layout_marginTop="30dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="30dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -112,23 +121,26 @@
             android:hint="Introduzca email"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:textSize="25dp" />
 
         <Button
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
             android:text="Atras"
             android:id="@+id/btAtrasFE"
             android:background="@drawable/presion_boton"
             android:layout_below="@+id/etEmail"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp" />
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp" />
 
         <ImageView
-            android:layout_width="250dp"
-            android:layout_height="50dp"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
             android:id="@+id/imageView2"
             android:background="@drawable/texto_fast_email"
             android:layout_alignParentTop="true"
@@ -146,8 +158,8 @@
             android:layout_marginLeft="30dp" />
 
         <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:id="@+id/btnAnadirFoto1"
             android:layout_below="@+id/tvFotos"
             android:layout_alignLeft="@+id/tvFotos"
@@ -156,16 +168,16 @@
             android:background="@drawable/anadir_foto" />
 
         <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:id="@+id/btnAnadirFoto2"
             android:layout_alignTop="@+id/btnAnadirFoto1"
             android:layout_centerHorizontal="true"
             android:background="@drawable/anadir_foto" />
 
         <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:id="@+id/btnAnadirFoto3"
             android:layout_alignTop="@+id/btnAnadirFoto2"
             android:layout_alignParentRight="true"
@@ -181,7 +193,8 @@
             android:layout_alignBottom="@+id/tvFecha"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="30dp" />
+            android:layout_marginRight="30dp"
+            android:textSize="25dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -192,20 +205,21 @@
             android:layout_alignTop="@+id/tvHora"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="30dp" />
+            android:layout_marginRight="30dp"
+            android:textSize="25dp" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="600dp"
             android:layout_height="70dp"
             android:text="Ver Localización"
             android:id="@+id/button"
             android:layout_below="@+id/tvLocal"
-            android:layout_alignRight="@+id/tvHora2"
-            android:layout_alignEnd="@+id/tvHora2"
-            android:layout_toRightOf="@+id/btnAnadirFoto1"
-            android:layout_toEndOf="@+id/btnAnadirFoto1"
             android:background="@drawable/presion_boton"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/tvEnvDat"
+            android:layout_toLeftOf="@+id/tvFecha2"
+            android:layout_toStartOf="@+id/tvFecha2"
+            android:textSize="20dp" />
 
         <ImageView
             android:layout_width="70dp"

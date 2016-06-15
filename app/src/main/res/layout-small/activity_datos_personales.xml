@@ -19,24 +19,20 @@
                 android:layout_height="50dp"
                 android:text="Atras"
                 android:id="@+id/btAtrasDatos"
-                android:layout_below="@+id/etFVenc"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/presion_boton" />
+                android:background="@drawable/presion_boton"
+                android:layout_below="@+id/btGuardarDatos"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp" />
 
             <Button
                 android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:text="Guardar"
                 android:id="@+id/btGuardarDatos"
-                android:layout_alignTop="@+id/btAtrasDatos"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/presion_boton" />
+                android:background="@drawable/presion_boton"
+                android:layout_below="@+id/etFVenc"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -59,7 +55,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="90dp" />
+                android:layout_marginTop="90dp"
+                android:textSize="15dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,7 +68,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="15dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -95,7 +93,8 @@
                 android:layout_below="@+id/edApellidos"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="15dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -119,7 +118,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
-                android:layout_below="@+id/edDireccion" />
+                android:layout_below="@+id/edDireccion"
+                android:textSize="15dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -143,7 +143,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
-                android:layout_below="@+id/etTel" />
+                android:layout_below="@+id/etTel"
+                android:textSize="15dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -165,7 +166,8 @@
                 android:id="@+id/tvFechaVencimiento"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
-                android:layout_below="@+id/edNPermiso" />
+                android:layout_below="@+id/edNPermiso"
+                android:textSize="15dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -180,7 +182,7 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:id="@+id/imageView"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
