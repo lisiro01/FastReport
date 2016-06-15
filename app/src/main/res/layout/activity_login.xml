@@ -25,7 +25,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:layout_marginLeft="10dp" />
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_below="@+id/etUsuario"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp" />
 
     <EditText
@@ -50,7 +50,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:layout_marginLeft="10dp" />
 
     <TextView
@@ -60,12 +60,12 @@
         android:text="¿Aún no estas registrado? Registrarte"
         android:id="@+id/tvAunNo"
         android:textColor="#ff2d48ff"
-        android:layout_below="@+id/etContraseña"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
         android:clickable="false"
         android:gravity="center_horizontal"
-        android:layout_marginTop="10dp" />
+        android:layout_below="@+id/cbRememberUser"
+        android:layout_alignLeft="@+id/etContraseña"
+        android:layout_alignStart="@+id/etContraseña"
+        android:layout_marginTop="40dp" />
 
     <Button
         android:layout_width="120dp"
@@ -87,4 +87,15 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/texto_login"
         android:layout_marginTop="25dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recordar usuario"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/cbRememberUser"
+        android:checked="false"
+        android:layout_below="@+id/etContraseña"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 </RelativeLayout>
