@@ -17,8 +17,9 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginTop="110dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="40dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -28,7 +29,8 @@
             android:layout_alignLeft="@+id/tvMarca"
             android:layout_alignStart="@+id/tvMarca"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:textSize="40dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,7 +41,8 @@
             android:layout_below="@+id/etMarca"
             android:layout_alignLeft="@+id/etMarca"
             android:layout_alignStart="@+id/etMarca"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textSize="40dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -49,7 +52,8 @@
             android:layout_alignRight="@+id/etMarca"
             android:layout_alignEnd="@+id/etMarca"
             android:layout_alignLeft="@+id/tvModel"
-            android:layout_alignStart="@+id/tvModel" />
+            android:layout_alignStart="@+id/tvModel"
+            android:textSize="40dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -62,7 +66,8 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textSize="40dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -72,30 +77,33 @@
             android:layout_alignRight="@+id/etModel"
             android:layout_alignEnd="@+id/etModel"
             android:layout_alignLeft="@+id/tvMat"
-            android:layout_alignStart="@+id/tvMat" />
+            android:layout_alignStart="@+id/tvMat"
+            android:textSize="40dp" />
 
         <Button
-            android:layout_width="120dp"
-            android:layout_height="50dp"
+            android:layout_width="200dp"
+            android:layout_height="90dp"
             android:text="Atras"
             android:id="@+id/btAtrasVeh"
             android:background="@drawable/presion_boton"
             android:layout_below="@+id/tvNumP"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="15dp" />
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="30dp" />
 
         <Button
-            android:layout_width="120dp"
-            android:layout_height="50dp"
+            android:layout_width="200dp"
+            android:layout_height="90dp"
             android:text="Guardar"
             android:id="@+id/btGuardarVeh"
             android:background="@drawable/presion_boton"
             android:layout_alignTop="@+id/btAtrasVeh"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="15dp" />
+            android:layout_marginRight="30dp"
+            android:textSize="30dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -106,7 +114,8 @@
             android:layout_below="@+id/etMat"
             android:layout_alignLeft="@+id/etMat"
             android:layout_alignStart="@+id/etMat"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textSize="40dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -116,7 +125,8 @@
             android:layout_alignRight="@+id/etMat"
             android:layout_alignEnd="@+id/etMat"
             android:layout_alignLeft="@+id/tvAseg"
-            android:layout_alignStart="@+id/tvAseg" />
+            android:layout_alignStart="@+id/tvAseg"
+            android:textSize="40dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -127,7 +137,8 @@
             android:layout_below="@+id/etAseg"
             android:layout_alignLeft="@+id/etAseg"
             android:layout_alignStart="@+id/etAseg"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textSize="40dp" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -138,11 +149,12 @@
             android:layout_alignStart="@+id/tvNumP"
             android:layout_alignRight="@+id/btGuardarVeh"
             android:layout_alignEnd="@+id/btGuardarVeh"
-            android:layout_marginBottom="50dp" />
+            android:layout_marginBottom="50dp"
+            android:textSize="40dp" />
 
         <ImageView
-            android:layout_width="230dp"
-            android:layout_height="50dp"
+            android:layout_width="350dp"
+            android:layout_height="100dp"
             android:id="@+id/imageView8"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"

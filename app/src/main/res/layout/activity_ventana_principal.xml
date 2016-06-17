@@ -4,7 +4,7 @@
     android:background="#c6d1ff">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="50dp"
         android:text="Datos Personales "
         android:id="@+id/btDatPersPRINC"
@@ -15,7 +15,7 @@
         android:layout_marginBottom="20dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="50dp"
         android:text="Mis Vehículos"
         android:id="@+id/btMisVeh"
@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="50dp"
         android:text="Historial Accidentes "
         android:id="@+id/btHistAcc"
@@ -35,7 +35,7 @@
         android:layout_marginTop="20dp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="50dp"
         android:text="FAST EMAIL"
         android:id="@+id/btFastEmail"

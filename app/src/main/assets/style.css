@@ -1,16 +1,15 @@
-
 html {
 	margin:0;
 	padding:0;
 	height:100%;
+	background: linear-gradient(#C6D1FF, #013ADF);
 }
 
 body {
 	margin:0;
 	padding:0;
 	height:100%;
-
-	background: #C6D1FF;
+	
 }
 
 #wrapper {
@@ -23,10 +22,10 @@ body {
 #sect {
 	padding-bottom:140px; /* Altura del #foot + la foto*/
 	padding-right: 30px;
-	background: #C6D1FF;
 }
 #foot {
-	background:#58D3F7;
+	background: radial-gradient(#2ECCFA, #00BFFF, #0489B1);
+	text-shadow: 5px 5px 5px #151515;
 	width:100%;
 	height:80px;
 	position:absolute;
@@ -35,14 +34,15 @@ body {
 }
 
 header {
-	background: blue;
+	background: radial-gradient(#819FF7, blue);
 	text-align: center;
 }
 
 section{
+	/*text-shadow: 5px 5px 5px #585858;*/
 	padding-top: 15px;
 	padding-left: 15px;
-	padding-right: 15px;
+	padding-right: 10px;
 	font-size: 150%;
 }
 

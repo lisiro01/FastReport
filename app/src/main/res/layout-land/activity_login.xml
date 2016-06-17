@@ -1,86 +1,105 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".act_Login"
     android:background="#c6d1ff">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Usuario"
-        android:id="@+id/tvUsuario"
-        android:layout_below="@+id/imageView6"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etUsuario"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvUsuario"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="10dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Contraseña"
-        android:id="@+id/tvContraseña"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/etUsuario"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp" />
 
-    <EditText
-        android:inputType="textPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etContraseña"
-        android:layout_below="@+id/tvContraseña"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp"
-        android:layout_alignRight="@+id/etUsuario"
-        android:layout_alignEnd="@+id/etUsuario" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Usuario"
+            android:id="@+id/tvUsuario"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="125dp"
+            android:layout_marginLeft="10dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="¿Aún no estas registrado? Registrarte"
-        android:id="@+id/tvAunNo"
-        android:textColor="#ff2d48ff"
-        android:layout_below="@+id/etContraseña"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
-        android:clickable="false"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etUsuario"
+            android:layout_below="@+id/tvUsuario"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="10dp" />
 
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:text="Entrar"
-        android:id="@+id/btLogEntrar"
-        android:background="@drawable/presion_boton"
-        android:layout_below="@+id/tvAunNo"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Contraseña"
+            android:id="@+id/tvContraseña"
+            android:layout_below="@+id/etUsuario"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp" />
 
-    <ImageView
-        android:layout_width="280dp"
-        android:layout_height="80dp"
-        android:id="@+id/imageView6"
-        android:background="@drawable/texto_login"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
+        <EditText
+            android:inputType="textPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/etContraseña"
+            android:layout_below="@+id/tvContraseña"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="¿Aún no estas registrado? Registrarte"
+            android:id="@+id/tvAunNo"
+            android:textColor="#ff2d48ff"
+            android:clickable="false"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/cbRememberUser"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="Entrar"
+            android:id="@+id/btLogEntrar"
+            android:background="@drawable/presion_boton"
+            android:layout_below="@+id/tvAunNo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
+
+        <ImageView
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:id="@+id/imageView6"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/texto_login"
+            android:layout_marginTop="25dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recordar usuario"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/cbRememberUser"
+            android:checked="false"
+            android:layout_below="@+id/etContraseña"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+    </RelativeLayout>
+</ScrollView>

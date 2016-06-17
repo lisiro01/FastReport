@@ -8,7 +8,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
+        android:layout_height="65dp"
         android:background="#ed00021f">
 
         <TextView
@@ -20,7 +20,7 @@
             android:layout_weight="0"
             android:text="¡Guardado!"
             android:textStyle="bold"
-            android:textSize="25dp"
+            android:textSize="45dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp" />
     </LinearLayout>
@@ -40,7 +40,8 @@
             android:text="Se ha guardado correctamente"
             android:id="@+id/textoPopUp"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textSize="40dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -51,13 +52,14 @@
         android:orientation="vertical">
 
         <Button
-            android:layout_width="120dp"
-            android:layout_height="50dp"
+            android:layout_width="180dp"
+            android:layout_height="70dp"
             android:text="Aceptar"
             android:id="@+id/btnAceptarPopUp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:background="@drawable/presion_boton" />
+            android:background="@drawable/presion_boton"
+            android:textSize="22dp" />
     </LinearLayout>
 
 </LinearLayout>
