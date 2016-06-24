@@ -4,9 +4,6 @@ import com.lisis.charles.fastreport.DB_Accident;
 import com.lisis.charles.fastreport.DB_User;
 import com.lisis.charles.fastreport.DB_Vehicle;
 
-/**
- * Created by dsk_derecha on 30/05/2016.
- */
 public class GenerateMailHelper {
 
     DB_User user;

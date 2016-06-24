@@ -181,27 +181,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
     /*
  * Creating a USER
  */
-    //Generic method to create a complete DBUser
-    public long createUserDB(DB_User DBUser) {
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, DBUser.getName());
-        values.put(KEY_LAST_NAME, DBUser.getLastname());
-        values.put(KEY_EMAIL, DBUser.getEmail());
-        values.put(KEY_PASS, DBUser.getPass());
-        values.put(KEY_PHONE_NUMBER, DBUser.getPhoneNumber());
-        values.put(KEY_DRIVERS_LICENSE, DBUser.getDriverLicense());
-        values.put(KEY_EXPIRATION_DATE, DBUser.getExpiration_date());
-
-        // insert row
-        long user_id = db.insert(TABLE_USERS, null, values);
-
-        db.close();
-        return user_id;
-    }
-
 
     //Create user with email/user and password
     public long createUserDB(String email, String pass) {
@@ -641,22 +620,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
  * Updating a User_Vehicle row
  */
 
-    //Updating a User_Vehicle relation with the id
-    public void updateUserVehicleDB(int user, int vehicle, int user_vehicle_id) {
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-
-        values.put(KEY_UV_USER_ID, user);
-        values.put(KEY_UV_VEHICLE_ID, vehicle);
-
-        Integer id = (int) (long) user_vehicle_id;
-
-        // updating row
-        db.update(TABLE_USER_VEHICLE, values, KEY_USER_VEHICLE_ID + " = " + id, null);
-        db.close();
-    }
 
 
 
@@ -685,37 +648,6 @@ public class DatabaseSQLiteHelper extends SQLiteOpenHelper {
 
 //*************************************************************************************************************************************************
 //*************************************************************************************************************************************************
-
-
-    /*
-* getting all vehicles under single user_id
-* */
-    public ArrayList<DB_Vehicle> getAllVehiclesByUserId(long user_id) {
-
-        String selectQuery = "SELECT * FROM " + TABLE_USER_VEHICLE + " NATURAL JOIN " + TABLE_VEHICLES +
-                " WHERE " + KEY_UV_USER_ID + " = " + user_id;
-
-        Log.e(LOG, selectQuery);
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery(selectQuery, null);
-        ArrayList<DB_Vehicle> vehiclesList = new ArrayList<DB_Vehicle>();
-
-        // looping through all rows and adding to list
-        if (c.moveToFirst()) {
-            do {
-                DB_Vehicle v = new DB_Vehicle();
-                v.setBrand(c.getString(c.getColumnIndex(KEY_BRAND)));
-                v.setModel(c.getString(c.getColumnIndex(KEY_MODEL)));
-                v.setRegistrationNumber(c.getString(c.getColumnIndex(KEY_REG_NUMBER)));
-
-                vehiclesList.add(v);
-            } while (c.moveToNext());
-        }
-
-        return vehiclesList;
-    }
-
 
     /*
 * getting all vehicles under single user_id

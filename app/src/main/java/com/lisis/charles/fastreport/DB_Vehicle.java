@@ -1,8 +1,6 @@
 package com.lisis.charles.fastreport;
 
-/**
- * Created by Lis on 13/5/16.
- */
+
 public class DB_Vehicle {
 
     private String brand;

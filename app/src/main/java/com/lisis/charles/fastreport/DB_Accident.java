@@ -1,8 +1,6 @@
 package com.lisis.charles.fastreport;
 
-/**
- * Created by Lis on 17/5/16.
- */
+
 public class DB_Accident {
 
     private long user_id;

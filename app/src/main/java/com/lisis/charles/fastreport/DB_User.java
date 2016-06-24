@@ -1,8 +1,6 @@
 package com.lisis.charles.fastreport;
 
-/**
- * Created by Lis on 11/5/16.
- */
+
 public class DB_User {
 
     private String name;

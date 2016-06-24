@@ -2,9 +2,6 @@ package Extras;
 
 import org.mindrot.BCrypt;
 
-/**
- * Created by Lis on 1/6/16.
- */
 public class PasswordHashHelper {
 
     // Define the BCrypt workload to use when generating password hashes. 10-31 is a valid value.

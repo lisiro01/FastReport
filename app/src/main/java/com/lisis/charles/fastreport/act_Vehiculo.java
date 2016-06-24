@@ -16,9 +16,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import Extras.DatabaseSQLiteHelper;
 
-/**
- * Created by Lis on 14/5/16.
- */
 public class act_Vehiculo extends AppCompatActivity {
 
     private EditText marca, modelo, numMat, aseguradora, numPol;

@@ -43,7 +43,7 @@ public class act_Datos_Personales extends AppCompatActivity {
         fechaVenc = (EditText) findViewById(R.id.etFVenc);
 
 
-        tel.setText("Hooolaaaa");
+        tel.setText("");
 
 
         //Para coger lo que nos envia la otra clase (user_id )
